@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/public/css/styles.css">
 </head>
 <body>
-    <iframe class="header" src="includes/header.php"></iframe>
+    <?php include("includes/header.php"); ?>
     <div class="container">
         <p class="h1">Formulario Autores</p>
         <form class="row">
