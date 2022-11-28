@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../../../public/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../../public/css/styles.css">
 </head>
-<body>
+<body class="detalleLibro">
     <?php include("includes/header.php"); ?>
     <div class="container">
         <p class="h1 mt-3 mb-3">DETALLES DEL LIBRO</p>
@@ -17,10 +17,10 @@
                 <img src="../../../public/imagenesPortada/libro1.jpg" class="col-12 pe-2" width="200px">
             </div>
             <div class="col-lg-10 col-md-8 col-sm-12">
-                <p class="h5 col-12">Título: Título del Libro</p>
-                <p class="h5 col-12">Autor: Autor del Libro</p>
-                <p class="h5 col-12">Categoría: Categoría del Libro</p>
-                <p class="h5 col-12">Sinopsis: Sinopsis del Libro</p>
+                <p class="h5 col-12"><span class="subrayado">Título:</span> Título del Libro</p>
+                <p class="h5 col-12"><span class="subrayado">Autor:</span> Autor del Libro</p>
+                <p class="h5 col-12"><span class="subrayado">Categoría:</span> Categoría del Libro</p>
+                <p class="h5 col-12"><span class="subrayado">Sinopsis:</span> Sinopsis del Libro</p>
             </div>
         </div>
     </div>

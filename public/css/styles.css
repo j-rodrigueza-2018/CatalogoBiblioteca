@@ -33,13 +33,23 @@ p.h1 {
     text-decoration: underline;
 }
 
+/* Colores de fondos de las páginas */
 .librosDestacados {
     background-color: rgba(30, 170, 241, 0.1);
 }
 
-/* Tamaño pequeño (sm) - Tablets (≥ 768 px) */
-@media screen and (min-width: 992px) {
-    .bordesContacto {
-        border-bottom: none;
-    }
+.catalogo {
+    background-color: rgba(254, 233, 78, 0.1);
+}
+
+.detalleLibro {
+    background-color: rgba(53, 183, 54, 0.1);
+}
+
+.condicionesUso {
+    background-color: rgba(253, 151, 39, 0.1);
+}
+
+.contacto {
+    background-color: rgba(154, 47, 174, 0.1);
 }

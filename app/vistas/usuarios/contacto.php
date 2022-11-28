@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../../../public/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../../public/css/styles.css">
 </head>
-<body>
+<body class="contacto">
     <?php include("includes/header.php"); ?>
     <div class="container">
         <p class="h1 mt-3 mb-3">CONTACTO</p>
@@ -15,15 +15,15 @@
             <form class="col-lg-6 col-md-6 col-sm-12 border-end border-bottom">
                 <div class="col-12 mb-3">
                     <label for="nombre" class="form-label">Nombre:</label>
-                    <input type="text" class="form-control" id="nombre">
+                    <input type="text" class="form-control contacto" id="nombre">
                 </div>
                 <div class="col-12 mb-3">
                     <label for="email" class="form-label">E-Mail:</label>
-                    <input type="email" class="form-control" id="email">
+                    <input type="email" class="form-control contacto" id="email">
                 </div>
                 <div class="col-12 mb-3">
                     <label for="mensaje" class="form-label">Mensaje:</label>
-                    <textarea id="mensaje" class="form-control" rows="8"></textarea>
+                    <textarea id="mensaje" class="form-control contacto" rows="8"></textarea>
                 </div>
                 <div class="mb-3 text-center">
                     <button type="submit" class="btn btn-danger">Enviar</button>

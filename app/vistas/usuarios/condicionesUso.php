@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../../../public/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../../public/css/styles.css">
 </head>
-<body>
+<body class="condicionesUso">
     <?php include("includes/header.php"); ?>
     <div class="container">
         <p class="h1 mt-3 mb-3">CONDICIONES DE USO</p>
