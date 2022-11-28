@@ -12,7 +12,8 @@
     <?php include("includes/header.php"); ?>
     <div class="container">
         <p class="h1 mt-3 mb-3">LISTADO DE AUTORES</p>
-        <button type="button" class="btn btn-check">Añadir</button>
+        <button type="button" class="btn btn-success mb-3" onclick="location.href='formularioLibros.php'">+</button>
+        <button type="button" class="btn btn-danger mb-3"><img src="../../../public/img/papelera-de-reciclaje.png" width="20px" height="20px"></button>
         <table class="table table-bordered col-12">
             <thead>
             <tr>
