@@ -18,7 +18,7 @@
                 <button type="button" class="btn btn-danger mb-3"><img src="../../../public/img/papelera-de-reciclaje.png" width="15px" height="20px"></button>
             </div>
             <div class="col-9">
-                <form class="d-flex ms-auto col-lg-6 col-md-6 col-sm-6" role="search">
+                <form class="d-flex ms-auto col-lg-6 col-md-9 col-sm-12" role="search">
                     <input class="form-control me-2" type="search" placeholder="Buscar por Apellido" aria-label="Buscar">
                     <button class="btn btn-danger" type="submit">Buscar</button>
                 </form>

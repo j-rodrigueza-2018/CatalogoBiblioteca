@@ -12,8 +12,32 @@
     <?php include("includes/header.php"); ?>
     <div class="container">
         <p class="h1 mt-3 mb-3">LISTADO DE LIBROS</p>
-        <button type="button" class="btn btn-success mb-3" onclick="location.href='formularioLibros.php'">+</button>
-        <button type="button" class="btn btn-danger mb-3"><img src="../../../public/img/papelera-de-reciclaje.png" width="20px" height="20px"></button>
+        <div class="row">
+            <div class="col-lg-4 col-md-12 col-sm-12 mb-3">
+                <button type="button" class="btn btn-success" onclick="location.href='formularioLibros.php'">+</button>
+                <button type="button" class="btn btn-danger"><img src="../../../public/img/papelera-de-reciclaje.png" width="15px" height="20px"></button>
+                <button type="button" class="btn btn-primary">Publicar</button>
+                <button type="button" class="btn btn-secondary">Ocultar</button>
+            </div>
+            <div class="col-lg-8 col-md-12 col-sm-12 mb-3">
+                <form class="d-flex ms-auto col-lg-8 col-md-12 col-sm-12" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Título" aria-label="Buscar">
+                    <select id="select1" class="form-select me-2" aria-label="Default select example">
+                        <option selected disabled>Autor</option>
+                        <option value="1">Autor 1</option>
+                        <option value="2">Autor 2</option>
+                        <option value="3">Autor 3</option>
+                    </select>
+                    <select id="select2" class="form-select me-2" aria-label="Default select example">
+                        <option selected disabled>Categorías</option>
+                        <option value="1">Categoría 1</option>
+                        <option value="2">Categoría 2</option>
+                        <option value="3">Categoría 3</option>
+                    </select>
+                    <button class="btn btn-danger" type="submit">Buscar</button>
+                </form>
+            </div>
+        </div>
         <table class="table table-bordered col-12">
             <thead>
                 <tr>
