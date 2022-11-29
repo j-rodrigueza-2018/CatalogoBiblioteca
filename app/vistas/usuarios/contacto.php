@@ -12,24 +12,24 @@
     <div class="container">
         <p class="h1 mt-3 mb-3">CONTACTO</p>
         <div class="row">
-            <form class="col-lg-6 col-md-6 col-sm-12 border-end border-bottom">
+            <form class="col-lg-6 col-md-12 col-sm-12 border-end border-bottom">
                 <div class="col-12 mb-3">
-                    <label for="nombre" class="form-label">Nombre:</label>
+                    <label for="nombre" class="form-label subrayado">Nombre:</label>
                     <input type="text" class="form-control contacto" id="nombre">
                 </div>
                 <div class="col-12 mb-3">
-                    <label for="email" class="form-label">E-Mail:</label>
+                    <label for="email" class="form-label subrayado">E-Mail:</label>
                     <input type="email" class="form-control contacto" id="email">
                 </div>
                 <div class="col-12 mb-3">
-                    <label for="mensaje" class="form-label">Mensaje:</label>
+                    <label for="mensaje" class="form-label subrayado">Mensaje:</label>
                     <textarea id="mensaje" class="form-control contacto" rows="8"></textarea>
                 </div>
                 <div class="mb-3 text-center">
                     <button type="submit" class="btn btn-danger">Enviar</button>
                 </div>
             </form>
-            <div class="col-lg-6 col-md-6 col-sm-12 mb-0">
+            <div class="col-lg-6 col-md-12 col-sm-12 mb-0">
                 <p class="col-12"><span class="subrayado">Dirección:</span> Av. de Castilla la Mancha, 43, 45940 Valmojado, Toledo</p>
                 <p class="col-12 border-bottom pb-3"><span class="subrayado">Teléfono:</span> +34 640 220 830</p>
                 <p class="col-12 subrayado">Ubicación:</p>
