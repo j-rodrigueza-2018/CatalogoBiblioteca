@@ -2,8 +2,8 @@
         <img class="navbar-brand border-end pe-3" src="../../../public/img/biblioteca.png" width="200px">
         <ul class="navbar-nav justify-content-center">
             <li class="nav-item">
-                <a href="condicionesUso.php" class="nav-link px-1">Condiciones de Uso</a>
-                <a href="contacto.php" class="nav-link px-1">Contacto</a>
+                <a id="condicionesUso" href="condicionesUso.php" class="nav-link px-1">Condiciones de Uso</a>
+                <a id="contacto" href="contacto.php" class="nav-link px-1">Contacto</a>
             </li>
         </ul>
     </nav>

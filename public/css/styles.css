@@ -16,12 +16,7 @@ body {
 }
 
 a.nav-link {
-    color: white;
     font-weight: bold;
-}
-
-a.nav-link:hover {
-    color: rgba(255, 255, 255, 0.75)
 }
 
 p.h1 {

@@ -39,5 +39,10 @@
             </tbody>
         </table>
     </div>
+
+    <script>
+        let autores = document.getElementById('autores');
+        autores.className += " active";
+    </script>
 </body>
 </html>

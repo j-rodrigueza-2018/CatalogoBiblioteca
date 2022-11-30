@@ -41,5 +41,10 @@
         </ol>
     </div>
     <?php include("includes/footer.php"); ?>
+
+    <script>
+        let condicionesUso = document.getElementById('condicionesUso');
+        condicionesUso.className += " active";
+    </script>
 </body>
 </html>

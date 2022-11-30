@@ -39,5 +39,10 @@
             </div>
         </form>
     </div>
+
+    <script>
+        let libros = document.getElementById('libros');
+        libros.className += " active";
+    </script>
 </body>
 </html>

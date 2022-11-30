@@ -17,5 +17,10 @@
         </div>
     </div>
     <?php include("includes/footer.php"); ?>
+
+    <script>
+        let portada = document.getElementById('portada');
+        portada.className += " active";
+    </script>
 </body>
 </html>

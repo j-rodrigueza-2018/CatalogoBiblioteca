@@ -37,5 +37,10 @@
         </div>
     </div>
     <?php include("includes/footer.php"); ?>
+
+    <script>
+        let catalogo = document.getElementById('catalogo');
+        catalogo.className += " active";
+    </script>
 </body>
 </html>
