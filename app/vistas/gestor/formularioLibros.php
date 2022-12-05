@@ -5,8 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestor Biblioteca - Nuevo Libro</title>
-    <link rel="stylesheet" href="../../../public/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../../public/css/styles.css">
 </head>
 <body>
     <?php include("includes/header.php"); ?>
@@ -34,7 +32,7 @@
                 <input accept="image/png, image/jpeg, image/jpg" type="file" class="form-control" id="imagenPortada">
             </div>
             <div class="mb-3 text-center">
-                <button type="button" class="btn btn-danger me-4" onclick="location.href='index.php'">Cancelar</button>
+                <button type="button" class="btn btn-danger me-4" onclick="location.href='<?php echo RUTA_PUBLIC; ?>/gestor'">Cancelar</button>
                 <button type="submit" class="btn btn-success">Confirmar</button>
             </div>
         </form>

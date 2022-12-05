@@ -5,8 +5,6 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Gestor Biblioteca - Listado de Libros</title>
-        <link rel="stylesheet" href="../../../public/css/bootstrap.min.css">
-        <link rel="stylesheet" href="../../../public/css/styles.css">
     </head>
 <body>
     <?php include("includes/header.php"); ?>
@@ -14,8 +12,8 @@
         <p class="h1 mt-3 mb-3">LISTADO DE LIBROS</p>
         <div class="row">
             <div class="col-lg-4 col-md-12 col-sm-12 mb-3">
-                <button type="button" class="btn btn-success" onclick="location.href='formularioLibros.php'">+</button>
-                <button type="button" class="btn btn-danger"><img src="../../../public/img/papelera-de-reciclaje.png" width="15px" height="20px"></button>
+                <button type="button" class="btn btn-success" onclick="location.href='<?php echo RUTA_PUBLIC; ?>/gestor/formularioLibros'">+</button>
+                <button type="button" class="btn btn-danger"><img src="<?php echo RUTA_PUBLIC; ?>/public/img/papelera-de-reciclaje.png" width="15px" height="20px"></button>
                 <button type="button" class="btn btn-primary">Publicar</button>
                 <button type="button" class="btn btn-secondary">Ocultar</button>
             </div>
