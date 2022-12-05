@@ -1,13 +1,13 @@
     <nav class="navbar navbar-expand-lg navbar-dark mt-3 justify-content-center">
-        <img class="navbar-brand border-end pe-3" src="../../../public/img/biblioteca.png" width="200px">
+        <img class="navbar-brand border-end pe-3" src="<?php echo RUTA_PUBLIC; ?>/public/img/biblioteca.png" width="200px">
         <ul class="navbar-nav justify-content-center">
             <li class="nav-item">
-                <a id="condicionesUso" href="condicionesUso.php" class="nav-link px-1">Condiciones de Uso</a>
-                <a id="contacto" href="contacto.php" class="nav-link px-1">Contacto</a>
+                <a id="condicionesUso" href="<?php echo RUTA_PUBLIC; ?>/app/vistas/usuarios/condicionesUso" class="nav-link px-1">Condiciones de Uso</a>
+                <a id="contacto" href="<?php echo RUTA_PUBLIC; ?>/app/vistas/usuarios/contacto" class="nav-link px-1">Contacto</a>
             </li>
         </ul>
     </nav>
 
-    <script src="../../../public/js/bootstrap.bundle.min.js"></script>
+    <script src="<?php echo RUTA_PUBLIC; ?>/public/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
