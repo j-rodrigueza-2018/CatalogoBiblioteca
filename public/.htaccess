@@ -3,4 +3,4 @@ RewriteEngine On
 RewriteBase /CatalogoBiblioteca/public
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
+RewriteRule ^(.+)$ usuarios.php?url=$1 [QSA,L]
