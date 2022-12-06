@@ -9,7 +9,7 @@
 <body>
     <?php include("includes/header.php"); ?>
     <div class="container">
-        <p class="h1 mt-3 mb-3">NUEVO AUTOR</p>
+        <p class="h1 mt-3 mb-3">EDITAR AUTOR</p>
         <form class="row">
             <div class="col-12 mb-3">
                 <label for="nombre" class="form-label subrayado">Nombre:</label>

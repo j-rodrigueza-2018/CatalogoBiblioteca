@@ -12,7 +12,7 @@
         <p class="h1 mt-3 mb-3">LISTADO DE AUTORES</p>
         <div class="row">
             <div class="col-3">
-                <button type="button" class="btn btn-success mb-3" onclick="location.href='<?php echo RUTA_PUBLIC; ?>/gestor/formularioAutores'">+</button>
+                <button type="button" class="btn btn-success mb-3" onclick="location.href='<?php echo RUTA_PUBLIC; ?>/gestor/nuevoAutor'">+</button>
                 <button type="button" class="btn btn-danger mb-3"><img src="<?php echo RUTA_PUBLIC; ?>/public/img/papelera-de-reciclaje.png" width="15px" height="20px"></button>
             </div>
             <div class="col-9">
