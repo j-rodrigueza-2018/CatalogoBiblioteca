@@ -11,7 +11,7 @@ class ModeloGestor {
     }
 
     // Método que nos permite dar de alta un libro
-    public function crearNuevoLibro($data) {
+    public function crearNuevoAutor($data) {
         $nombre = $data['nombre'];
         $apellidos = $data['apellidos'];
         $fechaNacimiento = $data['fechaNacimiento'];

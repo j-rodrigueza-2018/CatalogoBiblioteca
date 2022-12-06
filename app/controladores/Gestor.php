@@ -45,8 +45,8 @@ class Gestor extends Controlador {
             'paisOrigen' => trim($_POST['paisOrigen'])
         ];
 
-        if ($this->modeloGestor->crearNuevoLibro($data)) {
-            $this->vista('gestor/index');
+        if ($this->modeloGestor->crearNuevoAutor($data)) {
+            $this->vista('gestor/listadoAutores');
         } else {
             die('No se pudo dar de alta al autor');
         }
