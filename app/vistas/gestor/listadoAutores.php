@@ -22,20 +22,11 @@
                 </form>
             </div>
         </div>
-        <table class="table table-bordered col-12">
-            <thead>
-            <tr>
-                <th scope="col" class="text-center">Nombre</th>
-                <th scope="col" class="text-center">Apellidos</th>
-                <th scope="col" class="text-center">Fecha de Nacimiento</th>
-                <th scope="col" class="text-center">País de Origen</th>
-                <th scope="col" class="text-center">Acciones</th>
-            </tr>
-            </thead>
-            <tbody>
-
-            </tbody>
-        </table>
+        <div class="row">
+            <div class="col-12">
+                <?php include("includes/tablaAutores.php"); ?>
+            </div>
+        </div>
     </div>
 
     <script>
