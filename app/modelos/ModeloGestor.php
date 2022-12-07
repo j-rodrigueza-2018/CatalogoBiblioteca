@@ -10,7 +10,7 @@ class ModeloGestor {
         $this->db = new Conexion();
     }
 
-    // Método que nos permite dar de alta un libro
+    // Método que nos permite dar de alta un autor
     public function crearNuevoAutor($data) {
         $nombre = $data['nombre'];
         $apellidos = $data['apellidos'];
@@ -19,6 +19,14 @@ class ModeloGestor {
 
         $insercion = $this->db->query("INSERT INTO autor VALUES (DEFAULT, '$nombre', '$apellidos', '$fechaNacimiento', '$paisOrigen')");
         return $insercion;
+    }
+
+    // Método que nos permite dar de baja autores
+    public function eliminarAutor($data) {
+        foreach ($data as $id) {
+            $eliminacion = $this->db->query("DELETE FROM autor WHERE id='".$id."'");
+            return $eliminacion;
+        }
     }
 
 }

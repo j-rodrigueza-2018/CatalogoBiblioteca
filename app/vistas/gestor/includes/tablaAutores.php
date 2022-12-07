@@ -1,6 +1,7 @@
 <table class="table table-bordered">
     <thead>
         <tr>
+            <th scope="col"></th>
             <th scope="col" class="text-center">Nombre</th>
             <th scope="col" class="text-center">Apellidos</th>
             <th scope="col" class="text-center">Fecha de Nacimiento</th>
@@ -11,9 +12,12 @@
     <tbody>
         <?php
         $conexion = new Conexion();
-        $resultado = $conexion->query("SELECT a.nombre AS nombreAutor, a.apellidos, DATE_FORMAT(a.fechaNacimiento, '%d-%m-%Y') AS fechaNac, p.nombre AS paisOrigen FROM autor a JOIN paisOrigen p ON (a.paisOrigenId = p.id) ORDER BY a.nombre ASC");
+        $resultado = $conexion->query("SELECT a.id, a.nombre AS nombreAutor, a.apellidos, DATE_FORMAT(a.fechaNacimiento, '%d-%m-%Y') AS fechaNac, p.nombre AS paisOrigen FROM autor a JOIN paisOrigen p ON (a.paisOrigenId = p.id) ORDER BY a.nombre ASC");
         while ($fila = mysqli_fetch_assoc($resultado)) {
-            echo "<tr>";
+            echo "<tr id='id".$fila['id']."'>";
+            echo "<td class='text-center'>";
+            echo "<input type='checkbox' name='ids[]' class='deleteCheckbox' value='".$fila['id']."'>";
+            echo "</td>";
             echo "<td class='text-center'>".$fila['nombreAutor']."</td>";
             echo "<td class='text-center'>".$fila['apellidos']."</td>";
             echo "<td class='text-center'>".$fila['fechaNac']."</td>";
