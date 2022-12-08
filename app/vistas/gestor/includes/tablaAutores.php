@@ -22,6 +22,9 @@
             echo "<td class='text-center'>".$fila['apellidos']."</td>";
             echo "<td class='text-center'>".$fila['fechaNac']."</td>";
             echo "<td class='text-center'>".$fila['paisOrigen']."</td>";
+            echo "<td class='text-center'>";
+            echo "<button type='button' class='btn btn-danger elimAutor' id='".$fila['id']."'><img src='".RUTA_PUBLIC."/public/img/papelera-de-reciclaje.png' width='15px' height='20px'></button>";
+            echo "</td>";
             echo "</tr>";
         }
         ?>

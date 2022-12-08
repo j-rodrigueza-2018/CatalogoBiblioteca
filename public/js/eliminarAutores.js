@@ -1,6 +1,6 @@
 $(document).ready(function() {
     $("#btnBorrar").click(function() {
-        var idsArray = [];
+        let idsArray = [];
         $("input:checkbox[class=deleteCheckbox]:checked").each(function() {
             idsArray.push($(this).val());
         });
@@ -8,7 +8,7 @@ $(document).ready(function() {
         if (idsArray.length > 0) {
             $.ajax({
                 type: "POST",
-                url: "http://localhost/CatalogoBiblioteca2/gestor/eliminarAutores",
+                url: "http://localhost/CatalogoBiblioteca/gestor/eliminarAutores",
                 data: {idsArray: idsArray},
                 success: function(data) {
                     $.each(idsArray, function(indice, id) {
@@ -18,4 +18,18 @@ $(document).ready(function() {
             });
         }
     });
-})
+
+    $(".elimAutor").click(function() {
+        let id = $(this).attr("id");
+        let data = "id=" + id;
+        $.ajax({
+            type: "POST",
+            url: "http://localhost/CatalogoBiblioteca/gestor/eliminarAutor",
+            data: data,
+            success: function(data) {
+                $("#id" + id).remove();
+            }
+        });
+    });
+
+});

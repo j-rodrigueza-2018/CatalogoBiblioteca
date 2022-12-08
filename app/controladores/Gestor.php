@@ -62,6 +62,16 @@ class Gestor extends Controlador {
         }
     }
 
+    // Método para eliminar un autor concreto de la base de datos
+    public function eliminarAutor() {
+        $id = $_REQUEST['id'];
+        if ($this->modeloGestor->eliminarAutor($id)) {
+            $this->vista('gestor/listadoAutores');
+        } else {
+            die('No se pudo dar de alta al autor');
+        }
+    }
+
     // Método para establecer la vista para editar un autor
     public function editarAutor() {
         $this->vista('gestor/editarAutor');
