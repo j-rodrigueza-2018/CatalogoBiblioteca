@@ -34,6 +34,6 @@
         autores.className += " active";
     </script>
     <script src="<?php echo RUTA_PUBLIC; ?>/public/js/jquery-3.6.1.min.js"></script>
-    <script type="text/javascript" src="<?php echo RUTA_PUBLIC; ?>/public/js/eliminarAutor.js"></script>
+    <script type="text/javascript" src="<?php echo RUTA_PUBLIC; ?>/public/js/eliminarAutores.js"></script>
 </body>
 </html>
