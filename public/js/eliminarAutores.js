@@ -8,7 +8,7 @@ $(document).ready(function() {
         if (idsArray.length > 0) {
             $.ajax({
                 type: "POST",
-                url: "http://localhost/CatalogoBiblioteca2/gestor/eliminarAutor",
+                url: "http://localhost/CatalogoBiblioteca2/gestor/eliminarAutores",
                 data: {idsArray: idsArray},
                 success: function(data) {
                     $.each(idsArray, function(indice, id) {

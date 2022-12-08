@@ -22,7 +22,7 @@ class ModeloGestor {
     }
 
     // Método que nos permite dar de baja autores
-    public function eliminarAutor($data) {
+    public function eliminarAutores($data) {
         foreach ($data as $id) {
             $eliminacion = $this->db->query("DELETE FROM autor WHERE id='".$id."'");
             return $eliminacion;
