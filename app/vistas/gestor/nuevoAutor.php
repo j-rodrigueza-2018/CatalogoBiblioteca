@@ -25,7 +25,6 @@
             </div>
             <div class="col-12 mb-3">
                 <label for="paisOrigen" class="form-label subrayado">País de Origen:</label>
-                <!--<input type="text" class="form-control" id="paisOrigen">-->
                 <select class="form-select" id="paisOrigen" name="paisOrigen" data-show-subtext="true" data-live-search="true">
                     <?php
                     $conexion = new Conexion();
