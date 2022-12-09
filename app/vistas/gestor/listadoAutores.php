@@ -12,8 +12,8 @@
         <p class="h1 mt-3 mb-3">LISTADO DE AUTORES</p>
         <div class="row">
             <div class="col-3">
-                <button type="button" class="btn btn-success mb-3" onclick="location.href='<?php echo RUTA_PUBLIC; ?>/gestor/nuevoAutor'">+</button>
-                <button type="button" class="btn btn-danger mb-3" id="btnBorrar"><img src="<?php echo RUTA_PUBLIC; ?>/public/img/papelera-de-reciclaje.png" width="15px" height="20px"></button>
+                <button type="button" class="btn btn-success bi-plus-square mb-3" onclick="location.href='<?php echo RUTA_PUBLIC; ?>/gestor/nuevoAutor'"></button>
+                <button type="button" class="btn btn-danger bi-trash mb-3" id="btnBorrar"></button>
             </div>
             <div class="col-9">
                 <form class="d-flex ms-auto col-lg-6 col-md-9 col-sm-12" role="search">
