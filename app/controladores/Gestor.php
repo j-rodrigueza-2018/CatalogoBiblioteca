@@ -46,7 +46,7 @@ class Gestor extends Controlador {
         ];
 
         if ($this->modeloGestor->crearNuevoAutor($data)) {
-            $this->vista('gestor/listadoAutores');
+            redirect('gestor/listadoAutores');
         } else {
             die('No se pudo dar de alta al autor');
         }
@@ -73,8 +73,34 @@ class Gestor extends Controlador {
     }
 
     // Método para establecer la vista para editar un autor
-    public function editarAutor() {
-        $this->vista('gestor/editarAutor');
+    public function vistaEditarAutor($id) {
+        $post = $this->modeloGestor->autorPorId($id);
+        $data = [
+            'id' => $id,
+            'nombre' => $post->nombre,
+            'apellidos' => $post->apellidos,
+            'fechaNacimiento' => $post->fechaNacimiento,
+            'paisOrigen' => $post->paisOrigenId
+        ];
+        $this->vista('gestor/editarAutor', $data);
+    }
+
+    // Método para editar los datos de un autor
+    public function editarAutor($id) {
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+        $data= [
+            'id' => $id,
+            'nombre' => trim($_POST['nombre']),
+            'apellidos' => trim($_POST['apellidos']),
+            'fechaNacimiento' => trim($_POST['fechaNacimiento']),
+            'paisOrigen' => trim($_POST['paisOrigen'])
+        ];
+
+        if ($this->modeloGestor->actualizarAutor($data)) {
+            redirect('gestor/listadoAutores');
+        } else {
+            die('No se pudo cambiar los datos del autor');
+        }
     }
 
 }

@@ -35,4 +35,23 @@ class ModeloGestor {
         return $eliminacion;
     }
 
+    // Método que nos devuelve un autor (con sus datos) a partir de su Id
+    public function autorPorId($id) {
+        $consulta = $this->db->query("SELECT * FROM autor WHERE id='$id'");
+        $data = $consulta->fetch_object();
+        return $data;
+    }
+
+    // Método que nos permite actualizar los datos de un autor
+    public function actualizarAutor($data) {
+        $id = $data['id'];
+        $nombre = $data['nombre'];
+        $apellidos = $data['apellidos'];
+        $fechaNacimiento = $data['fechaNacimiento'];
+        $paisOrigen = $data['paisOrigen'];
+
+        $update = $this->db->query("UPDATE autor SET nombre='$nombre', apellidos='$apellidos', fechaNacimiento='$fechaNacimiento', paisOrigenId='$paisOrigen' WHERE id='$id'");
+        return $update;
+    }
+
 }

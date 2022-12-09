@@ -24,7 +24,8 @@
             echo "<td class='text-center'>".$fila['paisOrigen']."</td>";
             echo "<td class='text-center'>";
             echo "<button type='button' class='btn btn-danger bi-trash elimAutor' id='".$fila['id']."'></button>";
-            echo "<button type='button' class='btn btn-primary bi-pencil-square ms-2'></button>";
+            $location = RUTA_PUBLIC.'/gestor/vistaEditarAutor/'.$fila['id'];
+            echo "<button type='button' class='btn btn-primary bi-pencil-square ms-2' onclick='location.href=\"$location\"'></button>";
             echo "</td>";
             echo "</tr>";
         }
