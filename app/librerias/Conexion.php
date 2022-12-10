@@ -36,4 +36,8 @@ class Conexion {
         return $rows;
     }
 
+    public function realEscapeString($query) {
+        return $this->dbh->real_escape_string($query);
+    }
+
 }

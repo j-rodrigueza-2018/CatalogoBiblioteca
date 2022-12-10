@@ -103,4 +103,11 @@ class Gestor extends Controlador {
         }
     }
 
+    // Método para mostrar los autores por apellido
+    public function buscarAutores() {
+        $con = $_POST['busqueda'];
+        $resultadoConsulta = $this->modeloGestor->autorPorApellidos($con);
+        echo $resultadoConsulta;
+    }
+
 }
