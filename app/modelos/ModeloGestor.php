@@ -10,6 +10,24 @@ class ModeloGestor {
         $this->db = new Conexion();
     }
 
+    /* Métodos de las vistas de los Libros */
+
+    // Método que nos permite dar de alta un libro en el catálogo
+    public function crearNuevoLibro($data) {
+        $titulo = $data['titulo'];
+        $autor = $data['autor'];
+        $categoria = $data['categoria'];
+        $sinopsis = $data['sinopsis'];
+        $imagenPortada = $data['imagenPortada'];
+
+        $insercion = $this->db->query("INSERT INTO libro VALUES (DEFAULT, '$titulo', '$autor', '$categoria', '$sinopsis', '$imagenPortada')");
+        return $insercion;
+    }
+
+    /* ------------------------------------ */
+
+    /* Métodos de las vistas de los Autores */
+
     // Método que nos permite dar de alta un autor
     public function crearNuevoAutor($data) {
         $nombre = $data['nombre'];

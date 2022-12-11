@@ -16,8 +16,35 @@ class Gestor extends Controlador {
     }
 
     // Método para establecer la vista para añadir un libro
-    public function nuevoLibro() {
+    public function vistaNuevoLibro() {
         $this->vista('gestor/nuevoLibro');
+    }
+
+    // Método para crear un libro en nuestra base de datos
+    public function crearLibro() {
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+        $archivo = $_FILES['imagen']['tmp_name'];
+        $nombreArchivo = $_FILES['imagen']['name'];
+        $info = pathinfo($nombreArchivo);
+        $extension = $info['extension'];
+        $nombreImagen = trim($_POST['titulo']).'-'.rand(00000, 99999);
+        move_uploaded_file($archivo, RUTA_IMG.'/public/imagenesPortada/'.$nombreImagen.'.'.$extension);
+        $ruta = 'imagenesPortada/'.$nombreImagen.'.'.$extension;
+
+        $data = [
+            'titulo' => trim($_POST['titulo']),
+            'autor' => trim($_POST['autor']),
+            'categoria' => trim($_POST['categoria']),
+            'sinopsis' => trim($_POST['sinopsis']),
+            'imagenPortada' => trim($ruta)
+        ];
+
+        if ($this->modeloGestor->crearNuevoLibro($data)) {
+            redirect('gestor');
+        } else {
+            die('No se pudo guardar el libro');
+        }
     }
 
     // Método para establecer la vista para editar un libro
