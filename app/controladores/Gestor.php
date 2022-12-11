@@ -28,9 +28,9 @@ class Gestor extends Controlador {
         $nombreArchivo = $_FILES['imagen']['name'];
         $info = pathinfo($nombreArchivo);
         $extension = $info['extension'];
-        $nombreImagen = trim($_POST['titulo']).'-'.rand(00000, 99999);
+        $nombreImagen = trim($_POST['titulo']).'_'.rand(00000, 99999);
         move_uploaded_file($archivo, RUTA_IMG.'/public/imagenesPortada/'.$nombreImagen.'.'.$extension);
-        $ruta = 'imagenesPortada/'.$nombreImagen.'.'.$extension;
+        $ruta = $nombreImagen.'.'.$extension;
 
         $data = [
             'titulo' => trim($_POST['titulo']),
@@ -44,6 +44,27 @@ class Gestor extends Controlador {
             redirect('gestor');
         } else {
             die('No se pudo guardar el libro');
+        }
+    }
+
+    // Método para eliminar autores en nuestra base de datos
+    public function eliminarLibros() {
+        $data = $_REQUEST['idsArray'];
+        if ($this->modeloGestor->eliminarLibros($data)) {
+            redirect('gestor');
+        } else {
+            die('No se pudo dar de alta al autor');
+        }
+    }
+
+    // Método para eliminar un autor concreto de la base de datos
+    public function eliminarLibro() {
+        $id = $_REQUEST['datos'][0];
+        $imagen = $_REQUEST['datos'][1];
+        if ($this->modeloGestor->eliminarLibro($id, $imagen)) {
+            redirect('gestor');
+        } else {
+            die('No se pudo dar de alta al autor');
         }
     }
 

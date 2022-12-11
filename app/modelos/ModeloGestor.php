@@ -24,6 +24,22 @@ class ModeloGestor {
         return $insercion;
     }
 
+    // Método que nos permite dar de baja autores
+    public function eliminarLibros($data) {
+        foreach ($data as $id) {
+            $eliminacion = $this->db->query("DELETE FROM libro WHERE id='".$id."'");
+            return $eliminacion;
+        }
+    }
+
+    // Método que nos permite dar de baja un autor en concreto
+    public function eliminarLibro($id, $imagen) {
+        $borrarImg = RUTA_IMG.'/public/imagenesPortada/'.$imagen;
+        unlink($borrarImg);
+        $eliminacion = $this->db->query("DELETE FROM libro WHERE id='".$id."'");
+        return $eliminacion;
+    }
+
     /* ------------------------------------ */
 
     /* Métodos de las vistas de los Autores */

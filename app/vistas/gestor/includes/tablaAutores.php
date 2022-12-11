@@ -14,7 +14,7 @@
         $conexion = new Conexion();
         $resultado = $conexion->query("SELECT a.id, a.nombre AS nombreAutor, a.apellidos, DATE_FORMAT(a.fechaNacimiento, '%d-%m-%Y') AS fechaNac, p.nombre AS paisOrigen FROM autor a JOIN paisOrigen p ON (a.paisOrigenId = p.id) ORDER BY a.nombre ASC");
         while ($fila = mysqli_fetch_assoc($resultado)) {
-            echo "<tr id='id".$fila['id']."'>";
+            echo "<tr id='idAutor".$fila['id']."'>";
             echo "<td class='text-center'>";
             echo "<input type='checkbox' name='ids[]' class='deleteCheckbox' value='".$fila['id']."'>";
             echo "</td>";
