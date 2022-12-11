@@ -2,7 +2,7 @@ $(document).ready(function() {
     $("#btnBorrarLibros").click(function() {
         let idsArray = [];
         $("input:checkbox[class=deleteCheckbox]:checked").each(function() {
-            idsArray.push($(this).val());
+            idsArray.push($(this).val().split('-'));
         });
 
         if (idsArray.length > 0) {
@@ -11,8 +11,8 @@ $(document).ready(function() {
                 url: "http://localhost/CatalogoBiblioteca/gestor/eliminarLibros",
                 data: {idsArray: idsArray},
                 success: function(data) {
-                    $.each(idsArray, function(indice, id) {
-                        var fila = $("#idLibro" + id).remove();
+                    $.each(idsArray, function(indice, datos) {
+                        var fila = $("#idLibro" + datos[0]).remove();
                     });
                 }
             });

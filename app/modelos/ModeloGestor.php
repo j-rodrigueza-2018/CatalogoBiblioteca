@@ -26,10 +26,12 @@ class ModeloGestor {
 
     // Método que nos permite dar de baja autores
     public function eliminarLibros($data) {
-        foreach ($data as $id) {
-            $eliminacion = $this->db->query("DELETE FROM libro WHERE id='".$id."'");
-            return $eliminacion;
+        foreach ($data as $d) {
+            $borrarImg = RUTA_IMG.'/public/imagenesPortada/'.$d[1];
+            unlink($borrarImg);
+            $eliminacion = $this->db->query("DELETE FROM libro WHERE id='".$d[0]."'");
         }
+        return $eliminacion;
     }
 
     // Método que nos permite dar de baja un autor en concreto
@@ -59,8 +61,8 @@ class ModeloGestor {
     public function eliminarAutores($data) {
         foreach ($data as $id) {
             $eliminacion = $this->db->query("DELETE FROM autor WHERE id='".$id."'");
-            return $eliminacion;
         }
+        return $eliminacion;
     }
 
     // Método que nos permite dar de baja un autor en concreto

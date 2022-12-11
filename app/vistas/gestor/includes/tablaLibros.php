@@ -15,7 +15,7 @@
     while ($fila = mysqli_fetch_assoc($resultado)) {
         echo "<tr id='idLibro".$fila['id']."'>";
         echo "<td class='text-center'>";
-        echo "<input type='checkbox' name='ids[]' class='deleteCheckbox' value='".$fila['id']."'>";
+        echo "<input type='checkbox' name='ids[]' class='deleteCheckbox' value='".$fila['id']."-".$fila['imagenPortada']."'>";
         echo "</td>";
         echo "<td class='text-center'>".$fila['titulo']."</td>";
         echo "<td class='text-center'>".$fila['autor']."</td>";
