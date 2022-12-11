@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-12" id="tablaDatos">
+            <div class="col-12" id="tablaDatosAutores">
                 <?php include("includes/tablaAutores.php"); ?>
             </div>
         </div>

@@ -36,19 +36,11 @@
                 </form>
             </div>
         </div>
-        <table class="table table-bordered col-12">
-            <thead>
-                <tr>
-                    <th scope="col" class="text-center">Título</th>
-                    <th scope="col" class="text-center">Autor</th>
-                    <th scope="col" class="text-center">Categoría</th>
-                    <th scope="col" class="text-center">Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-
-            </tbody>
-        </table>
+        <div class="row">
+            <div class="col-12" id="tablaDatos">
+                <?php include("includes/tablaLibros.php"); ?>
+            </div>
+        </div>
     </div>
 
     <script>

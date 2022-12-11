@@ -6,7 +6,7 @@ $(document).ready(function() {
             url: 'http://localhost/CatalogoBiblioteca/gestor/buscarAutores',
             data: {'busqueda': busqueda},
         }).done(function(respuesta) {
-            $('#tablaDatos').html(respuesta);
+            $('#tablaDatosAutores').html(respuesta);
         }).fail(function() {
            alert('Hubo un error');
         });
