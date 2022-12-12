@@ -4,7 +4,7 @@
 const HOST = "localhost";
 const USER = "root";
 const PASS = "";
-const NAME = "catalogoBiblioteca";
+const NAME = "biblioteca";
 
 // URL para acceder a la carpeta 'app'
 define("RUTA_APP", dirname(__FILE__, 2));
