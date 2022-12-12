@@ -14,7 +14,7 @@
             <div class="col-lg-4 col-md-12 col-sm-12 mb-3">
                 <button type="button" class="btn btn-success bi-plus-square" onclick="location.href='<?php echo RUTA_PUBLIC; ?>/gestor/vistaNuevoLibro'"></button>
                 <button type="button" class="btn btn-danger bi-trash" id="btnBorrarLibros"></button>
-                <button type="button" class="btn btn-primary">Publicar</button>
+                <button type="button" class="btn btn-primary" id="btnPublicar">Publicar</button>
                 <button type="button" class="btn btn-secondary">Ocultar</button>
             </div>
             <div class="col-lg-8 col-md-12 col-sm-12 mb-3">
@@ -49,5 +49,6 @@
     </script>
     <script src="<?php echo RUTA_PUBLIC; ?>/public/js/jquery-3.6.1.min.js"></script>
     <script type="text/javascript" src="<?php echo RUTA_PUBLIC; ?>/public/js/eliminarLibros.js"></script>
+    <script type="text/javascript" src="<?php echo RUTA_PUBLIC; ?>/public/js/publicarEnCatalogo.js"></script>
 </body>
 </html>

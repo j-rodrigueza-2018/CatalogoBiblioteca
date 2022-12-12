@@ -119,6 +119,16 @@ class Gestor extends Controlador {
         }
     }
 
+    // Método para publicar libros en el catálogo
+    public function publicarLibros() {
+        $data = $_REQUEST['idsArray'];
+        if ($this->modeloGestor->publicarLibros($data)) {
+            redirect('gestor');
+        } else {
+            die('No se pudieron publicar los libros');
+        }
+    }
+
     /* ------------------------------------ */
 
     /* Métodos de las vistas de los Autores */

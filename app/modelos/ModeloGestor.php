@@ -24,7 +24,7 @@ class ModeloGestor {
         return $insercion;
     }
 
-    // Método que nos permite dar de baja autores
+    // Método que nos permite eliminar libros
     public function eliminarLibros($data) {
         foreach ($data as $d) {
             $borrarImg = RUTA_IMG.'/public/imagenesPortada/'.$d[1];
@@ -34,7 +34,7 @@ class ModeloGestor {
         return $eliminacion;
     }
 
-    // Método que nos permite dar de baja un autor en concreto
+    // Método que nos permite eliminar un libro en concreto
     public function eliminarLibro($id, $imagen) {
         $borrarImg = RUTA_IMG.'/public/imagenesPortada/'.$imagen;
         unlink($borrarImg);
@@ -60,6 +60,14 @@ class ModeloGestor {
 
         $update = $this->db->query("UPDATE libro SET titulo='$titulo', autorId='$autor', categoriaId='$categoria', sinopsis='$sinopsis', imagenPortada='$imagenPortada' WHERE id='".$id."'");
         return $update;
+    }
+
+    // Método que nos permite publicar libros en el catálogo
+    public function publicarLibros($data) {
+        foreach ($data as $d) {
+            $publicacion = $this->db->query("INSERT INTO catalogo VALUES (DEFAULT, '$d[0]', 0)");
+        }
+        return $publicacion;
     }
 
     /* ------------------------------------ */
