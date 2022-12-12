@@ -131,7 +131,7 @@ class Gestor extends Controlador {
 
     // Método para publicar un libro concreto en el catálogo
     public function publicarLibro() {
-        $id = $_REQUEST['datos'][0];
+        $id = $_REQUEST['datos'];
         if ($this->modeloGestor->publicarLibro($id)) {
             redirect('gestor');
         } else {
@@ -151,7 +151,7 @@ class Gestor extends Controlador {
 
     // Método para ocultar un libro concreto en el catálogo
     public function ocultarLibro() {
-        $id = $_REQUEST['datos'][0];
+        $id = $_REQUEST['datos'];
         if ($this->modeloGestor->ocultarLibro($id)) {
             redirect('gestor');
         } else {

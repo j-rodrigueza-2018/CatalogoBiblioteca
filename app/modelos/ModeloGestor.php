@@ -64,30 +64,30 @@ class ModeloGestor {
 
     // Método que nos permite publicar libros en el catálogo
     public function publicarLibros($data) {
-        foreach ($data as $d) {
-            $publicacion = $this->db->query("INSERT INTO catalogo VALUES (DEFAULT, '$d[0]', 0)");
+        foreach ($data as $id) {
+            $publicacion = $this->db->query("INSERT INTO catalogo VALUES (DEFAULT, '".$id[0]."', 0)");
         }
         return $publicacion;
     }
 
     // Método que nos permite publicar un libro en concreto en el catálogo
     public function publicarLibro($id) {
-        $publicacion = $this->db->query("INSERT INTO catalogo VALUES (DEFAULT, '$id', 0)");
+        $publicacion = $this->db->query("INSERT INTO catalogo VALUES (DEFAULT, '".$id."', 0)");
         return $publicacion;
     }
 
     // Método que nos permite publicar libros en el catálogo
     public function ocultarLibros($data) {
-        foreach ($data as $d) {
-            $publicacion = $this->db->query("DELETE FROM catalogo WHERE libroId='".$d[0]."'");
+        foreach ($data as $id) {
+            $ocultacion = $this->db->query("DELETE FROM catalogo WHERE libroId='".$id[0]."'");
         }
-        return $publicacion;
+        return $ocultacion;
     }
 
     // Método que nos permite publicar un libro en concreto en el catálogo
     public function ocultarLibro($id) {
-        $publicacion = $this->db->query("DELETE FROM catalogo WHERE libroId='".$id."'");
-        return $publicacion;
+        $ocultacion = $this->db->query("DELETE FROM catalogo WHERE libroId='".$id."'");
+        return $ocultacion;
     }
 
     /* ------------------------------------ */

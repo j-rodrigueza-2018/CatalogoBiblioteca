@@ -23,7 +23,7 @@ $(document).ready(function() {
     });
 
     $(".ocultarLibro").click(function() {
-        let datos = $(this).attr("id").split('-');
+        let datos = $(this).attr("id");
         $.ajax({
             type: "POST",
             url: "http://localhost/CatalogoBiblioteca/gestor/ocultarLibro",
