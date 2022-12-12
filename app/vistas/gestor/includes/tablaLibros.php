@@ -26,8 +26,8 @@
         echo "<button type='button' class='btn btn-primary bi-pencil-square ms-2' onclick='location.href=\"$location\"'></button>";
         echo "<button type='button' class='btn btn-warning text-white ms-2 publicarLibro' id='".$fila['id']."'>Publicar</button>";
         echo "<button type='button' class='btn btn-secondary ms-2 ocultarLibro' id='".$fila['id']."'>Ocultar</button>";
-        echo "<button type='button' class='btn btn-success ms-2 ocultarLibro' id='".$fila['id']."'>Destacar</button>";
-        echo "<button type='button' class='btn btn-danger ms-2 ocultarLibro' id='".$fila['id']."'>Quitar</button>";
+        echo "<button type='button' class='btn btn-success ms-2 destacarLibro' id='".$fila['id']."'>Destacar</button>";
+        echo "<button type='button' class='btn btn-danger ms-2 quitarLibro' id='".$fila['id']."'>Quitar</button>";
         echo "</td>";
         echo "</tr>";
     }

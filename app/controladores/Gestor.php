@@ -55,7 +55,7 @@ class Gestor extends Controlador {
         if ($this->modeloGestor->eliminarLibros($data)) {
             redirect('gestor');
         } else {
-            die('No se pudo dar de alta al autor');
+            die('No se pudo eliminar los libros');
         }
     }
 
@@ -66,7 +66,7 @@ class Gestor extends Controlador {
         if ($this->modeloGestor->eliminarLibro($id, $imagen)) {
             redirect('gestor');
         } else {
-            die('No se pudo dar de alta al autor');
+            die('No se pudo eliminar el libro');
         }
     }
 
@@ -115,7 +115,7 @@ class Gestor extends Controlador {
         if ($this->modeloGestor->actualizarLibro($data)) {
             redirect('gestor');
         } else {
-            die('No se pudo cambiar los datos del autor');
+            die('No se pudo cambiar los datos del libro');
         }
     }
 
@@ -125,7 +125,7 @@ class Gestor extends Controlador {
         if ($this->modeloGestor->publicarLibros($data)) {
             redirect('gestor');
         } else {
-            die('No se pudieron publicar los libros');
+            die('No se pudieron publicar los libros en el catálogo');
         }
     }
 
@@ -135,7 +135,7 @@ class Gestor extends Controlador {
         if ($this->modeloGestor->publicarLibro($id)) {
             redirect('gestor');
         } else {
-            die('No se pudo dar de alta al autor');
+            die('No se pudo publicar el libro en el catálogo');
         }
     }
 
@@ -145,7 +145,7 @@ class Gestor extends Controlador {
         if ($this->modeloGestor->ocultarLibros($data)) {
             redirect('gestor');
         } else {
-            die('No se pudieron publicar los libros');
+            die('No se pudieron ocultar los libros en el catálogo');
         }
     }
 
@@ -155,7 +155,27 @@ class Gestor extends Controlador {
         if ($this->modeloGestor->ocultarLibro($id)) {
             redirect('gestor');
         } else {
-            die('No se pudo dar de alta al autor');
+            die('No se pudo ocultar el libro en el catálogo');
+        }
+    }
+
+    // Método para destacar un libro concreto en el catálogo
+    public function destacarLibro() {
+        $id = $_REQUEST['datos'];
+        if ($this->modeloGestor->destacarLibro($id)) {
+            redirect('gestor');
+        } else {
+            die('No se pudo destacar el libro en el catálogo');
+        }
+    }
+
+    // Método para quitar de los libros destacados a un libro concreto en el catálogo
+    public function quitarLibro() {
+        $id = $_REQUEST['datos'];
+        if ($this->modeloGestor->quitarLibro($id)) {
+            redirect('gestor');
+        } else {
+            die('No se pudo quitar el libro de la sección de destacados del catálogo');
         }
     }
 
@@ -196,7 +216,7 @@ class Gestor extends Controlador {
         if ($this->modeloGestor->eliminarAutores($data)) {
             $this->vista('gestor/listadoAutores');
         } else {
-            die('No se pudo dar de alta al autor');
+            die('No se pudo eliminar a los autores');
         }
     }
 
@@ -206,7 +226,7 @@ class Gestor extends Controlador {
         if ($this->modeloGestor->eliminarAutor($id)) {
             $this->vista('gestor/listadoAutores');
         } else {
-            die('No se pudo dar de alta al autor');
+            die('No se pudo eliminar al autor');
         }
     }
 

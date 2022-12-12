@@ -76,7 +76,7 @@ class ModeloGestor {
         return $publicacion;
     }
 
-    // Método que nos permite publicar libros en el catálogo
+    // Método que nos permite ocultar libros en el catálogo
     public function ocultarLibros($data) {
         foreach ($data as $id) {
             $ocultacion = $this->db->query("DELETE FROM catalogo WHERE libroId='".$id[0]."'");
@@ -84,10 +84,22 @@ class ModeloGestor {
         return $ocultacion;
     }
 
-    // Método que nos permite publicar un libro en concreto en el catálogo
+    // Método que nos permite ocultar un libro en concreto en el catálogo
     public function ocultarLibro($id) {
         $ocultacion = $this->db->query("DELETE FROM catalogo WHERE libroId='".$id."'");
         return $ocultacion;
+    }
+
+    // Método que nos permite destacar un libro en concreto en el catálogo
+    public function destacarLibro($id) {
+        $destacado = $this->db->query("UPDATE catalogo SET destacado=1 WHERE libroId='".$id."'");
+        return $destacado;
+    }
+
+    // Método para quitar de los libros destacados a un libro concreto en el catálogo
+    public function quitarLibro($id) {
+        $destacado = $this->db->query("UPDATE catalogo SET destacado=0 WHERE libroId='".$id."'");
+        return $destacado;
     }
 
     /* ------------------------------------ */

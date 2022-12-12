@@ -51,5 +51,7 @@
     <script type="text/javascript" src="<?php echo RUTA_PUBLIC; ?>/public/js/eliminarLibros.js"></script>
     <script type="text/javascript" src="<?php echo RUTA_PUBLIC; ?>/public/js/publicarEnCatalogo.js"></script>
     <script type="text/javascript" src="<?php echo RUTA_PUBLIC; ?>/public/js/ocultarDelCatalogo.js"></script>
+    <script type="text/javascript" src="<?php echo RUTA_PUBLIC; ?>/public/js/destacarLibro.js"></script>
+    <script type="text/javascript" src="<?php echo RUTA_PUBLIC; ?>/public/js/quitarLibroDeDestacados.js"></script>
 </body>
 </html>
