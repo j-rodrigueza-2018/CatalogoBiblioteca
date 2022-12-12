@@ -25,6 +25,7 @@
         $location = RUTA_PUBLIC.'/gestor/vistaEditarLibro/'.$fila['id'];
         echo "<button type='button' class='btn btn-primary bi-pencil-square ms-2' onclick='location.href=\"$location\"'></button>";
         echo "<button type='button' class='btn btn-warning text-white ms-2 publicarLibro' id='".$fila['id']."-".$fila['imagenPortada']."'>Publicar</button>";
+        echo "<button type='button' class='btn btn-secondary ms-2 ocultarLibro' id='".$fila['id']."-".$fila['imagenPortada']."'>Ocultar</button>";
         echo "</td>";
         echo "</tr>";
     }

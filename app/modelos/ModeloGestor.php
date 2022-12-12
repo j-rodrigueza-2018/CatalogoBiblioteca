@@ -76,6 +76,20 @@ class ModeloGestor {
         return $publicacion;
     }
 
+    // Método que nos permite publicar libros en el catálogo
+    public function ocultarLibros($data) {
+        foreach ($data as $d) {
+            $publicacion = $this->db->query("DELETE FROM catalogo WHERE libroId='".$d[0]."'");
+        }
+        return $publicacion;
+    }
+
+    // Método que nos permite publicar un libro en concreto en el catálogo
+    public function ocultarLibro($id) {
+        $publicacion = $this->db->query("DELETE FROM catalogo WHERE libroId='".$id."'");
+        return $publicacion;
+    }
+
     /* ------------------------------------ */
 
     /* Métodos de las vistas de los Autores */
