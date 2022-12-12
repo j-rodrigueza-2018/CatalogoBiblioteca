@@ -4,8 +4,8 @@
             <th scope="col"></th>
             <th scope="col" class="text-center">Nombre</th>
             <th scope="col" class="text-center">Apellidos</th>
-            <th scope="col" class="text-center">Fecha de Nacimiento</th>
-            <th scope="col" class="text-center">País de Origen</th>
+            <th scope="col" class="text-center d-none d-sm-none d-md-table-cell d-lg-table-cell d-xl-table-cell">Fecha de Nacimiento</th>
+            <th scope="col" class="text-center d-none d-sm-none d-md-table-cell d-lg-table-cell d-xl-table-cell">País de Origen</th>
             <th scope="col" class="text-center">Acciones</th>
         </tr>
     </thead>
@@ -20,8 +20,8 @@
             echo "</td>";
             echo "<td class='text-center'>".$fila['nombreAutor']."</td>";
             echo "<td class='text-center'>".$fila['apellidos']."</td>";
-            echo "<td class='text-center'>".$fila['fechaNac']."</td>";
-            echo "<td class='text-center'>".$fila['paisOrigen']."</td>";
+            echo "<td class='text-center d-none d-sm-none d-md-table-cell d-lg-table-cell d-xl-table-cell'>".$fila['fechaNac']."</td>";
+            echo "<td class='text-center d-none d-sm-none d-md-table-cell d-lg-table-cell d-xl-table-cell'>".$fila['paisOrigen']."</td>";
             echo "<td class='text-center'>";
             echo "<button type='button' class='btn btn-danger bi-trash elimAutor' id='".$fila['id']."'></button>";
             $location = RUTA_PUBLIC.'/gestor/vistaEditarAutor/'.$fila['id'];

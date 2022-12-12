@@ -15,7 +15,7 @@
                 <button type="button" class="btn btn-success bi-plus-square mb-3" onclick="location.href='<?php echo RUTA_PUBLIC; ?>/gestor/nuevoAutor'"></button>
                 <button type="button" class="btn btn-danger bi-trash mb-3" id="btnBorrarAutores"></button>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-12 mb-sm-3 ms-auto">
+            <div class="col-lg-3 col-md-6 col-sm-12 mb-3 mb-sm-3 ms-auto">
                 <input type="search" class="form-control" id="cajaBusqueda" placeholder="Buscar por Apellido" aria-label="Buscar">
             </div>
         </div>
