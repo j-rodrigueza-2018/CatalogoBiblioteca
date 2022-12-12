@@ -10,6 +10,8 @@ class Gestor extends Controlador {
         $this->modeloGestor = $this->modelo('ModeloGestor');
     }
 
+    /* Métodos de las vistas de los Libros */
+
     // Método para establecer la vista principal de la Clase
     public function index() {
         $this->vista('gestor/index');
@@ -69,9 +71,57 @@ class Gestor extends Controlador {
     }
 
     // Método para establecer la vista para editar un libro
-    public function editarLibro() {
-        $this->vista('gestor/editarLibro');
+    public function vistaEditarLibro($id) {
+        $post = $this->modeloGestor->libroPorId($id);
+        $data = [
+            'id' => $id,
+            'titulo' => $post->titulo,
+            'autor' => $post->autorId,
+            'categoria' => $post->categoriaId,
+            'sinopsis' => $post->sinopsis,
+            'imagenPortada' => $post->imagenPortada
+        ];
+        $this->vista('gestor/editarLibro', $data);
     }
+
+    // Método para editar los datos de un libro
+    public function editarLibro($id) {
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+        $archivo = $_FILES['imagen']['tmp_name'];
+        if ($archivo == '') {
+            $ruta = $_POST['ruta'];
+        } else {
+            $imgEliminar = $_POST['ruta'];
+            $borrarImg = RUTA_IMG.'/public/imagenesPortada/'.$imgEliminar;
+            unlink($borrarImg);
+            $nombreArchivo = $_FILES['imagen']['name'];
+            $info = pathinfo($nombreArchivo);
+            $extension = $info['extension'];
+            $nombreImagen = trim($_POST['titulo']).'_'.rand(00000, 99999);
+            move_uploaded_file($archivo, RUTA_IMG.'/public/imagenesPortada/'.$nombreImagen.'.'.$extension);
+            $ruta = $nombreImagen.'.'.$extension;
+        }
+
+        $data = [
+            'id' => $id,
+            'titulo' => trim($_POST['titulo']),
+            'autor' => trim($_POST['autor']),
+            'categoria' => trim($_POST['categoria']),
+            'sinopsis' => trim($_POST['sinopsis']),
+            'imagenPortada' => trim($ruta)
+        ];
+
+        if ($this->modeloGestor->actualizarLibro($data)) {
+            redirect('gestor');
+        } else {
+            die('No se pudo cambiar los datos del autor');
+        }
+    }
+
+    /* ------------------------------------ */
+
+    /* Métodos de las vistas de los Autores */
 
     // Método para establecer la vista de Autores
     public function listadoAutores() {
@@ -157,5 +207,7 @@ class Gestor extends Controlador {
         $resultadoConsulta = $this->modeloGestor->autorPorApellidos($con);
         echo $resultadoConsulta;
     }
+
+    /* ------------------------------------ */
 
 }

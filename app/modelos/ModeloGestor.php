@@ -42,6 +42,26 @@ class ModeloGestor {
         return $eliminacion;
     }
 
+    // Método que nos devuelve un libro (con sus datos) a partir de su Id
+    public function libroPorId($id) {
+        $consulta = $this->db->query("SELECT * FROM libro WHERE id='".$id."'");
+        $data = $consulta->fetch_object();
+        return $data;
+    }
+
+    // Método que nos permite actualizar los datos de un libro
+    public function actualizarLibro($data) {
+        $id = $data['id'];
+        $titulo = $data['titulo'];
+        $autor = $data['autor'];
+        $categoria = $data['categoria'];
+        $sinopsis = $data['sinopsis'];
+        $imagenPortada = $data['imagenPortada'];
+
+        $update = $this->db->query("UPDATE libro SET titulo='$titulo', autorId='$autor', categoriaId='$categoria', sinopsis='$sinopsis', imagenPortada='$imagenPortada' WHERE id='".$id."'");
+        return $update;
+    }
+
     /* ------------------------------------ */
 
     /* Métodos de las vistas de los Autores */
@@ -132,5 +152,7 @@ class ModeloGestor {
 
         return $salida;
     }
+
+    /* ------------------------------------ */
 
 }
