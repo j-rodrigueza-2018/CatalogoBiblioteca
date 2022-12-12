@@ -30,9 +30,24 @@ class Usuarios extends Controlador {
         $this->vista('usuarios/condicionesUso');
     }
 
+    // Método para establecer la vista de detalle de un libro
+    public function vistaDetalleLibro($id) {
+        $post = $this->modeloUsuarios->libroPorId($id);
+        $data = [
+            'id' => $id,
+            'titulo' => $post->titulo,
+            'autorId' => $post->autorId,
+            'autor' => $post->autor,
+            'categoria' => $post->categoria,
+            'sinopsis' => $post->sinopsis,
+            'imagenPortada' => $post->imagenPortada
+        ];
+        $this->vista('usuarios/detalleLibro', $data);
+    }
+
     // Método para establecer la vista de Detalle de Libro
-    public function detallelibro() {
-        $this->vista('usuarios/detallelibro');
+    public function detallelibro($id) {
+        $this->vista('usuarios/detalleLibro', $id);
     }
 
 }
