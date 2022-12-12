@@ -2,9 +2,12 @@
 
 class Usuarios extends Controlador {
 
+    // Atributos de la Clase
+    private $modeloUsuarios;
+
     // Método Constructor de la Clase
     public function __construct() {
-
+        $this->modeloUsuarios = $this->modelo('ModeloUsuarios');
     }
 
     // Método para establecer la vista principal de la Clase
