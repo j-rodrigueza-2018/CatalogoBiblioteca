@@ -70,6 +70,12 @@ class ModeloGestor {
         return $publicacion;
     }
 
+    // Método que nos permite publicar un libro en concreto en el catálogo
+    public function publicarLibro($id) {
+        $publicacion = $this->db->query("INSERT INTO catalogo VALUES (DEFAULT, '$id', 0)");
+        return $publicacion;
+    }
+
     /* ------------------------------------ */
 
     /* Métodos de las vistas de los Autores */

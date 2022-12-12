@@ -3,7 +3,7 @@
 $conexion = new Conexion();
 $rutaPublic = RUTA_PUBLIC;
 
-$consulta = $conexion->query("SELECT c.*, l.titulo, l.imagenPortada FROM catalogo c JOIN libro l ON (c.libroId = l.id)");
+$consulta = $conexion->query("SELECT c.*, l.titulo, l.imagenPortada FROM catalogo c JOIN libro l ON (c.libroId = l.id) ORDER BY l.titulo");
 while ($fila = mysqli_fetch_assoc($consulta)) {
     $imagen = $fila['imagenPortada'];
     $titulo = $fila['titulo'];
