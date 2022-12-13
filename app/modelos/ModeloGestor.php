@@ -102,6 +102,66 @@ class ModeloGestor {
         return $destacado;
     }
 
+    // Método que nos devuelve los libros de nuestra base de datos
+    public function buscarLibros($data) {
+        $titulo = $data[0];
+        $autor = $data[1];
+        $categoria = $data[2];
+
+        $salida = "<table class='table table-bordered'>
+                    <thead>
+                    <tr>
+                        <th scope='col'></th>
+                        <th scope='col' class='text-center'>Título</th>
+                        <th scope='col' class='text-center d-none d-sm-none d-md-none d-lg-none d-xl-table-cell'>Autor</th>
+                        <th scope='col' class='text-center d-none d-sm-none d-md-none d-lg-none d-xl-table-cell'>Categoría</th>
+                        <th scope='col' class='text-center'>Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+        ";
+
+        if ($autor == null && $categoria == null) {
+            $consulta = $this->db->query("SELECT l.id, l.titulo, CONCAT(a.nombre, ' ', a.apellidos) AS autor, c.nombre AS categoria, l.imagenPortada FROM libro l JOIN autor a ON (l.autorId = a.id) JOIN categoria c ON (l.categoriaId = c.id) WHERE l.titulo LIKE '%{$titulo}%' ORDER BY l.titulo ASC");
+        } elseif ($titulo == null && $autor == null) {
+            $consulta = $this->db->query("SELECT l.id, l.titulo, CONCAT(a.nombre, ' ', a.apellidos) AS autor, c.nombre AS categoria, l.imagenPortada FROM libro l JOIN autor a ON (l.autorId = a.id) JOIN categoria c ON (l.categoriaId = c.id) WHERE c.nombre = '$categoria' ORDER BY l.titulo ASC");
+        } elseif ($titulo == null && $categoria == null) {
+            $consulta = $this->db->query("SELECT l.id, l.titulo, CONCAT(a.nombre, ' ', a.apellidos) AS autor, c.nombre AS categoria, l.imagenPortada FROM libro l JOIN autor a ON (l.autorId = a.id) JOIN categoria c ON (l.categoriaId = c.id) WHERE CONCAT(a.nombre, ' ', a.apellidos)='$autor' ORDER BY l.titulo ASC");
+        } elseif ($titulo == null) {
+            $consulta = $this->db->query("SELECT l.id, l.titulo, CONCAT(a.nombre, ' ', a.apellidos) AS autor, c.nombre AS categoria, l.imagenPortada FROM libro l JOIN autor a ON (l.autorId = a.id) JOIN categoria c ON (l.categoriaId = c.id) WHERE CONCAT(a.nombre, ' ', a.apellidos)='$autor' AND c.nombre = '$categoria' ORDER BY l.titulo ASC");
+        } elseif ($autor == null) {
+            $consulta = $this->db->query("SELECT l.id, l.titulo, CONCAT(a.nombre, ' ', a.apellidos) AS autor, c.nombre AS categoria, l.imagenPortada FROM libro l JOIN autor a ON (l.autorId = a.id) JOIN categoria c ON (l.categoriaId = c.id) WHERE l.titulo LIKE '%{$titulo}%' AND c.nombre = '$categoria' ORDER BY l.titulo ASC");
+        } elseif ($categoria == null) {
+            $consulta = $this->db->query("SELECT l.id, l.titulo, CONCAT(a.nombre, ' ', a.apellidos) AS autor, c.nombre AS categoria, l.imagenPortada FROM libro l JOIN autor a ON (l.autorId = a.id) JOIN categoria c ON (l.categoriaId = c.id) WHERE l.titulo LIKE '%{$titulo}%' AND CONCAT(a.nombre, ' ', a.apellidos)='$autor' ORDER BY l.titulo ASC");
+        } else {
+            $consulta = $this->db->query("SELECT l.id, l.titulo, CONCAT(a.nombre, ' ', a.apellidos) AS autor, c.nombre AS categoria, l.imagenPortada FROM libro l JOIN autor a ON (l.autorId = a.id) JOIN categoria c ON (l.categoriaId = c.id) WHERE l.titulo LIKE '%{$titulo}%' AND CONCAT(a.nombre, ' ', a.apellidos)='$autor' AND c.nombre = '$categoria' ORDER BY l.titulo ASC");
+        }
+        while ($fila = mysqli_fetch_assoc($consulta)) {
+            $salida .= "<tr id='idLibro".$fila['id']."'>";
+            $salida .= "<td class='text-center'>";
+            $salida .= "<input type='checkbox' name='ids[]' class='deleteCheckbox' value='".$fila['id']."-".$fila['imagenPortada']."'>";
+            $salida .= "</td>";
+            $salida .= "<td class='text-center'>".$fila['titulo']."</td>";
+            $salida .= "<td class='text-center d-none d-sm-none d-md-none d-lg-none d-xl-table-cell'>".$fila['autor']."</td>";
+            $salida .= "<td class='text-center d-none d-sm-none d-md-none d-lg-none d-xl-table-cell'>".$fila['categoria']."</td>";
+            $salida .= "<td class='text-lg-center'>";
+            $salida .= "<button type='button' class='btn btn-danger bi-trash elimLibro' id='".$fila['id']."-".$fila['imagenPortada']."'></button>";
+            $location = RUTA_PUBLIC.'/gestor/vistaEditarLibro/'.$fila['id'];
+            $salida .= "<button type='button' class='btn btn-primary bi-pencil-square ms-2' onclick='location.href=\"$location\"'></button>";
+            $salida .= "<button type='button' class='btn btn-warning text-white ms-2 publicarLibro' id='".$fila['id']."'>Publicar</button>";
+            $salida .= "<button type='button' class='btn btn-secondary ms-2 ocultarLibro' id='".$fila['id']."'>Ocultar</button>";
+            $salida .= "<button type='button' class='btn btn-success ms-2 destacarLibro' id='".$fila['id']."'>Destacar</button>";
+            $salida .= "<button type='button' class='btn btn-danger ms-2 quitarLibro' id='".$fila['id']."'>Quitar</button>";
+            $salida .= "</td>";
+            $salida .= "</tr>";
+        }
+
+        $salida .= "</tbody>";
+        $salida .= "</table>";
+
+        return $salida;
+    }
+
     /* ------------------------------------ */
 
     /* Métodos de las vistas de los Autores */
@@ -164,8 +224,8 @@ class ModeloGestor {
                             <th scope='col'></th>
                             <th scope='col' class='text-center'>Nombre</th>
                             <th scope='col' class='text-center'>Apellidos</th>
-                            <th scope='col' class='text-center'>Fecha de Nacimiento</th>
-                            <th scope='col' class='text-center'>País de Origen</th>
+                            <th scope='col' class='text-center d-none d-sm-none d-md-table-cell d-lg-table-cell d-xl-table-cell'>Fecha de Nacimiento</th>
+                            <th scope='col' class='text-center d-none d-sm-none d-md-table-cell d-lg-table-cell d-xl-table-cell'>País de Origen</th>
                             <th scope='col' class='text-center'>Acciones</th>
                         </tr>
                     </thead>
@@ -179,8 +239,8 @@ class ModeloGestor {
                                 </td>
                                 <td class='text-center'>".$fila['nombreAutor']."</td>
                                 <td class='text-center'>".$fila['apellidos']."</td>
-                                <td class='text-center'>".$fila['fechaNac']."</td>
-                                <td class='text-center'>".$fila['paisOrigen']."</td>
+                                <td class='text-center text-center d-none d-sm-none d-md-table-cell d-lg-table-cell d-xl-table-cell'>".$fila['fechaNac']."</td>
+                                <td class='text-center text-center d-none d-sm-none d-md-table-cell d-lg-table-cell d-xl-table-cell'>".$fila['paisOrigen']."</td>
                                 <td class='text-center'>
                                     <button type='button' class='btn btn-danger bi-trash elimAutor' id='".$fila['id']."'></button>
                                     <button type='button' class='btn btn-primary bi-pencil-square ms-2' onclick='location.href=\"$location\"'></button>

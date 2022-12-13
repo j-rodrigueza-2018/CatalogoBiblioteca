@@ -14,4 +14,20 @@ $(document).ready(function() {
             alert('Hubo un error');
         });
     });
+
+    $('#buscarLibroGestor').on('click', function() {
+        let titulo = $('#buscaTituloGestor').val();
+        let autor = $('#selectAutorGestor').val();
+        let categoria = $('#selectCategoriaGestor').val();
+        let busqueda = [titulo, autor, categoria];
+        $.ajax({
+            type: 'POST',
+            url: 'http://localhost/CatalogoBiblioteca/gestor/buscarLibros',
+            data: {'busqueda': busqueda},
+        }).done(function(respuesta) {
+            $('#tablaDatosLibros').html(respuesta);
+        }).fail(function() {
+            alert('Hubo un error');
+        });
+    });
 });

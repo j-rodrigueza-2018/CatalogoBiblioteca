@@ -179,6 +179,13 @@ class Gestor extends Controlador {
         }
     }
 
+    // Método para buscar los libros
+    public function buscarLibros() {
+        $con = $_POST['busqueda'];
+        $resultadoConsulta = $this->modeloGestor->buscarLibros($con);
+        echo $resultadoConsulta;
+    }
+
     /* ------------------------------------ */
 
     /* Métodos de las vistas de los Autores */

@@ -17,23 +17,29 @@
                 <button type="button" class="btn btn-warning text-white" id="btnPublicar">Publicar</button>
                 <button type="button" class="btn btn-secondary" id="btnOcultar">Ocultar</button>
             </div>
-            <div class="col-lg-8 col-md-12 col-sm-12 mb-3">
-                <form class="d-flex ms-auto col-lg-8 col-md-12 col-sm-12" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Título" aria-label="Buscar">
-                    <select id="select1" class="form-select me-2" aria-label="Default select example">
-                        <option selected disabled>Autor</option>
-                        <option value="1">Autor 1</option>
-                        <option value="2">Autor 2</option>
-                        <option value="3">Autor 3</option>
-                    </select>
-                    <select id="select2" class="form-select me-2" aria-label="Default select example">
-                        <option selected disabled>Categorías</option>
-                        <option value="1">Categoría 1</option>
-                        <option value="2">Categoría 2</option>
-                        <option value="3">Categoría 3</option>
-                    </select>
-                    <button class="btn btn-danger" type="submit">Buscar</button>
-                </form>
+            <div class="col-xxl-8 col-xl-8 col-lg-12 col-md-12 col-sm-12 d-xxl-flex d-xl-flex">
+                <input class="form-control me-xxl-2 me-xl-2 mb-xl-3 mb-lg-3 mb-md-3 mb-sm-3 mb-3" placeholder="Título" id="buscaTituloGestor" name="buscaTituloGestor">
+                <select id="selectAutorGestor" name="selectAutorGestor" class="form-select me-xxl-2 me-xl-2 mb-xl-3 mb-lg-3 mb-md-3 mb-sm-3 mb-3">
+                    <option selected disabled>Autor</option>
+                    <?php
+                    $conexion = new Conexion();
+                    $resultado = $conexion->query("SELECT id, CONCAT(nombre, ' ', apellidos) AS nombreAutor FROM autor ORDER BY nombre ASC");
+                    while ($fila = mysqli_fetch_assoc($resultado)) {
+                        echo "<option value='".$fila['nombreAutor']."'>".$fila['nombreAutor']."</option>";
+                    }
+                    ?>
+                </select>
+                <select id="selectCategoriaGestor" name="selectCategoriaGestor" class="form-select me-xxl-2 me-xl-2 mb-xl-3 mb-lg-3 mb-md-3 mb-sm-3 mb-3" aria-label="Default select example">
+                    <option selected disabled>Categorías</option>
+                    <?php
+                    $conexion = new Conexion();
+                    $resultado = $conexion->query("SELECT id, nombre FROM categoria ORDER BY nombre ASC");
+                    while ($fila = mysqli_fetch_assoc($resultado)) {
+                        echo "<option value='".$fila['nombre']."'>".$fila['nombre']."</option>";
+                    }
+                    ?>
+                </select>
+                <button class="btn btn-danger mb-xl-3 mb-lg-3 mb-md-3 mb-sm-3 mb-3" id="buscarLibroGestor" name="buscarLibroGestor">Buscar</button>
             </div>
         </div>
         <div class="row">
@@ -53,5 +59,6 @@
     <script type="text/javascript" src="<?php echo RUTA_PUBLIC; ?>/public/js/ocultarDelCatalogo.js"></script>
     <script type="text/javascript" src="<?php echo RUTA_PUBLIC; ?>/public/js/destacarLibro.js"></script>
     <script type="text/javascript" src="<?php echo RUTA_PUBLIC; ?>/public/js/quitarLibroDeDestacados.js"></script>
+    <script type="text/javascript" src="<?php echo RUTA_PUBLIC; ?>/public/js/buscarLibros.js"></script>
 </body>
 </html>
