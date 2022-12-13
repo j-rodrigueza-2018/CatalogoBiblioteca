@@ -13,26 +13,32 @@
     <div class="container">
         <p class="h1 mt-3 mb-3">CATÁLOGO</p>
         <div class="row">
-            <div class="col-lg-6 col-md-10 col-sm-12 mb-3">
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Título" aria-label="Buscar">
-                    <select id="select1" class="form-select me-2" aria-label="Default select example">
-                        <option selected disabled>Autor</option>
-                        <option value="1">Autor 1</option>
-                        <option value="2">Autor 2</option>
-                        <option value="3">Autor 3</option>
-                    </select>
-                    <select id="select2" class="form-select me-2" aria-label="Default select example">
-                        <option selected disabled>Categorías</option>
-                        <option value="1">Categoría 1</option>
-                        <option value="2">Categoría 2</option>
-                        <option value="3">Categoría 3</option>
-                    </select>
-                    <button class="btn btn-danger" type="submit">Buscar</button>
-                </form>
+            <div class="col-xxl-6 col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-3 d-xxl-flex">
+                <input class="form-control me-xxl-2 mb-xl-3 mb-lg-3 mb-md-3 mb-sm-3 mb-3" placeholder="Título" id="buscaTituloCatalogo" name="buscaTituloCatalogo">
+                <select id="selectAutorCatalogo" name="selectAutorCatalogo" class="form-select me-xxl-2 mb-xl-3 mb-lg-3 mb-md-3 mb-sm-3 mb-3">
+                    <option selected disabled>Autor</option>
+                    <?php
+                        $conexion = new Conexion();
+                        $resultado = $conexion->query("SELECT id, CONCAT(nombre, ' ', apellidos) AS nombreAutor FROM autor ORDER BY nombre ASC");
+                        while ($fila = mysqli_fetch_assoc($resultado)) {
+                            echo "<option value='".$fila['nombreAutor']."'>".$fila['nombreAutor']."</option>";
+                        }
+                    ?>
+                </select>
+                <select id="selectCategoriaCatalogo" name="selectCategoriaCatalogo" class="form-select me-xxl-2 mb-xl-3 mb-lg-3 mb-md-3 mb-sm-3 mb-3" aria-label="Default select example">
+                    <option selected disabled>Categorías</option>
+                    <?php
+                        $conexion = new Conexion();
+                        $resultado = $conexion->query("SELECT id, nombre FROM categoria ORDER BY nombre ASC");
+                        while ($fila = mysqli_fetch_assoc($resultado)) {
+                            echo "<option value='".$fila['nombre']."'>".$fila['nombre']."</option>";
+                        }
+                    ?>
+                </select>
+                <button class="btn btn-danger mb-xl-3 mb-lg-3 mb-md-3 mb-sm-3 mb-3" id="buscarLibroCatalogo" name="buscarLibroCatalogo">Buscar</button>
             </div>
         </div>
-        <div class="row justify-content-center">
+        <div class="row justify-content-center" id="librosCatalogo" name="librosCatalogo">
             <?php include("includes/librosCatalogo.php"); ?>
         </div>
     </div>
@@ -42,5 +48,7 @@
         let catalogo = document.getElementById('catalogo');
         catalogo.className += " active";
     </script>
+    <script src="<?php echo RUTA_PUBLIC; ?>/public/js/jquery-3.6.1.min.js"></script>
+    <script type="text/javascript" src="<?php echo RUTA_PUBLIC; ?>/public/js/buscarLibros.js"></script>
 </body>
 </html>

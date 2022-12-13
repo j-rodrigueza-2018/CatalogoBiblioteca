@@ -25,9 +25,13 @@
                 <li class="nav-item dropdown">
                     <a id="categorias" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">CATEGORÍAS</a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Categoría 1</a></li>
-                        <li><a class="dropdown-item" href="#">Categoría 2</a></li>
-                        <li><a class="dropdown-item" href="#">Categoría 3</a></li>
+                        <?php
+                            $conexion = new Conexion();
+                            $resultado = $conexion->query("SELECT id, nombre FROM categoria ORDER BY nombre ASC");
+                            while ($fila = mysqli_fetch_assoc($resultado)) {
+                                echo "<li><a class='dropdown-item' href='#'>".$fila['nombre']."</a></li>";
+                            }
+                        ?>
                     </ul>
                 </li>
             </ul>

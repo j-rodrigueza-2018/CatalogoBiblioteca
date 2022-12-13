@@ -49,3 +49,7 @@ p.h1 {
 .contacto {
     background-color: rgba(154, 47, 174, 0.1);
 }
+
+.card:hover {
+    transform: scale(1.05);
+}

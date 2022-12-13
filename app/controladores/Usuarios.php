@@ -45,9 +45,11 @@ class Usuarios extends Controlador {
         $this->vista('usuarios/detalleLibro', $data);
     }
 
-    // Método para establecer la vista de Detalle de Libro
-    public function detallelibro($id) {
-        $this->vista('usuarios/detalleLibro', $id);
+    // Método para buscar los libros en el catálogo
+    public function buscarLibros() {
+        $con = $_POST['busqueda'];
+        $resultadoConsulta = $this->modeloUsuarios->buscarLibros($con);
+        echo $resultadoConsulta;
     }
 
 }
