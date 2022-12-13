@@ -52,4 +52,11 @@ class Usuarios extends Controlador {
         echo $resultadoConsulta;
     }
 
+    // Método que devuelve un libro dada su categoría
+    public function libroCategoria() {
+        $con = $_POST['categoria'];
+        $resultadoConsulta = $this->modeloUsuarios->libroCategoria($con);
+        echo $resultadoConsulta;
+    }
+
 }

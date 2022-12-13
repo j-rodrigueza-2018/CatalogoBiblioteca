@@ -50,5 +50,6 @@
     </script>
     <script src="<?php echo RUTA_PUBLIC; ?>/public/js/jquery-3.6.1.min.js"></script>
     <script type="text/javascript" src="<?php echo RUTA_PUBLIC; ?>/public/js/buscarLibros.js"></script>
+    <script type="text/javascript" src="<?php echo RUTA_PUBLIC; ?>/public/js/libroPorCategoria.js"></script>
 </body>
 </html>

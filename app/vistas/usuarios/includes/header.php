@@ -29,7 +29,7 @@
                             $conexion = new Conexion();
                             $resultado = $conexion->query("SELECT id, nombre FROM categoria ORDER BY nombre ASC");
                             while ($fila = mysqli_fetch_assoc($resultado)) {
-                                echo "<li><a class='dropdown-item' href='#'>".$fila['nombre']."</a></li>";
+                                echo "<li><a class='dropdown-item filtroCategoria'>".$fila['nombre']."</a></li>";
                             }
                         ?>
                     </ul>

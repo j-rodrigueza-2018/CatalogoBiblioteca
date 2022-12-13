@@ -22,6 +22,7 @@ class ModeloUsuarios {
         $titulo = $data[0];
         $autor = $data[1];
         $categoria = $data[2];
+        $salida = '';
 
         if ($autor == null && $categoria == null) {
             $consulta = $this->db->query("SELECT c.*, l.id AS idLibro, l.titulo, l.imagenPortada FROM catalogo c JOIN libro l ON (c.libroId = l.id) WHERE l.titulo LIKE '%{$titulo}%' ORDER BY l.titulo");
@@ -55,6 +56,33 @@ class ModeloUsuarios {
         }
 
         return $salida;
+    }
+
+    // Método que devuelve los libros en el catálogo por su categoría
+    public function libroCategoria($data) {
+        $categoria = $data;
+        $salida = '';
+
+        $consulta = $this->db->query("SELECT c.*, l.id AS idLibro, l.titulo, l.imagenPortada, cat.nombre FROM catalogo c JOIN libro l ON (c.libroId = l.id) JOIN categoria cat ON (l.categoriaId = cat.id) WHERE cat.nombre = '$categoria' ORDER BY l.titulo");
+
+        while ($fila = mysqli_fetch_assoc($consulta)) {
+            $idLibro = $fila['idLibro'];
+            $imagen = $fila['imagenPortada'];
+            $titulo = $fila['titulo'];
+            $salida .= "
+                <div class='card border-0 col-2 catalogo' style='width: 15rem;'>
+                    <a href='".RUTA_PUBLIC."/usuarios/vistaDetalleLibro/$idLibro' class='text-center text-black text-decoration-none'>
+                        <img src='".RUTA_PUBLIC."/public/imagenesPortada/$imagen' class='card-img-top'>
+                        <div class='card-body'>
+                            <h5 class='card-title'>$titulo</h5>
+                        </div>
+                    </a>
+                </div>
+            ";
+        }
+
+        return $salida;
+
     }
 
 }
