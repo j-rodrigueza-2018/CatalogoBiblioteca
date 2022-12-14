@@ -35,12 +35,12 @@
                         <div class="modal-body">
                             <?php
                                 $conexion = new Conexion();
-                                $resultado = $conexion->query("SELECT a.nombre AS nombreAutor, a.apellidos, DATE_FORMAT(a.fechaNacimiento, '%d-%m-%Y') AS fechaNac, p.nombre AS paisOrigen FROM autor a JOIN paisOrigen p ON (a.paisOrigenId = p.id) WHERE a.id='".$data['autorId']."'");
+                                $resultado = $conexion->query("SELECT a.nombre AS nombreAutor, a.apellidos, DATE_FORMAT(a.fechaNacimiento, '%d-%m-%Y') AS fechaNac, p.nombre AS paises FROM autor a JOIN paises p ON (a.paisId = p.id) WHERE a.id='".$data['autorId']."'");
                                 while ($fila = mysqli_fetch_assoc($resultado)) {
                                     echo "<p class='h6'><span class='subrayado'>Nombre:</span> ".$fila['nombreAutor']."</p>";
                                     echo "<p class='h6'><span class='subrayado'>Apellidos:</span> ".$fila['apellidos']."</p>";
                                     echo "<p class='h6'><span class='subrayado'>Fecha de Nacimiento:</span> ".$fila['fechaNac']."</p>";
-                                    echo "<p class='h6'><span class='subrayado'>País de Origen:</span> ".$fila['paisOrigen']."</p>";
+                                    echo "<p class='h6'><span class='subrayado'>País de Origen:</span> ".$fila['paises']."</p>";
                                 }
                             ?>
                         </div>

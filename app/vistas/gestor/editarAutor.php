@@ -24,14 +24,14 @@
                 <input type="date" class="form-control" id="fechaNacimiento" name="fechaNacimiento" value="<?php echo $data['fechaNacimiento']; ?>" required>
             </div>
             <div class="col-12 mb-3">
-                <label for="paisOrigen" class="form-label subrayado">País de Origen:</label>
-                <select class="form-select" id="paisOrigen" name="paisOrigen" data-show-subtext="true" data-live-search="true" required>
+                <label for="paises" class="form-label subrayado">País de Origen:</label>
+                <select class="form-select" id="paises" name="paises" data-show-subtext="true" data-live-search="true" required>
                     <option selected disabled>País de Origen</option>
                     <?php
                     $conexion = new Conexion();
-                    $resultado = $conexion->query("SELECT * FROM paisOrigen ORDER BY nombre ASC");
+                    $resultado = $conexion->query("SELECT * FROM paises ORDER BY nombre ASC");
                     while ($fila = mysqli_fetch_assoc($resultado)) {
-                        if ($fila['id'] == $data['paisOrigen']) {
+                        if ($fila['id'] == $data['paises']) {
                             echo "<option value=".$fila['id']." selected='true'>".$fila['nombre']."</option>";
 
                         } else {

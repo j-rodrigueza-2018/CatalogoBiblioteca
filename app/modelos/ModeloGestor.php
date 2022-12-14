@@ -20,7 +20,7 @@ class ModeloGestor {
         $sinopsis = $data['sinopsis'];
         $imagenPortada = $data['imagenPortada'];
 
-        $insercion = $this->db->query("INSERT INTO libro VALUES (DEFAULT, '$titulo', '$autor', '$categoria', '$sinopsis', '$imagenPortada')");
+        $insercion = $this->db->query("INSERT INTO libro VALUES (DEFAULT, '$titulo', '$autor', '$categoria', '$sinopsis', '$imagenPortada', 0, 0)");
         return $insercion;
     }
 
@@ -65,14 +65,14 @@ class ModeloGestor {
     // Método que nos permite publicar libros en el catálogo
     public function publicarLibros($data) {
         foreach ($data as $id) {
-            $publicacion = $this->db->query("INSERT INTO catalogo VALUES (DEFAULT, '".$id[0]."', 0)");
+            $publicacion = $this->db->query("UPDATE libro SET enCatalogo=1 WHERE id='".$id[0]."'");
         }
         return $publicacion;
     }
 
     // Método que nos permite publicar un libro en concreto en el catálogo
     public function publicarLibro($id) {
-        $publicacion = $this->db->query("INSERT INTO catalogo VALUES (DEFAULT, '".$id."', 0)");
+        $publicacion = $this->db->query("UPDATE libro SET enCatalogo=1 WHERE id='".$id."'");
         return $publicacion;
     }
 
@@ -86,19 +86,19 @@ class ModeloGestor {
 
     // Método que nos permite ocultar un libro en concreto en el catálogo
     public function ocultarLibro($id) {
-        $ocultacion = $this->db->query("DELETE FROM catalogo WHERE libroId='".$id."'");
+        $ocultacion = $this->db->query("UPDATE libro SET enCatalogo=0 WHERE id='".$id."'");
         return $ocultacion;
     }
 
     // Método que nos permite destacar un libro en concreto en el catálogo
     public function destacarLibro($id) {
-        $destacado = $this->db->query("UPDATE catalogo SET destacado=1 WHERE libroId='".$id."'");
+        $destacado = $this->db->query("UPDATE libro SET destacado=1 WHERE id='".$id."'");
         return $destacado;
     }
 
     // Método para quitar de los libros destacados a un libro concreto en el catálogo
     public function quitarLibro($id) {
-        $destacado = $this->db->query("UPDATE catalogo SET destacado=0 WHERE libroId='".$id."'");
+        $destacado = $this->db->query("UPDATE catalogo SET destacado=0 WHERE id='".$id."'");
         return $destacado;
     }
 
@@ -171,9 +171,9 @@ class ModeloGestor {
         $nombre = $data['nombre'];
         $apellidos = $data['apellidos'];
         $fechaNacimiento = $data['fechaNacimiento'];
-        $paisOrigen = $data['paisOrigen'];
+        $paises = $data['paises'];
 
-        $insercion = $this->db->query("INSERT INTO autor VALUES (DEFAULT, '$nombre', '$apellidos', '$fechaNacimiento', '$paisOrigen')");
+        $insercion = $this->db->query("INSERT INTO autor VALUES (DEFAULT, '$nombre', '$apellidos', '$fechaNacimiento', '$paises')");
         return $insercion;
     }
 
@@ -204,9 +204,9 @@ class ModeloGestor {
         $nombre = $data['nombre'];
         $apellidos = $data['apellidos'];
         $fechaNacimiento = $data['fechaNacimiento'];
-        $paisOrigen = $data['paisOrigen'];
+        $paises = $data['paises'];
 
-        $update = $this->db->query("UPDATE autor SET nombre='$nombre', apellidos='$apellidos', fechaNacimiento='$fechaNacimiento', paisOrigenId='$paisOrigen' WHERE id='$id'");
+        $update = $this->db->query("UPDATE autor SET nombre='$nombre', apellidos='$apellidos', fechaNacimiento='$fechaNacimiento', paisId='$paises' WHERE id='$id'");
         return $update;
     }
 
@@ -214,7 +214,7 @@ class ModeloGestor {
     public function autorPorApellidos($texto) {
         if (isset($texto)) {
             $con = $this->db->realEscapeString($texto);
-            $consulta = "SELECT a.id, a.nombre AS nombreAutor, a.apellidos, DATE_FORMAT(a.fechaNacimiento, '%d-%m-%Y') AS fechaNac, p.nombre AS paisOrigen FROM autor a JOIN paisOrigen p ON (a.paisOrigenId = p.id) WHERE a.apellidos LIKE '%{$con}%' ORDER BY a.nombre ASC";
+            $consulta = "SELECT a.id, a.nombre AS nombreAutor, a.apellidos, DATE_FORMAT(a.fechaNacimiento, '%d-%m-%Y') AS fechaNac, p.nombre AS paises FROM autor a JOIN paises p ON (a.paisId = p.id) WHERE a.apellidos LIKE '%{$con}%' ORDER BY a.nombre ASC";
         }
 
         $resultado = $this->db->query($consulta);
@@ -240,7 +240,7 @@ class ModeloGestor {
                                 <td class='text-center'>".$fila['nombreAutor']."</td>
                                 <td class='text-center'>".$fila['apellidos']."</td>
                                 <td class='text-center text-center d-none d-sm-none d-md-table-cell d-lg-table-cell d-xl-table-cell'>".$fila['fechaNac']."</td>
-                                <td class='text-center text-center d-none d-sm-none d-md-table-cell d-lg-table-cell d-xl-table-cell'>".$fila['paisOrigen']."</td>
+                                <td class='text-center text-center d-none d-sm-none d-md-table-cell d-lg-table-cell d-xl-table-cell'>".$fila['paises']."</td>
                                 <td class='text-center'>
                                     <button type='button' class='btn btn-danger bi-trash elimAutor' id='".$fila['id']."'></button>
                                     <button type='button' class='btn btn-primary bi-pencil-square ms-2' onclick='location.href=\"$location\"'></button>

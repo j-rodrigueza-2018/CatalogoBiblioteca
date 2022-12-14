@@ -27,12 +27,19 @@ class Gestor extends Controlador {
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
         $archivo = $_FILES['imagen']['tmp_name'];
-        $nombreArchivo = $_FILES['imagen']['name'];
-        $info = pathinfo($nombreArchivo);
-        $extension = $info['extension'];
-        $nombreImagen = trim($_POST['titulo']).'_'.rand(00000, 99999);
-        move_uploaded_file($archivo, RUTA_IMG.'/public/imagenesPortada/'.$nombreImagen.'.'.$extension);
-        $ruta = $nombreImagen.'.'.$extension;
+        if ($archivo == '') {
+            $tmpName = RUTA_IMG.'/public/img/libro1.jpg';
+            $nombreImagen = strtr($_POST['titulo'], " ", "_").'_'.rand(00000, 99999);
+            copy($tmpName, RUTA_IMG.'/public/imagenesPortada/'.$nombreImagen.'.jpg');
+            $ruta = $nombreImagen.'.jpg';
+        } else {
+            $nombreArchivo = $_FILES['imagen']['name'];
+            $info = pathinfo($nombreArchivo);
+            $extension = $info['extension'];
+            $nombreImagen = trim($_POST['titulo']).'_'.rand(00000, 99999);
+            move_uploaded_file($archivo, RUTA_IMG.'/public/imagenesPortada/'.$nombreImagen.'.'.$extension);
+            $ruta = $nombreImagen.'.'.$extension;
+        }
 
         $data = [
             'titulo' => trim($_POST['titulo']),
@@ -98,7 +105,7 @@ class Gestor extends Controlador {
             $nombreArchivo = $_FILES['imagen']['name'];
             $info = pathinfo($nombreArchivo);
             $extension = $info['extension'];
-            $nombreImagen = trim($_POST['titulo']).'_'.rand(00000, 99999);
+            $nombreImagen = strtr($_POST['titulo'], " ", "_").'_'.rand(00000, 99999);
             move_uploaded_file($archivo, RUTA_IMG.'/public/imagenesPortada/'.$nombreImagen.'.'.$extension);
             $ruta = $nombreImagen.'.'.$extension;
         }
@@ -207,7 +214,7 @@ class Gestor extends Controlador {
             'nombre' => trim($_POST['nombre']),
             'apellidos' => trim($_POST['apellidos']),
             'fechaNacimiento' => trim($_POST['fechaNacimiento']),
-            'paisOrigen' => trim($_POST['paisOrigen'])
+            'paises' => trim($_POST['paises'])
         ];
 
         if ($this->modeloGestor->crearNuevoAutor($data)) {
@@ -245,7 +252,7 @@ class Gestor extends Controlador {
             'nombre' => $post->nombre,
             'apellidos' => $post->apellidos,
             'fechaNacimiento' => $post->fechaNacimiento,
-            'paisOrigen' => $post->paisOrigenId
+            'paises' => $post->paisId
         ];
         $this->vista('gestor/editarAutor', $data);
     }
@@ -258,7 +265,7 @@ class Gestor extends Controlador {
             'nombre' => trim($_POST['nombre']),
             'apellidos' => trim($_POST['apellidos']),
             'fechaNacimiento' => trim($_POST['fechaNacimiento']),
-            'paisOrigen' => trim($_POST['paisOrigen'])
+            'paises' => trim($_POST['paises'])
         ];
 
         if ($this->modeloGestor->actualizarAutor($data)) {
