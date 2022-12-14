@@ -13,19 +13,20 @@
         <form class="row" action="<?php echo RUTA_PUBLIC ?>/gestor/editarAutor/<?php echo $data['id']; ?>" method="post" autocomplete="off">
             <div class="col-12 mb-3">
                 <label for="nombre" class="form-label subrayado">Nombre:</label>
-                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre del Autor" value="<?php echo $data['nombre']; ?>" autofocus>
+                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre del Autor" value="<?php echo $data['nombre']; ?>" autofocus required>
             </div>
             <div class="col-12 mb-3">
                 <label for="apellidos" class="form-label subrayado">Apellidos:</label>
-                <input type="text" class="form-control" id="apellidos" name="apellidos" placeholder="Apellidos del Autor" value="<?php echo $data['apellidos']; ?>">
+                <input type="text" class="form-control" id="apellidos" name="apellidos" placeholder="Apellidos del Autor" value="<?php echo $data['apellidos']; ?>" required>
             </div>
             <div class="col-12 mb-3">
                 <label for="fechaNacimiento" class="form-label subrayado">Fecha de Nacimiento:</label>
-                <input type="date" class="form-control" id="fechaNacimiento" name="fechaNacimiento" value="<?php echo $data['fechaNacimiento']; ?>">
+                <input type="date" class="form-control" id="fechaNacimiento" name="fechaNacimiento" value="<?php echo $data['fechaNacimiento']; ?>" required>
             </div>
             <div class="col-12 mb-3">
                 <label for="paisOrigen" class="form-label subrayado">País de Origen:</label>
-                <select class="form-select" id="paisOrigen" name="paisOrigen" data-show-subtext="true" data-live-search="true">
+                <select class="form-select" id="paisOrigen" name="paisOrigen" data-show-subtext="true" data-live-search="true" required>
+                    <option selected disabled>País de Origen</option>
                     <?php
                     $conexion = new Conexion();
                     $resultado = $conexion->query("SELECT * FROM paisOrigen ORDER BY nombre ASC");

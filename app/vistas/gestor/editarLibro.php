@@ -13,11 +13,12 @@
         <form class="row" action="<?php echo RUTA_PUBLIC ?>/gestor/editarLibro/<?php echo $data['id']; ?>" method="post" autocomplete="off" enctype="multipart/form-data">
             <div class="col-12 mb-3">
                 <label for="titulo" class="form-label subrayado">Título:</label>
-                <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Título del Libro" value="<?php echo $data['titulo']; ?>" autofocus>
+                <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Título del Libro" value="<?php echo $data['titulo']; ?>" autofocus required>
             </div>
             <div class="col-12 mb-3">
                 <label for="autor" class="form-label subrayado">Autor:</label>
-                <select class="form-select" id="autor" name="autor" data-show-subtext="true" data-live-search="true">
+                <select class="form-select" id="autor" name="autor" data-show-subtext="true" data-live-search="true" required>
+                    <option selected disabled>Autor</option>
                     <?php
                     $conexion = new Conexion();
                     $resultado = $conexion->query("SELECT * FROM autor ORDER BY nombre ASC");
@@ -33,7 +34,8 @@
             </div>
             <div class="col-12 mb-3">
                 <label for="categoria" class="form-label subrayado">Categoría:</label>
-                <select class="form-select" id="categoria" name="categoria" data-show-subtext="true" data-live-search="true">
+                <select class="form-select" id="categoria" name="categoria" data-show-subtext="true" data-live-search="true" required>
+                    <option selected disabled>Categoría</option>
                     <?php
                     $conexion = new Conexion();
                     $resultado = $conexion->query("SELECT * FROM categoria ORDER BY nombre ASC");
@@ -49,7 +51,7 @@
             </div>
             <div class="col-12 mb-3">
                 <label for="sinopsis" class="form-label subrayado">Sinopsis:</label>
-                <textarea class="form-control" rows="4" id="sinopsis" name="sinopsis" placeholder="Sinopsis del Libro"><?php echo $data['sinopsis']; ?></textarea>
+                <textarea class="form-control" rows="4" id="sinopsis" name="sinopsis" placeholder="Sinopsis del Libro" required><?php echo $data['sinopsis']; ?></textarea>
             </div>
             <div class="col-12 mb-3">
                 <label for="imagenPortada" class="form-label subrayado">Imagen de Portada:</label>
