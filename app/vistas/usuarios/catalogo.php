@@ -17,6 +17,7 @@
                 <input class="form-control me-xxl-2 mb-xl-3 mb-lg-3 mb-md-3 mb-sm-3 mb-3" placeholder="Título" id="buscaTituloCatalogo" name="buscaTituloCatalogo">
                 <select id="selectAutorCatalogo" name="selectAutorCatalogo" class="form-select me-xxl-2 mb-xl-3 mb-lg-3 mb-md-3 mb-sm-3 mb-3">
                     <option selected disabled>Autor</option>
+                    <option></option>
                     <?php
                         $conexion = new Conexion();
                         $resultado = $conexion->query("SELECT id, CONCAT(nombre, ' ', apellidos) AS nombreAutor FROM autor ORDER BY nombre ASC");
@@ -27,6 +28,7 @@
                 </select>
                 <select id="selectCategoriaCatalogo" name="selectCategoriaCatalogo" class="form-select me-xxl-2 mb-xl-3 mb-lg-3 mb-md-3 mb-sm-3 mb-3" aria-label="Default select example">
                     <option selected disabled>Categorías</option>
+                    <option></option>
                     <?php
                         $conexion = new Conexion();
                         $resultado = $conexion->query("SELECT id, nombre FROM categoria ORDER BY nombre ASC");
