@@ -15,7 +15,7 @@ $(document).ready(function() {
                 },
                 error: function(xhr, httpStatusMessage) {
                     if (xhr.status === 500) {
-                        alert('El libro no se puede publicar porque ha sido publicado con anterioridad');
+                        alert('El libro no se puede ocultar porque ha sido publicado con anterioridad');
                     }
                 }
             });
@@ -30,6 +30,8 @@ $(document).ready(function() {
             data: {datos: datos},
             success: function(data) {
                 alert('Libro ocultado con éxito');
+                $(".ocultarLibro#" + datos).hide();
+                $(".publicarLibro#" + datos).show();
             },
             error: function(xhr, httpStatusMessage) {
                 if (xhr.status === 500) {

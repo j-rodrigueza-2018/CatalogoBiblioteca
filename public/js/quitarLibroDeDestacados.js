@@ -7,6 +7,8 @@ $(document).ready(function() {
             data: {datos: datos},
             success: function(data) {
                 alert('Libro eliminado de la sección de destacados con éxito');
+                $(".quitarLibro#" + datos).hide()
+                $(".destacarLibro#" + datos).show();
             },
             error: function(xhr, httpStatusMessage) {
                 if (xhr.status === 500) {

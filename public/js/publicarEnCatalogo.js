@@ -30,6 +30,8 @@ $(document).ready(function() {
             data: {datos: datos},
             success: function(data) {
                 alert('Libro publicado con éxito');
+                $(".publicarLibro#" + datos).hide();
+                $(".ocultarLibro#" + datos).removeAttr('hidden').show();
             },
             error: function(xhr, httpStatusMessage) {
                 if (xhr.status === 500) {

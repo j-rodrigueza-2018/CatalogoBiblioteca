@@ -79,7 +79,7 @@ class ModeloGestor {
     // Método que nos permite ocultar libros en el catálogo
     public function ocultarLibros($data) {
         foreach ($data as $id) {
-            $ocultacion = $this->db->query("DELETE FROM catalogo WHERE libroId='".$id[0]."'");
+            $ocultacion = $this->db->query("UPDATE libro SET enCatalogo=0 WHERE id='".$id[0]."'");
         }
         return $ocultacion;
     }
@@ -148,10 +148,10 @@ class ModeloGestor {
             $salida .= "<button type='button' class='btn btn-danger bi-trash elimLibro' id='".$fila['id']."-".$fila['imagenPortada']."'></button>";
             $location = RUTA_PUBLIC.'/gestor/vistaEditarLibro/'.$fila['id'];
             $salida .= "<button type='button' class='btn btn-primary bi-pencil-square ms-2' onclick='location.href=\"$location\"'></button>";
-            $salida .= "<button type='button' class='btn btn-warning text-white ms-2 publicarLibro' id='".$fila['id']."'>Publicar</button>";
-            $salida .= "<button type='button' class='btn btn-secondary ms-2 ocultarLibro' id='".$fila['id']."'>Ocultar</button>";
-            $salida .= "<button type='button' class='btn btn-success ms-2 destacarLibro' id='".$fila['id']."'>Destacar</button>";
-            $salida .= "<button type='button' class='btn btn-danger ms-2 quitarLibro' id='".$fila['id']."'>Quitar</button>";
+            $salida .= "<button type='button' class='btn btn-warning bi-eye-fill text-white ms-2 publicarLibro' id='".$fila['id']."'></button>";
+            $salida .= "<button type='button' class='btn btn-secondary bi-eye-slash-fill ms-2 ocultarLibro' id='".$fila['id']."' hidden></button>";
+            $salida .= "<button type='button' class='btn btn-success bi-star-fill ms-2 destacarLibro' id='".$fila['id']."'></button>";
+            $salida .= "<button type='button' class='btn btn-danger bi-star ms-2 quitarLibro' id='".$fila['id']."' hidden></button>";
             $salida .= "</td>";
             $salida .= "</tr>";
         }
