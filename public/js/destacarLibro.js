@@ -7,8 +7,12 @@ $(document).ready(function() {
             data: {datos: datos},
             success: function(data) {
                 alert('Libro añadido a la sección de destacados con éxito');
-                $(".destacarLibro#" + datos).hide();
-                $(".quitarLibro#" + datos).removeAttr('hidden').show();
+                let nombreBtnDestacar = "destacarLibro" + datos;
+                let botonDestacar = document.querySelector('button[name="' + nombreBtnDestacar + '"]');
+                botonDestacar.hidden = true;
+                let nombreBtnQuitar = "quitarLibro" + datos;
+                let botonQuitar = document.querySelector('button[name="' + nombreBtnQuitar + '"]');
+                botonQuitar.hidden = false;
             },
             error: function(xhr, httpStatusMessage) {
                 if (xhr.status === 500) {

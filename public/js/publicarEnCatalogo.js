@@ -30,8 +30,12 @@ $(document).ready(function() {
             data: {datos: datos},
             success: function(data) {
                 alert('Libro publicado con éxito');
-                $(".publicarLibro#" + datos).hide();
-                $(".ocultarLibro#" + datos).removeAttr('hidden').show();
+                let nombreBtnPublicar = "publicarLibro" + datos;
+                let botonPublicar = document.querySelector('button[name="' + nombreBtnPublicar + '"]');
+                botonPublicar.hidden = true;
+                let nombreBtnOcultar = "ocultarLibro" + datos;
+                let botonOcultar = document.querySelector('button[name="' + nombreBtnOcultar + '"]');
+                botonOcultar.hidden = false;
             },
             error: function(xhr, httpStatusMessage) {
                 if (xhr.status === 500) {
