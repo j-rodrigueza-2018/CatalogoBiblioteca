@@ -17,7 +17,7 @@
         echo "<td class='text-center'>";
         echo "<input type='checkbox' name='ids[]' class='deleteCheckbox' value='".$fila['id']."-".$fila['imagenPortada']."'>";
         echo "</td>";
-        echo "<td class='text-center'>".$fila['titulo']."</td>";
+        echo "<td class='text-center col-5'>".$fila['titulo']."</td>";
         echo "<td class='text-center d-none d-sm-none d-md-none d-lg-none d-xl-table-cell'>".$fila['autor']."</td>";
         echo "<td class='text-center d-none d-sm-none d-md-none d-lg-none d-xl-table-cell'>".$fila['categoria']."</td>";
         echo "<td class='text-center'>";

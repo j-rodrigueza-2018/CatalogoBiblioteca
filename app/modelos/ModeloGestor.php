@@ -141,10 +141,10 @@ class ModeloGestor {
             $salida .= "<td class='text-center'>";
             $salida .= "<input type='checkbox' name='ids[]' class='deleteCheckbox' value='".$fila['id']."-".$fila['imagenPortada']."'>";
             $salida .= "</td>";
-            $salida .= "<td class='text-center'>".$fila['titulo']."</td>";
+            $salida .= "<td class='text-center col-5'>".$fila['titulo']."</td>";
             $salida .= "<td class='text-center d-none d-sm-none d-md-none d-lg-none d-xl-table-cell'>".$fila['autor']."</td>";
             $salida .= "<td class='text-center d-none d-sm-none d-md-none d-lg-none d-xl-table-cell'>".$fila['categoria']."</td>";
-            $salida .= "<td class='text-lg-center'>";
+            $salida .= "<td class='text-center'>";
             $salida .= "<button type='button' class='btn btn-danger bi-trash elimLibro' id='".$fila['id']."-".$fila['imagenPortada']."'></button>";
             $location = RUTA_PUBLIC.'/gestor/vistaEditarLibro/'.$fila['id'];
             $salida .= "<button type='button' class='btn btn-primary bi-pencil-square ms-2' onclick='location.href=\"$location\"'></button>";
