@@ -29,14 +29,14 @@ class Gestor extends Controlador {
         $archivo = $_FILES['imagen']['tmp_name'];
         if ($archivo == '') {
             $tmpName = RUTA_IMG.'/public/img/libro1.jpg';
-            $nombreImagen = strtr($_POST['titulo'], " ", "_").'_'.rand(00000, 99999);
+            $nombreImagen = preg_replace("/[^a-zA-Z0-9\_\-]+/", "", strtr($_POST['titulo'], " ", "_")).'_'.rand(00000, 99999);
             copy($tmpName, RUTA_IMG.'/public/imagenesPortada/'.$nombreImagen.'.jpg');
             $ruta = $nombreImagen.'.jpg';
         } else {
             $nombreArchivo = $_FILES['imagen']['name'];
             $info = pathinfo($nombreArchivo);
             $extension = $info['extension'];
-            $nombreImagen = trim($_POST['titulo']).'_'.rand(00000, 99999);
+            $nombreImagen = preg_replace("/[^a-zA-Z0-9\_\-]+/", "", strtr($_POST['titulo'], " ", "_")).'_'.rand(00000, 99999);
             move_uploaded_file($archivo, RUTA_IMG.'/public/imagenesPortada/'.$nombreImagen.'.'.$extension);
             $ruta = $nombreImagen.'.'.$extension;
         }
@@ -105,7 +105,7 @@ class Gestor extends Controlador {
             $nombreArchivo = $_FILES['imagen']['name'];
             $info = pathinfo($nombreArchivo);
             $extension = $info['extension'];
-            $nombreImagen = strtr($_POST['titulo'], " ", "_").'_'.rand(00000, 99999);
+            $nombreImagen = preg_replace("/[^a-zA-Z0-9\_\-]+/", "", strtr($_POST['titulo'], " ", "_")).'_'.rand(00000, 99999);
             move_uploaded_file($archivo, RUTA_IMG.'/public/imagenesPortada/'.$nombreImagen.'.'.$extension);
             $ruta = $nombreImagen.'.'.$extension;
         }
