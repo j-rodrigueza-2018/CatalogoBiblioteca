@@ -3,11 +3,13 @@
 class Gestor extends Controlador {
 
     // Atributos de la Clase
-    private $modeloGestor;
+    private $modeloLibro;
+    private $modeloAutor;
 
     // Método Constructor de la Clase
     public function __construct() {
-        $this->modeloGestor = $this->modelo('ModeloGestor');
+        $this->modeloLibro = $this->modelo('ModeloLibro');
+        $this->modeloAutor = $this->modelo('ModeloAutor');
     }
 
     /* Métodos de las vistas de los Libros */
@@ -49,7 +51,7 @@ class Gestor extends Controlador {
             'imagenPortada' => trim($ruta)
         ];
 
-        if ($this->modeloGestor->crearNuevoLibro($data)) {
+        if ($this->modeloLibro->crearNuevoLibro($data)) {
             redirect('gestor');
         } else {
             die('No se pudo guardar el libro');
@@ -59,7 +61,7 @@ class Gestor extends Controlador {
     // Método para eliminar autores en nuestra base de datos
     public function eliminarLibros() {
         $data = $_REQUEST['idsArray'];
-        if ($this->modeloGestor->eliminarLibros($data)) {
+        if ($this->modeloLibro->eliminarLibros($data)) {
             redirect('gestor');
         } else {
             die('No se pudo eliminar los libros');
@@ -70,7 +72,7 @@ class Gestor extends Controlador {
     public function eliminarLibro() {
         $id = $_REQUEST['datos'][0];
         $imagen = $_REQUEST['datos'][1];
-        if ($this->modeloGestor->eliminarLibro($id, $imagen)) {
+        if ($this->modeloLibro->eliminarLibro($id, $imagen)) {
             redirect('gestor');
         } else {
             die('No se pudo eliminar el libro');
@@ -79,7 +81,7 @@ class Gestor extends Controlador {
 
     // Método para establecer la vista para editar un libro
     public function vistaEditarLibro($id) {
-        $post = $this->modeloGestor->libroPorId($id);
+        $post = $this->modeloLibro->libroPorId($id);
         $data = [
             'id' => $id,
             'titulo' => $post->titulo,
@@ -119,7 +121,7 @@ class Gestor extends Controlador {
             'imagenPortada' => trim($ruta)
         ];
 
-        if ($this->modeloGestor->actualizarLibro($data)) {
+        if ($this->modeloLibro->actualizarLibro($data)) {
             redirect('gestor');
         } else {
             die('No se pudo cambiar los datos del libro');
@@ -129,7 +131,7 @@ class Gestor extends Controlador {
     // Método para publicar libros en el catálogo
     public function publicarLibros() {
         $data = $_REQUEST['idsArray'];
-        if ($this->modeloGestor->publicarLibros($data)) {
+        if ($this->modeloLibro->publicarLibros($data)) {
             redirect('gestor');
         } else {
             die('No se pudieron publicar los libros en el catálogo');
@@ -139,7 +141,7 @@ class Gestor extends Controlador {
     // Método para publicar un libro concreto en el catálogo
     public function publicarLibro() {
         $id = $_REQUEST['datos'];
-        if ($this->modeloGestor->publicarLibro($id)) {
+        if ($this->modeloLibro->publicarLibro($id)) {
             redirect('gestor');
         } else {
             die('No se pudo publicar el libro en el catálogo');
@@ -149,7 +151,7 @@ class Gestor extends Controlador {
     // Método para ocultar libros en el catálogo
     public function ocultarLibros() {
         $data = $_REQUEST['idsArray'];
-        if ($this->modeloGestor->ocultarLibros($data)) {
+        if ($this->modeloLibro->ocultarLibros($data)) {
             redirect('gestor');
         } else {
             die('No se pudieron ocultar los libros en el catálogo');
@@ -159,7 +161,7 @@ class Gestor extends Controlador {
     // Método para ocultar un libro concreto en el catálogo
     public function ocultarLibro() {
         $id = $_REQUEST['datos'];
-        if ($this->modeloGestor->ocultarLibro($id)) {
+        if ($this->modeloLibro->ocultarLibro($id)) {
             redirect('gestor');
         } else {
             die('No se pudo ocultar el libro en el catálogo');
@@ -169,7 +171,7 @@ class Gestor extends Controlador {
     // Método para destacar un libro concreto en el catálogo
     public function destacarLibro() {
         $id = $_REQUEST['datos'];
-        if ($this->modeloGestor->destacarLibro($id)) {
+        if ($this->modeloLibro->destacarLibro($id)) {
             redirect('gestor');
         } else {
             die('No se pudo destacar el libro en el catálogo');
@@ -179,7 +181,7 @@ class Gestor extends Controlador {
     // Método para quitar de los libros destacados a un libro concreto en el catálogo
     public function quitarLibro() {
         $id = $_REQUEST['datos'];
-        if ($this->modeloGestor->quitarLibro($id)) {
+        if ($this->modeloLibro->quitarLibro($id)) {
             redirect('gestor');
         } else {
             die('No se pudo quitar el libro de la sección de destacados del catálogo');
@@ -189,7 +191,7 @@ class Gestor extends Controlador {
     // Método para buscar los libros
     public function buscarLibros() {
         $con = $_POST['busqueda'];
-        $resultadoConsulta = $this->modeloGestor->buscarLibros($con);
+        $resultadoConsulta = $this->modeloLibro->buscarLibros($con);
         echo $resultadoConsulta;
     }
 
@@ -217,7 +219,7 @@ class Gestor extends Controlador {
             'paises' => trim($_POST['paises'])
         ];
 
-        if ($this->modeloGestor->crearNuevoAutor($data)) {
+        if ($this->modeloAutor->crearNuevoAutor($data)) {
             redirect('gestor/listadoAutores');
         } else {
             die('No se pudo dar de alta al autor');
@@ -227,7 +229,7 @@ class Gestor extends Controlador {
     // Método para eliminar autores en nuestra base de datos
     public function eliminarAutores() {
         $data = $_REQUEST['idsArray'];
-        if ($this->modeloGestor->eliminarAutores($data)) {
+        if ($this->modeloAutor->eliminarAutores($data)) {
             $this->vista('gestor/listadoAutores');
         } else {
             die('No se pudo eliminar a los autores');
@@ -237,7 +239,7 @@ class Gestor extends Controlador {
     // Método para eliminar un autor concreto de la base de datos
     public function eliminarAutor() {
         $id = $_REQUEST['id'];
-        if ($this->modeloGestor->eliminarAutor($id)) {
+        if ($this->modeloAutor->eliminarAutor($id)) {
             $this->vista('gestor/listadoAutores');
         } else {
             die('No se pudo eliminar al autor');
@@ -246,7 +248,7 @@ class Gestor extends Controlador {
 
     // Método para establecer la vista para editar un autor
     public function vistaEditarAutor($id) {
-        $post = $this->modeloGestor->autorPorId($id);
+        $post = $this->modeloAutor->autorPorId($id);
         $data = [
             'id' => $id,
             'nombre' => $post->nombre,
@@ -268,7 +270,7 @@ class Gestor extends Controlador {
             'paises' => trim($_POST['paises'])
         ];
 
-        if ($this->modeloGestor->actualizarAutor($data)) {
+        if ($this->modeloAutor->actualizarAutor($data)) {
             redirect('gestor/listadoAutores');
         } else {
             die('No se pudo cambiar los datos del autor');
@@ -278,7 +280,7 @@ class Gestor extends Controlador {
     // Método para buscar los autores por apellido
     public function buscarAutores() {
         $con = $_POST['busqueda'];
-        $resultadoConsulta = $this->modeloGestor->autorPorApellidos($con);
+        $resultadoConsulta = $this->modeloAutor->autorPorApellidos($con);
         echo $resultadoConsulta;
     }
 

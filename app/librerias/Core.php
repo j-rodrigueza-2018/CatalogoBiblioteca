@@ -29,7 +29,7 @@ class Core {
             }
         }
 
-        // Parámetros (se eliminaron las posiciones 0 y 1 del array de la URL para dejar sólo los parámetros)
+        // Parámetros (se eliminaron las posiciones 0 y 1 del array de la URL para dejar solo los parámetros)
         $this->parametros = $url ? array_values($url) : [];
 
         // Devolvemos un array de parámetros
