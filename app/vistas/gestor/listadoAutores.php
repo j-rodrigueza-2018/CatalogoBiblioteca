@@ -12,7 +12,7 @@
         <p class="h1 mt-3 mb-3">LISTADO DE AUTORES</p>
         <div class="row">
             <div class="col-3">
-                <button type="button" class="btn btn-success bi-plus-square mb-3" onclick="location.href='<?php echo RUTA_PUBLIC; ?>/gestor/nuevoAutor'"></button>
+                <button type="button" class="btn btn-success bi-plus-square mb-3" onclick="location.href='<?php echo RUTA_PUBLIC; ?>/autores/nuevoAutor'"></button>
                 <button type="button" class="btn btn-danger bi-trash mb-3" id="btnBorrarAutores"></button>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-12 mb-3 mb-sm-3 ms-auto">

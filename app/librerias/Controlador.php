@@ -17,4 +17,10 @@ class Controlador {
         }
     }
 
+    // Función para cargar los repositorios
+    public function repositorio($repositorio) {
+        require_once '../app/repositorios/'.$repositorio.'.php';
+        return new $repositorio();
+    }
+
 }

@@ -22,7 +22,7 @@ $(document).ready(function() {
         let busqueda = [titulo, autor, categoria];
         $.ajax({
             type: 'POST',
-            url: 'http://localhost/CatalogoBiblioteca/gestor/buscarLibros',
+            url: 'http://localhost/CatalogoBiblioteca/libros/buscarLibros',
             data: {'busqueda': busqueda},
         }).done(function(respuesta) {
             $('#tablaDatosLibros').html(respuesta);

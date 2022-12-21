@@ -11,7 +11,7 @@
     <tbody>
     <?php
     $conexion = new Conexion();
-    $resultado = $conexion->query("SELECT l.id, l.titulo, CONCAT(a.nombre, ' ', a.apellidos) AS autor, c.nombre AS categoria, l.imagenPortada, l.enCatalogo, l.destacado FROM libro l JOIN autor a ON (l.autorId = a.id) JOIN categoria c ON (l.categoriaId = c.id) ORDER BY l.titulo ASC");
+    $resultado = $conexion->query("SELECT l.id, l.titulo, CONCAT(a.nombre, ' ', a.apellidos) AS autor, c.nombre AS categoria, l.imagenPortada, l.estaPublicado, l.esDestacado FROM libro l JOIN autor a ON (l.autorId = a.id) JOIN categoria c ON (l.categoriaId = c.id) ORDER BY l.titulo ASC");
     while ($fila = mysqli_fetch_assoc($resultado)) {
         echo "<tr id='idLibro".$fila['id']."'>";
         echo "<td class='text-center'>";
@@ -22,16 +22,16 @@
         echo "<td class='text-center d-none d-sm-none d-md-none d-lg-none d-xl-table-cell'>".$fila['categoria']."</td>";
         echo "<td class='text-center'>";
         echo "<button type='button' class='btn btn-danger bi-trash elimLibro' id='".$fila['id']."-".$fila['imagenPortada']."'></button>";
-        $location = RUTA_PUBLIC.'/gestor/vistaEditarLibro/'.$fila['id'];
+        $location = RUTA_PUBLIC.'/libros/vistaEditarLibro/'.$fila['id'];
         echo "<button type='button' class='btn btn-primary bi-pencil-square ms-2' onclick='location.href=\"$location\"'></button>";
-        if ($fila['enCatalogo'] == 0) {
+        if ($fila['estaPublicado'] == 0) {
             echo "<button type='button' class='btn btn-warning bi-eye-fill text-white ms-2 publicarLibro' name='publicarLibro".$fila['id']."' id='".$fila['id']."'></button>";
             echo "<button type='button' class='btn btn-secondary bi-eye-slash-fill ms-2 ocultarLibro' name='ocultarLibro".$fila['id']."' id='".$fila['id']."' hidden></button>";
         } else {
             echo "<button type='button' class='btn btn-warning bi-eye-fill text-white ms-2 publicarLibro' name='publicarLibro".$fila['id']."' id='".$fila['id']."' hidden></button>";
             echo "<button type='button' class='btn btn-secondary bi-eye-slash-fill ms-2 ocultarLibro' name='ocultarLibro".$fila['id']."' id='".$fila['id']."'></button>";
         }
-        if ($fila['destacado'] == 0) {
+        if ($fila['esDestacado'] == 0) {
             echo "<button type='button' class='btn btn-success bi-star-fill ms-2 destacarLibro' name='destacarLibro".$fila['id']."' id='".$fila['id']."'></button>";
             echo "<button type='button' class='btn btn-danger bi-star ms-2 quitarLibro' name='quitarLibro".$fila['id']."' id='".$fila['id']."' hidden></button>";
         } else {

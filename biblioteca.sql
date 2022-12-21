@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 16-12-2022 a las 09:54:40
+-- Tiempo de generación: 21-12-2022 a las 19:56:26
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -92,33 +92,33 @@ CREATE TABLE `libro` (
   `categoriaId` int(11) NOT NULL,
   `sinopsis` text COLLATE utf8mb4_spanish_ci NOT NULL,
   `imagenPortada` varchar(100) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `enCatalogo` bit(1) NOT NULL,
-  `destacado` bit(1) NOT NULL
+  `estaPublicado` bit(1) NOT NULL,
+  `esDestacado` bit(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `libro`
 --
 
-INSERT INTO `libro` (`id`, `titulo`, `autorId`, `categoriaId`, `sinopsis`, `imagenPortada`, `enCatalogo`, `destacado`) VALUES
+INSERT INTO `libro` (`id`, `titulo`, `autorId`, `categoriaId`, `sinopsis`, `imagenPortada`, `estaPublicado`, `esDestacado`) VALUES
 (73, 'Animales fantásticos y dónde encontrarlos', 30, 13, 'Animales fantásticos y dónde encontrarlos (título original en inglés: Fantastic Beasts and Where to Find Them) es un libro de 2001 escrito por la autora británica J. K. Rowling sobre las criaturas mágicas de Harry Potter.', 'Animales_fantsticos_y_dnde_encontrarlos_10144.jpg', b'1', b'0');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `paises`
+-- Estructura de tabla para la tabla `pais`
 --
 
-CREATE TABLE `paises` (
+CREATE TABLE `pais` (
   `id` int(11) NOT NULL,
   `nombre` varchar(100) COLLATE utf8mb4_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 --
--- Volcado de datos para la tabla `paises`
+-- Volcado de datos para la tabla `pais`
 --
 
-INSERT INTO `paises` (`id`, `nombre`) VALUES
+INSERT INTO `pais` (`id`, `nombre`) VALUES
 (1, 'Australia'),
 (2, 'Austria'),
 (3, 'Azerbaiyán'),
@@ -342,8 +342,7 @@ INSERT INTO `paises` (`id`, `nombre`) VALUES
 -- Indices de la tabla `autor`
 --
 ALTER TABLE `autor`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fkPaisOrigenId` (`paisId`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `categoria`
@@ -360,9 +359,9 @@ ALTER TABLE `libro`
   ADD KEY `fkCategoriaId` (`categoriaId`);
 
 --
--- Indices de la tabla `paises`
+-- Indices de la tabla `pais`
 --
-ALTER TABLE `paises`
+ALTER TABLE `pais`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -373,7 +372,7 @@ ALTER TABLE `paises`
 -- AUTO_INCREMENT de la tabla `autor`
 --
 ALTER TABLE `autor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT de la tabla `categoria`
@@ -388,9 +387,9 @@ ALTER TABLE `libro`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 
 --
--- AUTO_INCREMENT de la tabla `paises`
+-- AUTO_INCREMENT de la tabla `pais`
 --
-ALTER TABLE `paises`
+ALTER TABLE `pais`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=247;
 
 --
@@ -401,7 +400,7 @@ ALTER TABLE `paises`
 -- Filtros para la tabla `autor`
 --
 ALTER TABLE `autor`
-  ADD CONSTRAINT `fkPaisOrigenId` FOREIGN KEY (`paisId`) REFERENCES `catalogobiblioteca`.`paisOrigen` (`id`);
+  ADD CONSTRAINT `fk_paisId` FOREIGN KEY (`paisId`) REFERENCES `pais` (`id`);
 
 --
 -- Filtros para la tabla `libro`

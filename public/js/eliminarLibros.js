@@ -8,7 +8,7 @@ $(document).ready(function() {
         if (idsArray.length > 0) {
             $.ajax({
                 type: "POST",
-                url: "http://localhost/CatalogoBiblioteca/gestor/eliminarLibros",
+                url: "http://localhost/CatalogoBiblioteca/libros/eliminarLibros",
                 data: {idsArray: idsArray},
                 success: function(data) {
                     $.each(idsArray, function(indice, datos) {
@@ -23,7 +23,7 @@ $(document).ready(function() {
         let datos = $(this).attr("id").split('-');
         $.ajax({
             type: "POST",
-            url: "http://localhost/CatalogoBiblioteca/gestor/eliminarLibro",
+            url: "http://localhost/CatalogoBiblioteca/libros/eliminarLibro",
             data: {datos: datos},
             success: function(data) {
                 $("#idLibro" + datos[0]).remove();

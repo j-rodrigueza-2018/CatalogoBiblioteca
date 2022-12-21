@@ -12,7 +12,7 @@
         <p class="h1 mt-3 mb-3">LISTADO DE LIBROS</p>
         <div class="row">
             <div class="col-lg-4 col-md-12 col-sm-12 mb-3">
-                <button type="button" class="btn btn-success bi-plus-square" onclick="location.href='<?php echo RUTA_PUBLIC; ?>/gestor/vistaNuevoLibro'"></button>
+                <button type="button" class="btn btn-success bi-plus-square" onclick="location.href='<?php echo RUTA_PUBLIC; ?>/libros/vistaNuevoLibro'"></button>
                 <button type="button" class="btn btn-danger bi-trash" id="btnBorrarLibros"></button>
                 <button type="button" class="btn btn-warning bi-eye-fill text-white" id="btnPublicar"></button>
                 <button type="button" class="btn btn-secondary bi-eye-slash-fill" id="btnOcultar"></button>

@@ -8,7 +8,7 @@ $(document).ready(function() {
         if (idsArray.length > 0) {
             $.ajax({
                 type: "POST",
-                url: "http://localhost/CatalogoBiblioteca/gestor/ocultarLibros",
+                url: "http://localhost/CatalogoBiblioteca/libros/ocultarLibros",
                 data: {idsArray: idsArray},
                 success: function(data) {
                     alert('Libros ocultados con éxito');
@@ -26,7 +26,7 @@ $(document).ready(function() {
         let datos = $(this).attr("id");
         $.ajax({
             type: "POST",
-            url: "http://localhost/CatalogoBiblioteca/gestor/ocultarLibro",
+            url: "http://localhost/CatalogoBiblioteca/libros/ocultarLibro",
             data: {datos: datos},
             success: function(data) {
                 alert('Libro ocultado con éxito');

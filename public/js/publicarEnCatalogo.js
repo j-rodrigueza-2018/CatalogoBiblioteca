@@ -8,7 +8,7 @@ $(document).ready(function() {
         if (idsArray.length > 0) {
             $.ajax({
                 type: "POST",
-                url: "http://localhost/CatalogoBiblioteca/gestor/publicarLibros",
+                url: "http://localhost/CatalogoBiblioteca/libros/publicarLibros",
                 data: {idsArray: idsArray},
                 success: function(data) {
                     alert('Libros publicados con éxito');
@@ -26,7 +26,7 @@ $(document).ready(function() {
         let datos = $(this).attr("id");
         $.ajax({
             type: "POST",
-            url: "http://localhost/CatalogoBiblioteca/gestor/publicarLibro",
+            url: "http://localhost/CatalogoBiblioteca/libros/publicarLibro",
             data: {datos: datos},
             success: function(data) {
                 alert('Libro publicado con éxito');

@@ -216,7 +216,7 @@ class Gestor extends Controlador {
             'nombre' => trim($_POST['nombre']),
             'apellidos' => trim($_POST['apellidos']),
             'fechaNacimiento' => trim($_POST['fechaNacimiento']),
-            'paises' => trim($_POST['paises'])
+            'pais' => trim($_POST['pais'])
         ];
 
         if ($this->modeloAutor->crearNuevoAutor($data)) {
@@ -254,7 +254,7 @@ class Gestor extends Controlador {
             'nombre' => $post->nombre,
             'apellidos' => $post->apellidos,
             'fechaNacimiento' => $post->fechaNacimiento,
-            'paises' => $post->paisId
+            'pais' => $post->paisId
         ];
         $this->vista('gestor/editarAutor', $data);
     }
@@ -267,7 +267,7 @@ class Gestor extends Controlador {
             'nombre' => trim($_POST['nombre']),
             'apellidos' => trim($_POST['apellidos']),
             'fechaNacimiento' => trim($_POST['fechaNacimiento']),
-            'paises' => trim($_POST['paises'])
+            'pais' => trim($_POST['pais'])
         ];
 
         if ($this->modeloAutor->actualizarAutor($data)) {

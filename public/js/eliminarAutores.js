@@ -8,7 +8,7 @@ $(document).ready(function() {
         if (idsArray.length > 0) {
             $.ajax({
                 type: "POST",
-                url: "http://localhost/CatalogoBiblioteca/gestor/eliminarAutores",
+                url: "http://localhost/CatalogoBiblioteca/autores/eliminarAutores",
                 data: {idsArray: idsArray},
                 success: function(data) {
                     $.each(idsArray, function(indice, id) {
@@ -24,7 +24,7 @@ $(document).ready(function() {
         let data = "id=" + id;
         $.ajax({
             type: "POST",
-            url: "http://localhost/CatalogoBiblioteca/gestor/eliminarAutor",
+            url: "http://localhost/CatalogoBiblioteca/autores/eliminarAutor",
             data: data,
             success: function(data) {
                 $("#idAutor" + id).remove();

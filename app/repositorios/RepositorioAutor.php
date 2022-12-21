@@ -1,61 +1,58 @@
 <?php
 
-class ModeloAutor {
+include_once 'IRepositorioAutor.php';
+include_once RUTA_APP.'/modelos/Autor.php';
+
+class RepositorioAutor implements IRepositorioAutor {
 
     // Atributos de la Clase
-    private $db;
+    private Conexion $db;
 
     // Método Constructor de la Clase
     public function __construct() {
         $this->db = new Conexion();
     }
 
-    // Método que nos permite dar de alta un autor
-    public function crearNuevoAutor($data) {
-        $nombre = $data['nombre'];
-        $apellidos = $data['apellidos'];
-        $fechaNacimiento = $data['fechaNacimiento'];
-        $pais = $data['pais'];
+    // Implementamos los métodos de la interfaz 'IRepositorioAutor'
+    public function crearAutor(Autor $autor) {
+        $nombre = $autor->getNombre();
+        $apellidos = $autor->getApellidos();
+        $fechaNacimiento = $autor->getFechaNacimiento();
+        $pais = $autor->getPaisId();
 
-        $insercion = $this->db->query("INSERT INTO autor VALUES (DEFAULT, '$nombre', '$apellidos', '$fechaNacimiento', '$pais')");
-        return $insercion;
+        return $this->db->query("INSERT INTO autor VALUES (DEFAULT, '$nombre', '$apellidos', '$fechaNacimiento', '$pais')");
     }
 
-    // Método que nos permite dar de baja autores
-    public function eliminarAutores($data) {
-        foreach ($data as $id) {
+    public function editarAutor(Autor $autor) {
+        $id = $autor->getId();
+        $nombre = $autor->getNombre();
+        $apellidos = $autor->getApellidos();
+        $fechaNacimiento = $autor->getFechaNacimiento();
+        $pais = $autor->getPaisId();
+
+        return $this->db->query("UPDATE autor SET nombre='$nombre', apellidos='$apellidos', fechaNacimiento='$fechaNacimiento', paisId='$pais' WHERE id='$id'");
+    }
+
+    public function eliminarAutor(Autor $autor) {
+        $id = $autor->getId();
+        return $this->db->query("DELETE FROM autor WHERE id='".$id."'");
+    }
+
+    public function eliminarAutores($autores) {
+        foreach ($autores as $id) {
             $eliminacion = $this->db->query("DELETE FROM autor WHERE id='".$id."'");
         }
         return $eliminacion;
     }
 
-    // Método que nos permite dar de baja un autor en concreto
-    public function eliminarAutor($id) {
-        $eliminacion = $this->db->query("DELETE FROM autor WHERE id='".$id."'");
-        return $eliminacion;
-    }
-
-    // Método que nos devuelve un autor (con sus datos) a partir de su Id
-    public function autorPorId($id) {
+    public function buscarPorId(int $id) {
         $consulta = $this->db->query("SELECT * FROM autor WHERE id='$id'");
         $data = $consulta->fetch_object();
-        return $data;
-    }
-
-    // Método que nos permite actualizar los datos de un autor
-    public function actualizarAutor($data) {
-        $id = $data['id'];
-        $nombre = $data['nombre'];
-        $apellidos = $data['apellidos'];
-        $fechaNacimiento = $data['fechaNacimiento'];
-        $pais = $data['pais'];
-
-        $update = $this->db->query("UPDATE autor SET nombre='$nombre', apellidos='$apellidos', fechaNacimiento='$fechaNacimiento', paisId='$pais' WHERE id='$id'");
-        return $update;
+        return new Autor($data['id'], $data['nombre'], $data['apellidos'], $data['fechaNacimiento'], $data['paisId']);
     }
 
     // Método que nos devuelve autores (con sus datos) a partir de sus apellidos
-    public function autorPorApellidos($texto) {
+    public function autorPorApellidos($texto): string {
         if (isset($texto)) {
             $con = $this->db->realEscapeString($texto);
             $consulta = "SELECT a.id, a.nombre AS nombreAutor, a.apellidos, DATE_FORMAT(a.fechaNacimiento, '%d-%m-%Y') AS fechaNac, p.nombre AS pais FROM autor a JOIN pais p ON (a.paisId = p.id) WHERE a.apellidos LIKE '%{$con}%' ORDER BY a.nombre ASC";

@@ -3,7 +3,7 @@ $(document).ready(function() {
         let busqueda = $('#cajaBusqueda').val();
         $.ajax({
             type: 'POST',
-            url: 'http://localhost/CatalogoBiblioteca/gestor/buscarAutores',
+            url: 'http://localhost/CatalogoBiblioteca/autores/buscarAutores',
             data: {'busqueda': busqueda},
         }).done(function(respuesta) {
             $('#tablaDatosAutores').html(respuesta);

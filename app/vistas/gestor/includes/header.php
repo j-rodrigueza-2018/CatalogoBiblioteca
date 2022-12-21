@@ -17,10 +17,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a id="libros" class="nav-link" aria-current="page" href="<?php echo RUTA_PUBLIC; ?>/gestor">LIBROS</a>
+                    <a id="libros" class="nav-link" aria-current="page" href="<?php echo RUTA_PUBLIC; ?>/libros">LIBROS</a>
                 </li>
                 <li class="nav-item">
-                    <a id="autores" class="nav-link" href="<?php echo RUTA_PUBLIC; ?>/gestor/listadoAutores">AUTORES</a>
+                    <a id="autores" class="nav-link" href="<?php echo RUTA_PUBLIC; ?>/autores">AUTORES</a>
                 </li>
             </ul>
         </div>

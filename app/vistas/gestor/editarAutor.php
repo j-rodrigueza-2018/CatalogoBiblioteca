@@ -10,7 +10,7 @@
     <?php include("includes/header.php"); ?>
     <div class="container">
         <p class="h1 mt-3 mb-3">EDITAR AUTOR</p>
-        <form class="row" action="<?php echo RUTA_PUBLIC ?>/gestor/editarAutor/<?php echo $data['id']; ?>" method="post" autocomplete="off">
+        <form class="row" action="<?php echo RUTA_PUBLIC ?>/autores/editarAutor/<?php echo $data['id']; ?>" method="post" autocomplete="off">
             <div class="col-12 mb-3">
                 <label for="nombre" class="form-label subrayado">Nombre:</label>
                 <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre del Autor" value="<?php echo $data['nombre']; ?>" autofocus required>
@@ -24,14 +24,14 @@
                 <input type="date" class="form-control" id="fechaNacimiento" name="fechaNacimiento" value="<?php echo $data['fechaNacimiento']; ?>" required>
             </div>
             <div class="col-12 mb-3">
-                <label for="paises" class="form-label subrayado">País de Origen:</label>
-                <select class="form-select" id="paises" name="paises" data-show-subtext="true" data-live-search="true" required>
+                <label for="pais" class="form-label subrayado">País de Origen:</label>
+                <select class="form-select" id="pais" name="pais" data-show-subtext="true" data-live-search="true" required>
                     <option selected disabled>País de Origen</option>
                     <?php
                     $conexion = new Conexion();
-                    $resultado = $conexion->query("SELECT * FROM paises ORDER BY nombre ASC");
+                    $resultado = $conexion->query("SELECT * FROM pais ORDER BY nombre ASC");
                     while ($fila = mysqli_fetch_assoc($resultado)) {
-                        if ($fila['id'] == $data['paises']) {
+                        if ($fila['id'] == $data['pais']) {
                             echo "<option value=".$fila['id']." selected='true'>".$fila['nombre']."</option>";
 
                         } else {
@@ -42,7 +42,7 @@
                 </select>
             </div>
             <div class="mb-3 text-center">
-                <button type="button" class="btn btn-danger me-4" onclick="location.href='<?php echo RUTA_PUBLIC; ?>/gestor/listadoAutores'">Cancelar</button>
+                <button type="button" class="btn btn-danger me-4" onclick="location.href='<?php echo RUTA_PUBLIC; ?>/autores'">Cancelar</button>
                 <button type="submit" class="btn btn-success">Confirmar</button>
             </div>
         </form>

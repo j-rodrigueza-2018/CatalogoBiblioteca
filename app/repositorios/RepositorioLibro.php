@@ -1,30 +1,50 @@
 <?php
 
-class ModeloLibro {
+include_once 'IRepositorioLibro.php';
+include_once RUTA_APP.'/modelos/Libro.php';
+
+class RepositorioLibro implements IRepositorioLibro {
 
     // Atributos de la Clase
-    private $db;
+    private Conexion $db;
 
     // Método Constructor de la Clase
     public function __construct() {
         $this->db = new Conexion();
     }
 
-    // Método que nos permite dar de alta un libro en el catálogo
-    public function crearNuevoLibro($data) {
-        $titulo = $data['titulo'];
-        $autor = $data['autor'];
-        $categoria = $data['categoria'];
-        $sinopsis = $data['sinopsis'];
-        $imagenPortada = $data['imagenPortada'];
-
-        $insercion = $this->db->query("INSERT INTO libro VALUES (DEFAULT, '$titulo', '$autor', '$categoria', '$sinopsis', '$imagenPortada', 0, 0)");
-        return $insercion;
+    // Implementamos los métodos de la interfaz 'IRepositorioLibro'
+    public function crearLibro(Libro $libro) {
+        $titulo = $libro->getTitulo();
+        $autor = $libro->getAutorId();
+        $categoria = $libro->getCategoriaId();
+        $sinopsis = $libro->getSinopsis();
+        $imagenPortada = $libro->getImagenPortada();
+        return $this->db->query("INSERT INTO libro VALUES (DEFAULT, '$titulo', '$autor', '$categoria', '$sinopsis', '$imagenPortada', 0, 0)");
     }
 
-    // Método que nos permite eliminar libros
-    public function eliminarLibros($data) {
-        foreach ($data as $d) {
+    public function editarLibro(Libro $libro) {
+        $id = $libro->getId();
+        $titulo = $libro->getTitulo();
+        $autor = $libro->getAutorId();
+        $categoria = $libro->getCategoriaId();
+        $sinopsis = $libro->getSinopsis();
+        $imagenPortada = $libro->getImagenPortada();
+
+        return $this->db->query("UPDATE libro SET titulo='$titulo', autorId='$autor', categoriaId='$categoria', sinopsis='$sinopsis', imagenPortada='$imagenPortada' WHERE id='".$id."'");
+    }
+
+    public function eliminarLibro(Libro $libro) {
+        $imagen = $libro->getImagenPortada();
+        $borrarImg = RUTA_IMG.'/public/imagenesPortada/'.$imagen;
+        unlink($borrarImg);
+
+        $id = $libro->getId();
+        return $this->db->query("DELETE FROM libro WHERE id='".$id."'");
+    }
+
+    public function eliminarLibros($libros) {
+        foreach ($libros as $d) {
             $borrarImg = RUTA_IMG.'/public/imagenesPortada/'.$d[1];
             unlink($borrarImg);
             $eliminacion = $this->db->query("DELETE FROM libro WHERE id='".$d[0]."'");
@@ -32,72 +52,58 @@ class ModeloLibro {
         return $eliminacion;
     }
 
-    // Método que nos permite eliminar un libro en concreto
-    public function eliminarLibro($id, $imagen) {
-        $borrarImg = RUTA_IMG.'/public/imagenesPortada/'.$imagen;
-        unlink($borrarImg);
-        $eliminacion = $this->db->query("DELETE FROM libro WHERE id='".$id."'");
-        return $eliminacion;
+    public function publicarLibro(Libro $libro) {
+        $id = $libro->getId();
+        return $this->db->query("UPDATE libro SET estaPublicado=1 WHERE id='".$id."'");
     }
 
-    // Método que nos devuelve un libro (con sus datos) a partir de su Id
-    public function libroPorId($id) {
-        $consulta = $this->db->query("SELECT * FROM libro WHERE id='".$id."'");
-        $data = $consulta->fetch_object();
-        return $data;
-    }
-
-    // Método que nos permite actualizar los datos de un libro
-    public function actualizarLibro($data) {
-        $id = $data['id'];
-        $titulo = $data['titulo'];
-        $autor = $data['autor'];
-        $categoria = $data['categoria'];
-        $sinopsis = $data['sinopsis'];
-        $imagenPortada = $data['imagenPortada'];
-
-        $update = $this->db->query("UPDATE libro SET titulo='$titulo', autorId='$autor', categoriaId='$categoria', sinopsis='$sinopsis', imagenPortada='$imagenPortada' WHERE id='".$id."'");
-        return $update;
-    }
-
-    // Método que nos permite publicar libros en el catálogo
-    public function publicarLibros($data) {
-        foreach ($data as $id) {
+    public function publicarLibros($libros) {
+        foreach ($libros as $id) {
             $publicacion = $this->db->query("UPDATE libro SET estaPublicado=1 WHERE id='".$id[0]."'");
         }
         return $publicacion;
     }
 
-    // Método que nos permite publicar un libro en concreto en el catálogo
-    public function publicarLibro($id) {
-        $publicacion = $this->db->query("UPDATE libro SET estaPublicado=1 WHERE id='".$id."'");
-        return $publicacion;
+    public function ocultarLibro(Libro $libro) {
+        $id = $libro->getId();
+        return $this->db->query("UPDATE libro SET estaPublicado=0 WHERE id='".$id."'");
     }
 
-    // Método que nos permite ocultar libros en el catálogo
-    public function ocultarLibros($data) {
-        foreach ($data as $id) {
+    public function ocultarLibros($libros) {
+        foreach ($libros as $id) {
             $ocultacion = $this->db->query("UPDATE libro SET estaPublicado=0 WHERE id='".$id[0]."'");
         }
         return $ocultacion;
     }
 
-    // Método que nos permite ocultar un libro en concreto en el catálogo
-    public function ocultarLibro($id) {
-        $ocultacion = $this->db->query("UPDATE libro SET estaPublicado=0 WHERE id='".$id."'");
-        return $ocultacion;
+    public function destacarLibro(Libro $libro) {
+        $id = $libro->getId();
+        return $this->db->query("UPDATE libro SET esDestacado=1 WHERE id='".$id."'");
     }
 
-    // Método que nos permite destacar un libro en concreto en el catálogo
-    public function destacarLibro($id) {
-        $destacado = $this->db->query("UPDATE libro SET esDestacado=1 WHERE id='".$id."'");
-        return $destacado;
+    public function quitarLibro(Libro $libro) {
+        $id = $libro->getId();
+        return $this->db->query("UPDATE libro SET esDestacado=0 WHERE id='".$id."'");
     }
 
-    // Método para quitar de los libros destacados a un libro concreto en el catálogo
-    public function quitarLibro($id) {
-        $destacado = $this->db->query("UPDATE libro SET esDestacado=0 WHERE id='".$id."'");
-        return $destacado;
+    public function buscarPorId(int $id) {
+        $consulta = $this->db->query("SELECT * FROM libro WHERE id='".$id."'");
+        $array = $consulta->fetch_object();
+
+        if ($array['estaPublicado'] == 0 && $array['esDestacado'] == 0) {
+            $estaPublicado = false;
+            $esDestacado = false;
+        } elseif ($array['estaPublicado'] == 0 && $array['esDestacado'] == 1) {
+            $estaPublicado = false;
+            $esDestacado = true;
+        } elseif ($array['estaPublicado'] == 1 && $array['esDestacado'] == 0) {
+            $estaPublicado = true;
+            $esDestacado = false;
+        } else {
+            $estaPublicado = true;
+            $esDestacado = true;
+        }
+        return new Libro($array['id'], $array['titulo'], $array['autorId'], $array['categoriaId'], $array['sinopsis'], $array['imagenPortada'], $estaPublicado, $esDestacado);
     }
 
     // Método privado que nos devuelve un libro en función de los filtros aplicados

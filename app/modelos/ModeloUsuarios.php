@@ -25,19 +25,19 @@ class ModeloUsuarios {
         $salida = '';
 
         if ($autor == null && $categoria == null) {
-            $consulta = $this->db->query("SELECT id AS idLibro, titulo, imagenPortada FROM libro WHERE enCatalogo=1 AND titulo LIKE '%{$titulo}%' ORDER BY titulo");
+            $consulta = $this->db->query("SELECT id AS idLibro, titulo, imagenPortada FROM libro WHERE estaPublicado=1 AND titulo LIKE '%{$titulo}%' ORDER BY titulo");
         } elseif ($titulo == null && $autor == null) {
-            $consulta = $this->db->query("SELECT l.id AS idLibro, l.titulo, l.imagenPortada, cat.nombre FROM libro l JOIN categoria cat ON (l.categoriaId = cat.id) WHERE l.enCatalogo=1 AND cat.nombre = '$categoria' ORDER BY l.titulo");
+            $consulta = $this->db->query("SELECT l.id AS idLibro, l.titulo, l.imagenPortada, cat.nombre FROM libro l JOIN categoria cat ON (l.categoriaId = cat.id) WHERE l.estaPublicado=1 AND cat.nombre = '$categoria' ORDER BY l.titulo");
         } elseif ($titulo == null && $categoria == null) {
-            $consulta = $this->db->query("SELECT l.id AS idLibro, l.titulo, l.imagenPortada, CONCAT(a.nombre, ' ', a.apellidos) FROM libro l JOIN autor a ON (l.autorId = a.id) WHERE l.enCatalogo=1 AND CONCAT(a.nombre, ' ', a.apellidos)='$autor' ORDER BY l.titulo");
+            $consulta = $this->db->query("SELECT l.id AS idLibro, l.titulo, l.imagenPortada, CONCAT(a.nombre, ' ', a.apellidos) FROM libro l JOIN autor a ON (l.autorId = a.id) WHERE l.estaPublicado=1 AND CONCAT(a.nombre, ' ', a.apellidos)='$autor' ORDER BY l.titulo");
         } elseif ($titulo == null) {
-            $consulta = $this->db->query("SELECT l.id AS idLibro, l.titulo, l.imagenPortada, CONCAT(a.nombre, ' ', a.apellidos), cat.nombre FROM libro l JOIN autor a ON (l.autorId = a.id) JOIN categoria cat ON (l.categoriaId = cat.id) WHERE l.enCatalogo=1 AND CONCAT(a.nombre, ' ', a.apellidos)='$autor' AND cat.nombre = '$categoria' ORDER BY l.titulo");
+            $consulta = $this->db->query("SELECT l.id AS idLibro, l.titulo, l.imagenPortada, CONCAT(a.nombre, ' ', a.apellidos), cat.nombre FROM libro l JOIN autor a ON (l.autorId = a.id) JOIN categoria cat ON (l.categoriaId = cat.id) WHERE l.estaPublicado=1 AND CONCAT(a.nombre, ' ', a.apellidos)='$autor' AND cat.nombre = '$categoria' ORDER BY l.titulo");
         } elseif ($autor == null) {
-            $consulta = $this->db->query("SELECT l.id AS idLibro, l.titulo, l.imagenPortada, CONCAT(a.nombre, ' ', a.apellidos), cat.nombre FROM libro l JOIN autor a ON (l.autorId = a.id) JOIN categoria cat ON (l.categoriaId = cat.id) WHERE l.enCatalogo=1 AND l.titulo LIKE '%{$titulo}%' AND cat.nombre = '$categoria' ORDER BY l.titulo");
+            $consulta = $this->db->query("SELECT l.id AS idLibro, l.titulo, l.imagenPortada, CONCAT(a.nombre, ' ', a.apellidos), cat.nombre FROM libro l JOIN autor a ON (l.autorId = a.id) JOIN categoria cat ON (l.categoriaId = cat.id) WHERE l.estaPublicado=1 AND l.titulo LIKE '%{$titulo}%' AND cat.nombre = '$categoria' ORDER BY l.titulo");
         } elseif ($categoria == null) {
-            $consulta = $this->db->query("SELECT l.id AS idLibro, l.titulo, l.imagenPortada, CONCAT(a.nombre, ' ', a.apellidos), cat.nombre FROM libro l JOIN autor a ON (l.autorId = a.id) JOIN categoria cat ON (l.categoriaId = cat.id) WHERE l.enCatalogo=1 AND l.titulo LIKE '%{$titulo}%' AND CONCAT(a.nombre, ' ', a.apellidos)='$autor' ORDER BY l.titulo");
+            $consulta = $this->db->query("SELECT l.id AS idLibro, l.titulo, l.imagenPortada, CONCAT(a.nombre, ' ', a.apellidos), cat.nombre FROM libro l JOIN autor a ON (l.autorId = a.id) JOIN categoria cat ON (l.categoriaId = cat.id) WHERE l.estaPublicado=1 AND l.titulo LIKE '%{$titulo}%' AND CONCAT(a.nombre, ' ', a.apellidos)='$autor' ORDER BY l.titulo");
         } else {
-            $consulta = $this->db->query("SELECT l.id AS idLibro, l.titulo, l.imagenPortada, CONCAT(a.nombre, ' ', a.apellidos), cat.nombre FROM libro l JOIN autor a ON (l.autorId = a.id) JOIN categoria cat ON (l.categoriaId = cat.id) WHERE l.enCatalogo=1 AND l.titulo LIKE '%{$titulo}%' AND CONCAT(a.nombre, ' ', a.apellidos)='$autor' AND cat.nombre = '$categoria' ORDER BY l.titulo");
+            $consulta = $this->db->query("SELECT l.id AS idLibro, l.titulo, l.imagenPortada, CONCAT(a.nombre, ' ', a.apellidos), cat.nombre FROM libro l JOIN autor a ON (l.autorId = a.id) JOIN categoria cat ON (l.categoriaId = cat.id) WHERE l.estaPublicado=1 AND l.titulo LIKE '%{$titulo}%' AND CONCAT(a.nombre, ' ', a.apellidos)='$autor' AND cat.nombre = '$categoria' ORDER BY l.titulo");
         }
         while ($fila = mysqli_fetch_assoc($consulta)) {
             $idLibro = $fila['idLibro'];
