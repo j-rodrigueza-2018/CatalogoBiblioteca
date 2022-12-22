@@ -33,8 +33,7 @@ class RepositorioAutor implements IRepositorioAutor {
         return $this->db->query("UPDATE autor SET nombre='$nombre', apellidos='$apellidos', fechaNacimiento='$fechaNacimiento', paisId='$pais' WHERE id='$id'");
     }
 
-    public function eliminarAutor(Autor $autor) {
-        $id = $autor->getId();
+    public function eliminarAutor($id) {
         return $this->db->query("DELETE FROM autor WHERE id='".$id."'");
     }
 
@@ -45,7 +44,7 @@ class RepositorioAutor implements IRepositorioAutor {
         return $eliminacion;
     }
 
-    public function buscarPorId(int $id) {
+    public function buscarPorId($id): Autor {
         $consulta = $this->db->query("SELECT * FROM autor WHERE id='$id'");
         $data = $consulta->fetch_object();
         return new Autor($data['id'], $data['nombre'], $data['apellidos'], $data['fechaNacimiento'], $data['paisId']);

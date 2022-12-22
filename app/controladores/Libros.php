@@ -9,11 +9,11 @@ class Libros extends Controlador {
 
 
     // Atributos de la Clase
-    private $libros;
+    private $repoLibros;
 
     // Método Constructor de la Clase
     public function __construct() {
-        $this->libros = $this->repositorio('RepositorioLibro');
+        $this->repoLibros = $this->repositorio('RepositorioLibro');
     }
 
     // Método para establecer la vista principal del Gestor
@@ -47,7 +47,7 @@ class Libros extends Controlador {
 
         $libro = new Libro(0, trim($_POST['titulo']), trim($_POST['autor']), trim($_POST['categoria']), trim($_POST['sinopsis']), trim($ruta), false, false);
 
-        if ($this->libros->crearLibro($libro)) {
+        if ($this->repoLibros->crearLibro($libro)) {
             redirect('libros');
         } else {
             die('No se pudo guardar el libro');
@@ -57,7 +57,7 @@ class Libros extends Controlador {
     // Método para eliminar autores en nuestra base de datos
     public function eliminarLibros() {
         $data = $_REQUEST['idsArray'];
-        if ($this->libros->eliminarLibros($data)) {
+        if ($this->repoLibros->eliminarLibros($data)) {
             redirect('libros');
         } else {
             die('No se pudo eliminar los libros');
@@ -66,8 +66,9 @@ class Libros extends Controlador {
 
     // Método para eliminar un autor concreto de la base de datos
     public function eliminarLibro() {
-        $libro = $this->libros->buscarPorId($_REQUEST['datos'][0]);
-        if ($this->libros->eliminarLibro($libro)) {
+        $id = $_REQUEST['datos'][0];
+        $imagen = $_REQUEST['datos'][1];
+        if ($this->repoLibros->eliminarLibro($id, $imagen)) {
             redirect('libros');
         } else {
             die('No se pudo eliminar el libro');
@@ -76,7 +77,7 @@ class Libros extends Controlador {
 
     // Método para establecer la vista para editar un libro
     public function vistaEditarLibro($id) {
-        $libro = $this->libros->buscarPorId($id);
+        $libro = $this->repoLibros->buscarPorId($id);
         $this->vista('gestor/editarLibro', $libro);
     }
 
@@ -101,7 +102,7 @@ class Libros extends Controlador {
 
         $libro = new Libro($id, trim($_POST['titulo']), trim($_POST['autor']), trim($_POST['categoria']), trim($_POST['sinopsis']), trim($ruta), false, false);
 
-        if ($this->libros->editarLibro($libro)) {
+        if ($this->repoLibros->editarLibro($libro)) {
             redirect('gestor');
         } else {
             die('No se pudo cambiar los datos del libro');
@@ -111,7 +112,7 @@ class Libros extends Controlador {
     // Método para publicar libros en el catálogo
     public function publicarLibros() {
         $data = $_REQUEST['idsArray'];
-        if ($this->libros->publicarLibros($data)) {
+        if ($this->repoLibros->publicarLibros($data)) {
             redirect('libros');
         } else {
             die('No se pudieron publicar los libros en el catálogo');
@@ -120,8 +121,8 @@ class Libros extends Controlador {
 
     // Método para publicar un libro concreto en el catálogo
     public function publicarLibro() {
-        $libro = $this->libros->buscarPorId($_REQUEST['datos']);
-        if ($this->libros->publicarLibro($libro)) {
+        $id = $_REQUEST['datos'];
+        if ($this->repoLibros->publicarLibro($id)) {
             redirect('libros');
         } else {
             die('No se pudo publicar el libro en el catálogo');
@@ -131,7 +132,7 @@ class Libros extends Controlador {
     // Método para ocultar libros en el catálogo
     public function ocultarLibros() {
         $data = $_REQUEST['idsArray'];
-        if ($this->libros->ocultarLibros($data)) {
+        if ($this->repoLibros->ocultarLibros($data)) {
             redirect('libros');
         } else {
             die('No se pudieron ocultar los libros en el catálogo');
@@ -140,8 +141,8 @@ class Libros extends Controlador {
 
     // Método para ocultar un libro concreto en el catálogo
     public function ocultarLibro() {
-        $libro = $this->libros->buscarPorId($_REQUEST['datos']);
-        if ($this->libros->ocultarLibro($libro)) {
+        $id = $_REQUEST['datos'];
+        if ($this->repoLibros->ocultarLibro($id)) {
             redirect('libros');
         } else {
             die('No se pudo ocultar el libro en el catálogo');
@@ -150,8 +151,8 @@ class Libros extends Controlador {
 
     // Método para destacar un libro concreto en el catálogo
     public function destacarLibro() {
-        $libro = $this->libros->buscarPorId($_REQUEST['datos']);
-        if ($this->libros->destacarLibro($libro)) {
+        $id = $_REQUEST['datos'];
+        if ($this->repoLibros->destacarLibro($id)) {
             redirect('libros');
         } else {
             die('No se pudo destacar el libro en el catálogo');
@@ -160,8 +161,8 @@ class Libros extends Controlador {
 
     // Método para quitar de los libros destacados a un libro concreto en el catálogo
     public function quitarLibro() {
-        $libro = $this->libros->buscarPorId($_REQUEST['datos']);
-        if ($this->libros->quitarLibro($libro)) {
+        $id = $_REQUEST['datos'];
+        if ($this->repoLibros->quitarLibro($id)) {
             redirect('libros');
         } else {
             die('No se pudo quitar el libro de la sección de destacados del catálogo');
@@ -172,7 +173,7 @@ class Libros extends Controlador {
     // Método para buscar los libros
     public function buscarLibros() {
         $con = $_POST['busqueda'];
-        $resultadoConsulta = $this->libros->buscarLibros($con);
+        $resultadoConsulta = $this->repoLibros->buscarLibros($con);
         echo $resultadoConsulta;
     }
 

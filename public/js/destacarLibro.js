@@ -2,10 +2,10 @@ $(document).ready(function() {
     $(".destacarLibro").click(function() {
         let datos = $(this).attr("id");
         $.ajax({
-            type: "POST",
-            url: "http://localhost/CatalogoBiblioteca/gestor/destacarLibro",
+            method: "POST",
+            url: "http://localhost/CatalogoBiblioteca/libros/destacarLibro",
             data: {datos: datos},
-            success: function(data) {
+            success: function() {
                 alert('Libro añadido a la sección de destacados con éxito');
                 let nombreBtnDestacar = "destacarLibro" + datos;
                 let botonDestacar = document.querySelector('button[name="' + nombreBtnDestacar + '"]');

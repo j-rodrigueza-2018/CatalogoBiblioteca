@@ -2,10 +2,10 @@ $(document).ready(function() {
     $(".quitarLibro").click(function() {
         let datos = $(this).attr("id");
         $.ajax({
-            type: "POST",
-            url: "http://localhost/CatalogoBiblioteca/gestor/quitarLibro",
+            method: "POST",
+            url: "http://localhost/CatalogoBiblioteca/libros/quitarLibro",
             data: {datos: datos},
-            success: function(data) {
+            success: function() {
                 alert('Libro eliminado de la sección de destacados con éxito');
                 let nombreBtnQuitar = "quitarLibro" + datos;
                 let botonQuitar = document.querySelector('button[name="' + nombreBtnQuitar + '"]');

@@ -34,12 +34,10 @@ class RepositorioLibro implements IRepositorioLibro {
         return $this->db->query("UPDATE libro SET titulo='$titulo', autorId='$autor', categoriaId='$categoria', sinopsis='$sinopsis', imagenPortada='$imagenPortada' WHERE id='".$id."'");
     }
 
-    public function eliminarLibro(Libro $libro) {
-        $imagen = $libro->getImagenPortada();
+    public function eliminarLibro($id, $imagen) {
         $borrarImg = RUTA_IMG.'/public/imagenesPortada/'.$imagen;
         unlink($borrarImg);
 
-        $id = $libro->getId();
         return $this->db->query("DELETE FROM libro WHERE id='".$id."'");
     }
 
@@ -52,8 +50,7 @@ class RepositorioLibro implements IRepositorioLibro {
         return $eliminacion;
     }
 
-    public function publicarLibro(Libro $libro) {
-        $id = $libro->getId();
+    public function publicarLibro($id) {
         return $this->db->query("UPDATE libro SET estaPublicado=1 WHERE id='".$id."'");
     }
 
@@ -64,8 +61,7 @@ class RepositorioLibro implements IRepositorioLibro {
         return $publicacion;
     }
 
-    public function ocultarLibro(Libro $libro) {
-        $id = $libro->getId();
+    public function ocultarLibro($id) {
         return $this->db->query("UPDATE libro SET estaPublicado=0 WHERE id='".$id."'");
     }
 
@@ -76,13 +72,11 @@ class RepositorioLibro implements IRepositorioLibro {
         return $ocultacion;
     }
 
-    public function destacarLibro(Libro $libro) {
-        $id = $libro->getId();
+    public function destacarLibro($id) {
         return $this->db->query("UPDATE libro SET esDestacado=1 WHERE id='".$id."'");
     }
 
-    public function quitarLibro(Libro $libro) {
-        $id = $libro->getId();
+    public function quitarLibro($id) {
         return $this->db->query("UPDATE libro SET esDestacado=0 WHERE id='".$id."'");
     }
 

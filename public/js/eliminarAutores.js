@@ -7,27 +7,36 @@ $(document).ready(function() {
 
         if (idsArray.length > 0) {
             $.ajax({
-                type: "POST",
+                method: "POST",
                 url: "http://localhost/CatalogoBiblioteca/autores/eliminarAutores",
                 data: {idsArray: idsArray},
-                success: function(data) {
+                success: function() {
                     $.each(idsArray, function(indice, id) {
-                        var fila = $("#idAutor" + id).remove();
+                        $("#idAutor" + id).remove();
                     });
+                    alert('Autor/es eliminado/s correctamente');
                 }
             });
         }
     });
 
-    $(".elimAutor").click(function() {
+    // Manejador de click del botón de eliminar un autor
+    $(".elimAutor").click(function(e) {
+        // Evitamos el comportamiento predeterminado del botón
+        e.preventDefault();
+        // Obtenemos el id del autor a eliminar
         let id = $(this).attr("id");
-        let data = "id=" + id;
+        // Enviamos la solicitud Ajax al controlador
         $.ajax({
-            type: "POST",
             url: "http://localhost/CatalogoBiblioteca/autores/eliminarAutor",
-            data: data,
-            success: function(data) {
+            method: "POST",
+            data: {id: id},
+            success: function() {
+                alert('Autor eliminado correctamente');
                 $("#idAutor" + id).remove();
+            },
+            error: function() {
+                alert('Se produjo un error al enviar la solicitud');
             }
         });
     });

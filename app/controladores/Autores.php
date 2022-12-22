@@ -8,11 +8,11 @@ ini_set('display_errors', '1');
 class Autores extends Controlador {
 
     // Atributos de la Clase
-    private $autores;
+    private $repoAutores;
 
     // Método Constructor de la Clase
     public function __construct() {
-        $this->autores = $this->repositorio('RepositorioAutor');
+        $this->repoAutores = $this->repositorio('RepositorioAutor');
     }
 
     // Método para establecer la vista de Autores
@@ -30,39 +30,28 @@ class Autores extends Controlador {
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
         $autor = new Autor(0, trim($_POST['nombre']), trim($_POST['apellidos']), trim($_POST['fechaNacimiento']), trim($_POST['pais']));
-        if ($this->autores->crearAutor($autor)) {
+        if ($this->repoAutores->crearAutor($autor)) {
             redirect('autores');
         } else {
             die('No se pudo dar de alta al autor');
         }
     }
 
-
     // Método para eliminar autores en nuestra base de datos
     public function eliminarAutores() {
         $data = $_REQUEST['idsArray'];
-        if ($this->autores->eliminarAutores($data)) {
-            $this->vista('autores');
-        } else {
-            die('No se pudo eliminar a los autores');
-        }
+        $this->repoAutores->eliminarAutores($data);
     }
-
 
     // Método para eliminar un autor concreto de la base de datos
     public function eliminarAutor() {
-        $autor = $this->autores->buscarPorId($_REQUEST['id']);
-        if ($this->autores->eliminarAutor($autor)) {
-            $this->vista('autores');
-        } else {
-            die('No se pudo eliminar al autor');
-        }
+        $id = $_REQUEST['id'];
+        $this->repoAutores->eliminarAutor($id);
     }
-
 
     // Método para establecer la vista para editar un autor
     public function vistaEditarAutor($id) {
-        $autor = $this->autores->buscarPorId($id);
+        $autor = $this->repoAutores->buscarPorId($id);
         $data = [
             'id' => $autor->getId(),
             'nombre' => $autor->getNombre(),
@@ -78,7 +67,7 @@ class Autores extends Controlador {
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
         $autor = new Autor($id, trim($_POST['nombre']), trim($_POST['apellidos']), trim($_POST['fechaNacimiento']), trim($_POST['pais']));
 
-        if ($this->autores->editarAutor($autor)) {
+        if ($this->repoAutores->editarAutor($autor)) {
             redirect('autores');
         } else {
             die('No se pudo cambiar los datos del autor');
@@ -89,7 +78,7 @@ class Autores extends Controlador {
     // Método para buscar los autores por apellido
     public function buscarAutores() {
         $con = $_POST['busqueda'];
-        $resultadoConsulta = $this->autores->autorPorApellidos($con);
+        $resultadoConsulta = $this->repoAutores->autorPorApellidos($con);
         echo $resultadoConsulta;
     }
 
