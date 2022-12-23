@@ -8,5 +8,6 @@ interface IRepositorioAutor {
     public function eliminarAutores($autores);
     public function buscarPorId($id);
     public function mostrarAutores();
+    public function buscarPorApellidos($texto);
 
 }

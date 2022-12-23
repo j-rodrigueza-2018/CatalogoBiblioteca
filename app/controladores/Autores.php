@@ -86,8 +86,11 @@ class Autores extends Controlador {
     // Método para buscar los autores por apellido
     public function buscarAutores() {
         $con = $_POST['busqueda'];
-        $resultadoConsulta = $this->repoAutores->autorPorApellidos($con);
-        echo $resultadoConsulta;
+        $autores = $this->repoAutores->buscarPorApellidos($con);
+        $data = [
+            'autor' => $autores
+        ];
+        $this->vista('gestor/includes/tablaAutores', $data);
     }
 
 }
