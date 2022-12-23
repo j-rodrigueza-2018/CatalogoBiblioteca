@@ -59,7 +59,7 @@ class Autores extends Controlador {
             'fechaNacimiento' => $autor->getFechaNacimiento(),
             'pais' => $autor->getPaisId()
         ];
-        $this->vista('autores/editarAutor', $data);
+        $this->vista('gestor/editarAutor', $data);
     }
 
     // Método para editar los datos de un autor

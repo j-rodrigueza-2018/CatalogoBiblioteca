@@ -47,7 +47,7 @@ class RepositorioAutor implements IRepositorioAutor {
     public function buscarPorId($id): Autor {
         $consulta = $this->db->query("SELECT * FROM autor WHERE id='$id'");
         $data = $consulta->fetch_object();
-        return new Autor($data['id'], $data['nombre'], $data['apellidos'], $data['fechaNacimiento'], $data['paisId']);
+        return new Autor($data->id, $data->nombre, $data->apellidos, $data->fechaNacimiento, $data->paisId);
     }
 
     // Método que nos devuelve autores (con sus datos) a partir de sus apellidos
