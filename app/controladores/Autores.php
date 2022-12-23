@@ -40,13 +40,17 @@ class Autores extends Controlador {
     // Método para eliminar autores en nuestra base de datos
     public function eliminarAutores() {
         $data = $_REQUEST['idsArray'];
-        $this->repoAutores->eliminarAutores($data);
+        $autores = [];
+        for ($i = 0; $i < sizeof($data); $i++) {
+            $autores[$i] = $this->repoAutores->buscarPorId($data[$i]);
+        }
+        $this->repoAutores->eliminarAutores($autores);
     }
 
     // Método para eliminar un autor concreto de la base de datos
     public function eliminarAutor() {
-        $id = $_REQUEST['id'];
-        $this->repoAutores->eliminarAutor($id);
+        $autor = $this->repoAutores->buscarPorId($_REQUEST['id']);
+        $this->repoAutores->eliminarAutor($autor);
     }
 
     // Método para establecer la vista para editar un autor

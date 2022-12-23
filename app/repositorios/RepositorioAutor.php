@@ -33,13 +33,14 @@ class RepositorioAutor implements IRepositorioAutor {
         return $this->db->query("UPDATE autor SET nombre='$nombre', apellidos='$apellidos', fechaNacimiento='$fechaNacimiento', paisId='$pais' WHERE id='$id'");
     }
 
-    public function eliminarAutor($id) {
+    public function eliminarAutor(Autor $autor) {
+        $id = $autor->getId();
         return $this->db->query("DELETE FROM autor WHERE id='".$id."'");
     }
 
     public function eliminarAutores($autores) {
-        foreach ($autores as $id) {
-            $eliminacion = $this->db->query("DELETE FROM autor WHERE id='".$id."'");
+        foreach ($autores as $autor) {
+            $eliminacion = $this->db->query("DELETE FROM autor WHERE id='".$autor->getId()."'");
         }
         return $eliminacion;
     }
