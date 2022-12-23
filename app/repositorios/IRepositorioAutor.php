@@ -7,5 +7,6 @@ interface IRepositorioAutor {
     public function eliminarAutor(Autor $autor);
     public function eliminarAutores($autores);
     public function buscarPorId($id);
+    public function mostrarAutores();
 
 }

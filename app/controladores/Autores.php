@@ -17,7 +17,11 @@ class Autores extends Controlador {
 
     // Método para establecer la vista de Autores
     public function index() {
-        $this->vista('gestor/listadoAutores');
+        $autores = $this->repoAutores->mostrarAutores();
+        $data = [
+            'autor' => $autores
+        ];
+        $this->vista('gestor/listadoAutores', $data);
     }
 
     // Método para establecer la vista para añadir un autor

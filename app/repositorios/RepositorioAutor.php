@@ -94,4 +94,9 @@ class RepositorioAutor implements IRepositorioAutor {
         return $salida;
     }
 
+    public function mostrarAutores(): array {
+        $consulta = "SELECT a.id, a.nombre AS nombreAutor, a.apellidos, DATE_FORMAT(a.fechaNacimiento, '%d-%m-%Y') AS fechaNac, p.nombre AS pais FROM autor a JOIN pais p ON (a.paisId = p.id) ORDER BY a.nombre ASC";
+        return $this->db->result_query($consulta);
+    }
+
 }
