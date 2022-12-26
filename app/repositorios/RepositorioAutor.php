@@ -58,8 +58,8 @@ class RepositorioAutor implements IRepositorioAutor
     }
 
     public function buscarPorApellidos($texto): array {
-        $con = $this->db->realEscapeString($texto);
-        $consulta = "SELECT a.id, a.nombre AS nombreAutor, a.apellidos, DATE_FORMAT(a.fechaNacimiento, '%d-%m-%Y') AS fechaNac, p.nombre AS pais FROM autor a JOIN pais p ON (a.paisId = p.id) WHERE a.apellidos LIKE '%{$con}%' ORDER BY a.nombre ASC";
+        $textoBusqueda = $this->db->realEscapeString($texto);
+        $consulta = "SELECT a.id, a.nombre AS nombreAutor, a.apellidos, DATE_FORMAT(a.fechaNacimiento, '%d-%m-%Y') AS fechaNac, p.nombre AS pais FROM autor a JOIN pais p ON (a.paisId = p.id) WHERE a.apellidos LIKE '%{$textoBusqueda}%' ORDER BY a.nombre ASC";
         return $this->db->result_query($consulta);
     }
 

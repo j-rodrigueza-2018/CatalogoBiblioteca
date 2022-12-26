@@ -20,6 +20,7 @@ class RepositorioLibro implements IRepositorioLibro {
         $categoria = $libro->getCategoriaId();
         $sinopsis = $libro->getSinopsis();
         $imagenPortada = $libro->getImagenPortada();
+
         return $this->db->query("INSERT INTO libro VALUES (DEFAULT, '$titulo', '$autor', '$categoria', '$sinopsis', '$imagenPortada', 0, 0)");
     }
 
@@ -34,7 +35,9 @@ class RepositorioLibro implements IRepositorioLibro {
         return $this->db->query("UPDATE libro SET titulo='$titulo', autorId='$autor', categoriaId='$categoria', sinopsis='$sinopsis', imagenPortada='$imagenPortada' WHERE id='".$id."'");
     }
 
-    public function eliminarLibro($id, $imagen) {
+    public function eliminarLibro(Libro $libro) {
+        $id = $libro->getId();
+        $imagen = $libro->getImagenPortada();
         $borrarImg = RUTA_IMG.'/public/imagenesPortada/'.$imagen;
         unlink($borrarImg);
 
@@ -42,92 +45,84 @@ class RepositorioLibro implements IRepositorioLibro {
     }
 
     public function eliminarLibros($libros) {
-        foreach ($libros as $d) {
-            $borrarImg = RUTA_IMG.'/public/imagenesPortada/'.$d[1];
+        foreach ($libros as $libro) {
+            $borrarImg = RUTA_IMG.'/public/imagenesPortada/'.$libro->getImagenPortada();
             unlink($borrarImg);
-            $eliminacion = $this->db->query("DELETE FROM libro WHERE id='".$d[0]."'");
+            $eliminacion = $this->db->query("DELETE FROM libro WHERE id='".$libro->getId()."'");
         }
         return $eliminacion;
     }
 
-    public function publicarLibro($id) {
+    public function publicarLibro(Libro $libro) {
+        $id = $libro->getId();
         return $this->db->query("UPDATE libro SET estaPublicado=1 WHERE id='".$id."'");
     }
 
     public function publicarLibros($libros) {
-        foreach ($libros as $id) {
-            $publicacion = $this->db->query("UPDATE libro SET estaPublicado=1 WHERE id='".$id[0]."'");
+        foreach ($libros as $libro) {
+            $publicacion = $this->db->query("UPDATE libro SET estaPublicado=1 WHERE id='".$libro->getId()."'");
         }
         return $publicacion;
     }
 
-    public function ocultarLibro($id) {
+    public function ocultarLibro(Libro $libro) {
+        $id = $libro->getId();
         return $this->db->query("UPDATE libro SET estaPublicado=0 WHERE id='".$id."'");
     }
 
     public function ocultarLibros($libros) {
-        foreach ($libros as $id) {
-            $ocultacion = $this->db->query("UPDATE libro SET estaPublicado=0 WHERE id='".$id[0]."'");
+        foreach ($libros as $libro) {
+            $ocultacion = $this->db->query("UPDATE libro SET estaPublicado=0 WHERE id='".$libro->getId()."'");
         }
         return $ocultacion;
     }
 
-    public function destacarLibro($id) {
+    public function destacarLibro(Libro $libro) {
+        $id = $libro->getId();
         return $this->db->query("UPDATE libro SET esDestacado=1 WHERE id='".$id."'");
     }
 
-    public function quitarLibro($id) {
+    public function quitarLibro(Libro $libro) {
+        $id = $libro->getId();
         return $this->db->query("UPDATE libro SET esDestacado=0 WHERE id='".$id."'");
     }
 
     public function buscarPorId(int $id) {
         $consulta = $this->db->query("SELECT * FROM libro WHERE id='".$id."'");
-        $array = $consulta->fetch_object();
-
-        if ($array['estaPublicado'] == 0 && $array['esDestacado'] == 0) {
-            $estaPublicado = false;
-            $esDestacado = false;
-        } elseif ($array['estaPublicado'] == 0 && $array['esDestacado'] == 1) {
-            $estaPublicado = false;
-            $esDestacado = true;
-        } elseif ($array['estaPublicado'] == 1 && $array['esDestacado'] == 0) {
-            $estaPublicado = true;
-            $esDestacado = false;
-        } else {
-            $estaPublicado = true;
-            $esDestacado = true;
-        }
-        return new Libro($array['id'], $array['titulo'], $array['autorId'], $array['categoriaId'], $array['sinopsis'], $array['imagenPortada'], $estaPublicado, $esDestacado);
+        $libro = $consulta->fetch_object();
+        return new Libro($libro->id, $libro->titulo, $libro->autorId, $libro->categoriaId, $libro->sinopsis, $libro->imagenPortada, $libro->estaPublicado, $libro->esDestacado);
     }
 
     // Método privado que nos devuelve un libro en función de los filtros aplicados
-    private function obtenerPorFiltro($data) {
-        $titulo = $data[0];
-        $autor = $data[1];
-        $categoria = $data[2];
+    private function obtenerPorFiltro($texto): string {
+        $titulo = $this->db->realEscapeString($texto[0]);
+        $autor = $this->db->realEscapeString($texto[1]);
+        $categoria = $this->db->realEscapeString($texto[2]);
 
         if ($autor == null && $categoria == null) {
-            $consulta = $this->db->query("SELECT l.id, l.titulo, CONCAT(a.nombre, ' ', a.apellidos) AS autor, c.nombre AS categoria, l.imagenPortada, l.estaPublicado, l.esDestacado FROM libro l JOIN autor a ON (l.autorId = a.id) JOIN categoria c ON (l.categoriaId = c.id) WHERE l.titulo LIKE '%{$titulo}%' ORDER BY l.titulo ASC");
+            $consulta = "SELECT l.id, l.titulo, CONCAT(a.nombre, ' ', a.apellidos) AS autor, c.nombre AS categoria, l.imagenPortada, l.estaPublicado, l.esDestacado FROM libro l JOIN autor a ON (l.autorId = a.id) JOIN categoria c ON (l.categoriaId = c.id) WHERE l.titulo LIKE '%{$titulo}%' ORDER BY l.titulo ASC";
         } elseif ($titulo == null && $autor == null) {
-            $consulta = $this->db->query("SELECT l.id, l.titulo, CONCAT(a.nombre, ' ', a.apellidos) AS autor, c.nombre AS categoria, l.imagenPortada, l.estaPublicado, l.esDestacado FROM libro l JOIN autor a ON (l.autorId = a.id) JOIN categoria c ON (l.categoriaId = c.id) WHERE c.nombre = '$categoria' ORDER BY l.titulo ASC");
+            $consulta = "SELECT l.id, l.titulo, CONCAT(a.nombre, ' ', a.apellidos) AS autor, c.nombre AS categoria, l.imagenPortada, l.estaPublicado, l.esDestacado FROM libro l JOIN autor a ON (l.autorId = a.id) JOIN categoria c ON (l.categoriaId = c.id) WHERE c.nombre = '$categoria' ORDER BY l.titulo ASC";
         } elseif ($titulo == null && $categoria == null) {
-            $consulta = $this->db->query("SELECT l.id, l.titulo, CONCAT(a.nombre, ' ', a.apellidos) AS autor, c.nombre AS categoria, l.imagenPortada, l.estaPublicado, l.esDestacado FROM libro l JOIN autor a ON (l.autorId = a.id) JOIN categoria c ON (l.categoriaId = c.id) WHERE CONCAT(a.nombre, ' ', a.apellidos)='$autor' ORDER BY l.titulo ASC");
+            $consulta = "SELECT l.id, l.titulo, CONCAT(a.nombre, ' ', a.apellidos) AS autor, c.nombre AS categoria, l.imagenPortada, l.estaPublicado, l.esDestacado FROM libro l JOIN autor a ON (l.autorId = a.id) JOIN categoria c ON (l.categoriaId = c.id) WHERE CONCAT(a.nombre, ' ', a.apellidos)='$autor' ORDER BY l.titulo ASC";
         } elseif ($titulo == null) {
-            $consulta = $this->db->query("SELECT l.id, l.titulo, CONCAT(a.nombre, ' ', a.apellidos) AS autor, c.nombre AS categoria, l.imagenPortada, l.estaPublicado, l.esDestacado FROM libro l JOIN autor a ON (l.autorId = a.id) JOIN categoria c ON (l.categoriaId = c.id) WHERE CONCAT(a.nombre, ' ', a.apellidos)='$autor' AND c.nombre = '$categoria' ORDER BY l.titulo ASC");
+            $consulta = "SELECT l.id, l.titulo, CONCAT(a.nombre, ' ', a.apellidos) AS autor, c.nombre AS categoria, l.imagenPortada, l.estaPublicado, l.esDestacado FROM libro l JOIN autor a ON (l.autorId = a.id) JOIN categoria c ON (l.categoriaId = c.id) WHERE CONCAT(a.nombre, ' ', a.apellidos)='$autor' AND c.nombre = '$categoria' ORDER BY l.titulo ASC";
         } elseif ($autor == null) {
-            $consulta = $this->db->query("SELECT l.id, l.titulo, CONCAT(a.nombre, ' ', a.apellidos) AS autor, c.nombre AS categoria, l.imagenPortada, l.estaPublicado, l.esDestacado FROM libro l JOIN autor a ON (l.autorId = a.id) JOIN categoria c ON (l.categoriaId = c.id) WHERE l.titulo LIKE '%{$titulo}%' AND c.nombre = '$categoria' ORDER BY l.titulo ASC");
+            $consulta = "SELECT l.id, l.titulo, CONCAT(a.nombre, ' ', a.apellidos) AS autor, c.nombre AS categoria, l.imagenPortada, l.estaPublicado, l.esDestacado FROM libro l JOIN autor a ON (l.autorId = a.id) JOIN categoria c ON (l.categoriaId = c.id) WHERE l.titulo LIKE '%{$titulo}%' AND c.nombre = '$categoria' ORDER BY l.titulo ASC";
         } elseif ($categoria == null) {
-            $consulta = $this->db->query("SELECT l.id, l.titulo, CONCAT(a.nombre, ' ', a.apellidos) AS autor, c.nombre AS categoria, l.imagenPortada, l.estaPublicado, l.esDestacado FROM libro l JOIN autor a ON (l.autorId = a.id) JOIN categoria c ON (l.categoriaId = c.id) WHERE l.titulo LIKE '%{$titulo}%' AND CONCAT(a.nombre, ' ', a.apellidos)='$autor' ORDER BY l.titulo ASC");
+            $consulta = "SELECT l.id, l.titulo, CONCAT(a.nombre, ' ', a.apellidos) AS autor, c.nombre AS categoria, l.imagenPortada, l.estaPublicado, l.esDestacado FROM libro l JOIN autor a ON (l.autorId = a.id) JOIN categoria c ON (l.categoriaId = c.id) WHERE l.titulo LIKE '%{$titulo}%' AND CONCAT(a.nombre, ' ', a.apellidos)='$autor' ORDER BY l.titulo ASC";
         } else {
-            $consulta = $this->db->query("SELECT l.id, l.titulo, CONCAT(a.nombre, ' ', a.apellidos) AS autor, c.nombre AS categoria, l.imagenPortada, l.estaPublicado, l.esDestacado FROM libro l JOIN autor a ON (l.autorId = a.id) JOIN categoria c ON (l.categoriaId = c.id) WHERE l.titulo LIKE '%{$titulo}%' AND CONCAT(a.nombre, ' ', a.apellidos)='$autor' AND c.nombre = '$categoria' ORDER BY l.titulo ASC");
+            $consulta = "SELECT l.id, l.titulo, CONCAT(a.nombre, ' ', a.apellidos) AS autor, c.nombre AS categoria, l.imagenPortada, l.estaPublicado, l.esDestacado FROM libro l JOIN autor a ON (l.autorId = a.id) JOIN categoria c ON (l.categoriaId = c.id) WHERE l.titulo LIKE '%{$titulo}%' AND CONCAT(a.nombre, ' ', a.apellidos)='$autor' AND c.nombre = '$categoria' ORDER BY l.titulo ASC";
         }
 
         return $consulta;
     }
 
     // Método que nos devuelve los libros de nuestra base de datos
-    public function buscarLibros($data) {
-        $salida = "<table class='table table-bordered'>
+    public function buscarLibros($texto) {
+        $consulta = $this->obtenerPorFiltro($texto);
+        return $this->db->result_query($consulta);
+        /*$salida = "<table class='table table-bordered'>
                     <thead>
                     <tr>
                         <th scope='col'></th>
@@ -140,7 +135,7 @@ class RepositorioLibro implements IRepositorioLibro {
                     <tbody>
         ";
 
-        $consulta = $this->obtenerPorFiltro($data);
+        $consulta = $this->obtenerPorFiltro($texto);
         while ($fila = mysqli_fetch_assoc($consulta)) {
             $salida .= "<tr id='idLibro".$fila['id']."'>";
             $salida .= "<td class='text-center'>";
@@ -174,7 +169,12 @@ class RepositorioLibro implements IRepositorioLibro {
         $salida .= "</tbody>";
         $salida .= "</table>";
 
-        return $salida;
+        return $salida;*/
+    }
+
+    public function mostrarLibros() {
+        $consulta = "SELECT l.id, l.titulo, CONCAT(a.nombre, ' ', a.apellidos) AS autor, c.nombre AS categoria, l.imagenPortada, l.estaPublicado, l.esDestacado FROM libro l JOIN autor a ON (l.autorId = a.id) JOIN categoria c ON (l.categoriaId = c.id) ORDER BY l.titulo ASC";
+        return $this->db->result_query($consulta);
     }
 
 }

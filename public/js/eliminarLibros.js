@@ -2,7 +2,7 @@ $(document).ready(function() {
     $("#btnBorrarLibros").click(function() {
         let idsArray = [];
         $("input:checkbox[class=deleteCheckbox]:checked").each(function() {
-            idsArray.push($(this).val().split('-'));
+            idsArray.push($(this).val());
         });
 
         if (idsArray.length > 0) {
@@ -10,9 +10,9 @@ $(document).ready(function() {
                 method: "POST",
                 url: "http://localhost/CatalogoBiblioteca/libros/eliminarLibros",
                 data: {idsArray: idsArray},
-                success: function(data) {
-                    $.each(idsArray, function(indice, datos) {
-                        var fila = $("#idLibro" + datos[0]).remove();
+                success: function() {
+                    $.each(idsArray, function(indice, id) {
+                        $("#idLibro" + id).remove();
                     });
                 }
             });
@@ -20,12 +20,12 @@ $(document).ready(function() {
     });
 
     $(".elimLibro").click(function() {
-        let datos = $(this).attr("id").split('-');
+        let datos = $(this).attr("id");
         $.ajax({
             method: "POST",
             url: "http://localhost/CatalogoBiblioteca/libros/eliminarLibro",
             data: {datos: datos},
-            success: function(data) {
+            success: function() {
                 $("#idLibro" + datos[0]).remove();
             }
         });

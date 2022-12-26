@@ -1,9 +1,4 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
-?>
-
-<?php
 
 class Libros extends Controlador {
 
@@ -17,11 +12,15 @@ class Libros extends Controlador {
 
     // Método para establecer la vista principal del Gestor
     public function index() {
-        $this->vista('gestor/index');
+        $libros = $this->repoLibros->mostrarLibros();
+        $data = [
+            'libro' => $libros
+        ];
+        $this->vista('gestor/index', $data);
     }
 
     // Método para establecer la vista para añadir un libro
-    public function vistaNuevoLibro() {
+    public function nuevoLibro() {
         $this->vista('gestor/nuevoLibro');
     }
 
@@ -44,7 +43,7 @@ class Libros extends Controlador {
             $ruta = $nombreImagen.'.'.$extension;
         }
 
-        $libro = new Libro(0, trim($_POST['titulo']), trim($_POST['autor']), trim($_POST['categoria']), trim($_POST['sinopsis']), trim($ruta), false, false);
+        $libro = new Libro(0, trim($_POST['titulo']), trim($_POST['autor']), trim($_POST['categoria']), trim($_POST['sinopsis']), trim($ruta));
 
         if ($this->repoLibros->crearLibro($libro)) {
             redirect('libros');
@@ -56,28 +55,31 @@ class Libros extends Controlador {
     // Método para eliminar autores en nuestra base de datos
     public function eliminarLibros() {
         $data = $_REQUEST['idsArray'];
-        if ($this->repoLibros->eliminarLibros($data)) {
-            redirect('libros');
-        } else {
-            die('No se pudo eliminar los libros');
+        $libros = [];
+        for ($i = 0; $i < sizeof($data); $i++) {
+            $libros[$i] = $this->repoLibros->buscarPorId($data[$i]);
         }
+        $this->repoLibros->eliminarLibros($libros);
     }
 
     // Método para eliminar un autor concreto de la base de datos
     public function eliminarLibro() {
-        $id = $_REQUEST['datos'][0];
-        $imagen = $_REQUEST['datos'][1];
-        if ($this->repoLibros->eliminarLibro($id, $imagen)) {
-            redirect('libros');
-        } else {
-            die('No se pudo eliminar el libro');
-        }
+        $libro = $this->repoLibros->buscarPorId($_REQUEST['datos']);
+        $this->repoLibros->eliminarLibro($libro);
     }
 
     // Método para establecer la vista para editar un libro
     public function vistaEditarLibro($id) {
         $libro = $this->repoLibros->buscarPorId($id);
-        $this->vista('gestor/editarLibro', $libro);
+        $data = [
+            'id' => $libro->getId(),
+            'titulo' => $libro->getTitulo(),
+            'autor' => $libro->getAutorId(),
+            'categoria' => $libro->getCategoriaId(),
+            'sinopsis' => $libro->getSinopsis(),
+            'imagenPortada' => $libro->getImagenPortada()
+        ];
+        $this->vista('gestor/editarLibro', $data);
     }
 
     // Método para editar los datos de un libro
@@ -99,10 +101,10 @@ class Libros extends Controlador {
             $ruta = $nombreImagen.'.'.$extension;
         }
 
-        $libro = new Libro($id, trim($_POST['titulo']), trim($_POST['autor']), trim($_POST['categoria']), trim($_POST['sinopsis']), trim($ruta), false, false);
+        $libro = new Libro($id, trim($_POST['titulo']), trim($_POST['autor']), trim($_POST['categoria']), trim($_POST['sinopsis']), trim($ruta));
 
         if ($this->repoLibros->editarLibro($libro)) {
-            redirect('gestor');
+            redirect('libros');
         } else {
             die('No se pudo cambiar los datos del libro');
         }
@@ -111,69 +113,55 @@ class Libros extends Controlador {
     // Método para publicar libros en el catálogo
     public function publicarLibros() {
         $data = $_REQUEST['idsArray'];
-        if ($this->repoLibros->publicarLibros($data)) {
-            redirect('libros');
-        } else {
-            die('No se pudieron publicar los libros en el catálogo');
+        $libros = [];
+        for ($i = 0; $i < sizeof($data); $i++) {
+            $libros[$i] = $this->repoLibros->buscarPorId($data[$i]);
         }
+        $this->repoLibros->publicarLibros($libros);
     }
 
     // Método para publicar un libro concreto en el catálogo
     public function publicarLibro() {
-        $id = $_REQUEST['datos'];
-        if ($this->repoLibros->publicarLibro($id)) {
-            redirect('libros');
-        } else {
-            die('No se pudo publicar el libro en el catálogo');
-        }
+        $libro = $this->repoLibros->buscarPorId($_REQUEST['datos']);
+        $this->repoLibros->publicarLibro($libro);
     }
 
     // Método para ocultar libros en el catálogo
     public function ocultarLibros() {
         $data = $_REQUEST['idsArray'];
-        if ($this->repoLibros->ocultarLibros($data)) {
-            redirect('libros');
-        } else {
-            die('No se pudieron ocultar los libros en el catálogo');
+        $libros = [];
+        for ($i = 0; $i < sizeof($data); $i++) {
+            $libros[$i] = $this->repoLibros->buscarPorId($data[$i]);
         }
+        $this->repoLibros->ocultarLibros($libros);
     }
 
     // Método para ocultar un libro concreto en el catálogo
     public function ocultarLibro() {
-        $id = $_REQUEST['datos'];
-        if ($this->repoLibros->ocultarLibro($id)) {
-            redirect('libros');
-        } else {
-            die('No se pudo ocultar el libro en el catálogo');
-        }
+        $libro = $this->repoLibros->buscarPorId($_REQUEST['datos']);
+        $this->repoLibros->ocultarLibro($libro);
     }
 
     // Método para destacar un libro concreto en el catálogo
     public function destacarLibro() {
-        $id = $_REQUEST['datos'];
-        if ($this->repoLibros->destacarLibro($id)) {
-            redirect('libros');
-        } else {
-            die('No se pudo destacar el libro en el catálogo');
-        }
+        $libro = $this->repoLibros->buscarPorId($_REQUEST['datos']);
+        $this->repoLibros->destacarLibro($libro);
     }
 
     // Método para quitar de los libros destacados a un libro concreto en el catálogo
     public function quitarLibro() {
-        $id = $_REQUEST['datos'];
-        if ($this->repoLibros->quitarLibro($id)) {
-            redirect('libros');
-        } else {
-            die('No se pudo quitar el libro de la sección de destacados del catálogo');
-        }
+        $libro = $this->repoLibros->buscarPorId($_REQUEST['datos']);
+        $this->repoLibros->quitarLibro($libro);
     }
-
 
     // Método para buscar los libros
     public function buscarLibros() {
-        $con = $_POST['busqueda'];
-        $resultadoConsulta = $this->repoLibros->buscarLibros($con);
-        echo $resultadoConsulta;
+        $consulta = $_POST['busqueda'];
+        $libros = $this->repoLibros->buscarLibros($consulta);
+        $data = [
+            'libro' => $libros
+        ];
+        $this->vista('gestor/includes/tablaLibros', $data);
     }
 
 }

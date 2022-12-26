@@ -9,19 +9,17 @@ class Libro {
     private int $categoriaId;
     private string $sinopsis;
     private string $imagenPortada;
-    private bool $estaPublicado;
-    private bool $esDestacado;
+    private int $estaPublicado;
+    private int $esDestacado;
 
     // Método Constructor de la Clase
-    public function __construct($id, $titulo, $autorId, $categoriaId, $sinopsis, $imagenPortada, $estaPublicado, $esDestacado) {
+    public function __construct($id, $titulo, $autorId, $categoriaId, $sinopsis, $imagenPortada) {
         $this->id = $id;
         $this->titulo = $titulo;
         $this->autorId = $autorId;
         $this->categoriaId = $categoriaId;
         $this->sinopsis = $sinopsis;
         $this->imagenPortada = $imagenPortada;
-        $this->estaPublicado = $estaPublicado;
-        $this->esDestacado = $esDestacado;
     }
 
     // Métodos 'get' y 'set' de la Clase
@@ -73,19 +71,19 @@ class Libro {
         $this->imagenPortada = $imagenPortada;
     }
 
-    public function getEstaPublicado(): bool {
+    public function getEstaPublicado(): int {
         return $this->estaPublicado;
     }
 
-    public function setEstaPublicado(bool $estaPublicado): void {
+    public function setEstaPublicado(int $estaPublicado): void {
         $this->estaPublicado = $estaPublicado;
     }
 
-    public function getEsDestacado(): bool {
+    public function getEsDestacado(): int {
         return $this->esDestacado;
     }
 
-    public function setEsDestacado(bool $esDestacado): void {
+    public function setEsDestacado(int $esDestacado): void {
         $this->esDestacado = $esDestacado;
     }
 
