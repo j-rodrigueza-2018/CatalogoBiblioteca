@@ -24,10 +24,7 @@ $(document).ready(function() {
             type: 'POST',
             url: 'http://localhost/CatalogoBiblioteca/libros/buscarLibros',
             data: {'busqueda': busqueda},
-        }).done(function(respuesta) {
-            $('#tablaDatosLibros').html(respuesta);
-        }).fail(function() {
-            alert('Hubo un error');
+        }).done(function() {
         });
     });
 });

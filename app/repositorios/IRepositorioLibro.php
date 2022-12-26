@@ -14,5 +14,6 @@ interface IRepositorioLibro {
     public function quitarLibro(Libro $libro);
     public function buscarPorId(int $id);
     public function mostrarLibros();
+    public function buscarLibros($texto);
 
 }
