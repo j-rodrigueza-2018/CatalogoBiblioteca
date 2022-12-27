@@ -17,10 +17,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a id="portada" class="nav-link" aria-current="page" href="<?php echo RUTA_PUBLIC; ?>/usuarios">PORTADA</a>
+                    <a id="portada" class="nav-link" aria-current="page" href="<?php echo RUTA_PUBLIC; ?>/biblioteca">PORTADA</a>
                 </li>
                 <li class="nav-item">
-                    <a id="catalogo" class="nav-link" href="<?php echo RUTA_PUBLIC; ?>/usuarios/catalogo">CATÁLOGO</a>
+                    <a id="catalogo" class="nav-link" href="<?php echo RUTA_PUBLIC; ?>/biblioteca/catalogo">CATÁLOGO</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a id="categorias" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">CATEGORÍAS</a>

@@ -41,7 +41,7 @@
             </div>
         </div>
         <div class="row justify-content-center" id="librosCatalogo" name="librosCatalogo">
-            <?php include("includes/librosCatalogo.php"); ?>
+            <?php include("includes/cuadriculaLibros.php"); ?>
         </div>
     </div>
     <?php include("includes/footer.php"); ?>

@@ -94,7 +94,7 @@ class RepositorioLibro implements IRepositorioLibro {
     }
 
     // Método privado que nos devuelve un libro en función de los filtros aplicados
-    private function obtenerPorFiltro($texto): string {
+    private function filtrosGestor($texto): string {
         $titulo = $this->db->realEscapeString($texto[0]);
         $autor = $this->db->realEscapeString($texto[1]);
         $categoria = $this->db->realEscapeString($texto[2]);
@@ -121,11 +121,11 @@ class RepositorioLibro implements IRepositorioLibro {
 
     // Método que nos devuelve los libros de nuestra base de datos
     public function buscarLibros($texto): array {
-        $consulta = $this->obtenerPorFiltro($texto);
+        $consulta = $this->filtrosGestor($texto);
         return $this->db->result_query($consulta);
     }
 
-    public function mostrarLibros(): array {
+    public function getLibros(): array {
         $consulta = "SELECT l.id, l.titulo, CONCAT(a.nombre, ' ', a.apellidos) AS autor, c.nombre AS categoria, l.imagenPortada, l.estaPublicado, l.esDestacado FROM libro l JOIN autor a ON (l.autorId = a.id) JOIN categoria c ON (l.categoriaId = c.id) ORDER BY l.titulo ASC";
         return $this->db->result_query($consulta);
     }

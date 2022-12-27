@@ -5,8 +5,8 @@ $(document).ready(function() {
         let categoria = $('#selectCategoriaCatalogo').val();
         let busqueda = [titulo, autor, categoria];
         $.ajax({
-            type: 'POST',
-            url: 'http://localhost/CatalogoBiblioteca/usuarios/buscarLibros',
+            method: 'POST',
+            url: 'http://localhost/CatalogoBiblioteca/biblioteca/buscarLibros',
             data: {'busqueda': busqueda},
         }).done(function(respuesta) {
             $('#librosCatalogo').html(respuesta);
@@ -21,10 +21,13 @@ $(document).ready(function() {
         let categoria = $('#selectCategoriaGestor').val();
         let busqueda = [titulo, autor, categoria];
         $.ajax({
-            type: 'POST',
+            method: 'POST',
             url: 'http://localhost/CatalogoBiblioteca/libros/buscarLibros',
             data: {'busqueda': busqueda},
-        }).done(function() {
+        }).done(function(respuesta) {
+            $('#tablaDatosLibros').html(respuesta);
+        }).fail(function() {
+            alert('Hubo un error');
         });
     });
 });

@@ -12,7 +12,7 @@ class Libros extends Controlador {
 
     // Método para establecer la vista principal del Gestor
     public function index() {
-        $libros = $this->repoLibros->mostrarLibros();
+        $libros = $this->repoLibros->getLibros();
         $data = [
             'libro' => $libros
         ];

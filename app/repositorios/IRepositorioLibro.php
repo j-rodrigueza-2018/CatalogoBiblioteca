@@ -13,7 +13,7 @@ interface IRepositorioLibro {
     public function destacarLibro(Libro $libro);
     public function quitarLibro(Libro $libro);
     public function buscarPorId(int $id);
-    public function mostrarLibros();
     public function buscarLibros($texto);
+    public function getLibros();
 
 }
