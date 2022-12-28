@@ -1,6 +1,6 @@
 <?php
 
-class Libros extends Controlador {
+class LibroController extends Controlador {
 
     // Atributos de la Clase
     private $repoLibros;
@@ -10,7 +10,7 @@ class Libros extends Controlador {
         $this->repoLibros = $this->repositorio('RepositorioLibro');
     }
 
-    // Método para establecer la vista principal del Gestor
+    // Método para establecer la vista principal del Gestor de libros
     public function index() {
         $libros = $this->repoLibros->getLibros();
         $data = [
@@ -46,13 +46,13 @@ class Libros extends Controlador {
         $libro = new Libro(0, trim($_POST['titulo']), trim($_POST['autor']), trim($_POST['categoria']), trim($_POST['sinopsis']), trim($ruta));
 
         if ($this->repoLibros->crearLibro($libro)) {
-            redirect('libros');
+            redirect('libroController');
         } else {
             die('No se pudo guardar el libro');
         }
     }
 
-    // Método para eliminar autores en nuestra base de datos
+    // Método para eliminar libros en nuestra base de datos
     public function eliminarLibros() {
         $data = $_REQUEST['idsArray'];
         $libros = [];
@@ -62,7 +62,7 @@ class Libros extends Controlador {
         $this->repoLibros->eliminarLibros($libros);
     }
 
-    // Método para eliminar un autor concreto de la base de datos
+    // Método para eliminar un libro concreto de la base de datos
     public function eliminarLibro() {
         $libro = $this->repoLibros->buscarPorId($_REQUEST['datos']);
         $this->repoLibros->eliminarLibro($libro);
@@ -104,7 +104,7 @@ class Libros extends Controlador {
         $libro = new Libro($id, trim($_POST['titulo']), trim($_POST['autor']), trim($_POST['categoria']), trim($_POST['sinopsis']), trim($ruta));
 
         if ($this->repoLibros->editarLibro($libro)) {
-            redirect('libros');
+            redirect('libroController');
         } else {
             die('No se pudo cambiar los datos del libro');
         }

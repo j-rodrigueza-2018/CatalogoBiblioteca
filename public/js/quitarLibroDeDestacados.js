@@ -3,7 +3,7 @@ $(document).ready(function() {
         let datos = $(this).attr("id");
         $.ajax({
             method: "POST",
-            url: "http://localhost/CatalogoBiblioteca/libros/quitarLibro",
+            url: "http://localhost/CatalogoBiblioteca/libroController/quitarLibro",
             data: {datos: datos},
             success: function() {
                 alert('Libro eliminado de la sección de destacados con éxito');
@@ -14,7 +14,7 @@ $(document).ready(function() {
                 let botonDestacar = document.querySelector('button[name="' + nombreBtnDestacar + '"]');
                 botonDestacar.hidden = false;
             },
-            error: function(xhr, httpStatusMessage) {
+            error: function(xhr) {
                 if (xhr.status === 500) {
                     alert('El libro no se puede quitar de destacados porque no ha sido publicado con anterioridad');
                 }

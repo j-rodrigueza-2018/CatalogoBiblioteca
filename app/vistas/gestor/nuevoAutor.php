@@ -10,7 +10,7 @@
     <?php include("includes/header.php"); ?>
     <div class="container">
         <p class="h1 mt-3 mb-3">NUEVO AUTOR</p>
-        <form class="row" action="<?php echo RUTA_PUBLIC ?>/autores/crearAutor" method="post" autocomplete="off">
+        <form class="row" action="<?php echo RUTA_PUBLIC ?>/autorController/crearAutor" method="post" autocomplete="off">
             <div class="col-12 mb-3">
                 <label for="nombre" class="form-label subrayado">Nombre:</label>
                 <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre del Autor" autofocus required>
@@ -37,7 +37,7 @@
                 </select>
             </div>
             <div class="mb-3 text-center">
-                <button type="button" class="btn btn-danger me-4" onclick="location.href='<?php echo RUTA_PUBLIC; ?>/autores'">Cancelar</button>
+                <button type="button" class="btn btn-danger me-4" onclick="location.href='<?php echo RUTA_PUBLIC; ?>/autorController'">Cancelar</button>
                 <button type="submit" class="btn btn-success">Confirmar</button>
             </div>
         </form>

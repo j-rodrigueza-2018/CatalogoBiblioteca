@@ -1,9 +1,9 @@
 <?php
 
-include_once 'IRepositorioCatalogo.php';
+include_once 'IRepositorioBiblioteca.php';
 include_once RUTA_APP.'/modelos/Libro.php';
 
-class RepositorioCatalogo implements IRepositorioCatalogo {
+class RepositorioBiblioteca implements IRepositorioBiblioteca {
 
     // Atributos de la Clase
     private Conexion $db;
@@ -62,7 +62,7 @@ class RepositorioCatalogo implements IRepositorioCatalogo {
 
     public function buscarLibroPorCategoria($texto): array {
         $categoria = $this->db->realEscapeString($texto);
-        $consulta = "SELECT l.id AS idLibro, l.titulo, l.imagenPortada, CONCAT(a.nombre, ' ', a.apellidos), cat.nombre FROM libro l JOIN autor a ON (l.autorId = a.id) JOIN categoria cat ON (l.categoriaId = cat.id) WHERE l.estaPublicado=1 AND cat.nombre = '$categoria' ORDER BY l.titulo";
+        $consulta = "SELECT l.id AS idLibro, l.titulo, l.imagenPortada, cat.nombre FROM libro l JOIN categoria cat ON (l.categoriaId = cat.id) WHERE l.estaPublicado=1 AND cat.nombre = '$categoria' ORDER BY l.titulo";
         return $this->db->result_query($consulta);
     }
 

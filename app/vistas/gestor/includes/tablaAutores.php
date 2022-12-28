@@ -22,7 +22,7 @@
             <td class='text-center'>
                 <button type='button' class='btn btn-danger bi-trash elimAutor' id='<?php echo $autor->id;?>'></button>
                 <?php
-                $location = RUTA_PUBLIC.'/autores/vistaEditarAutor/'.$autor->id;
+                $location = RUTA_PUBLIC.'/autorController/vistaEditarAutor/'.$autor->id;
                 echo "<button type='button' class='btn btn-primary bi-pencil-square ms-2' onclick='location.href=\"$location\"'></button>";
                 ?>
             </td>

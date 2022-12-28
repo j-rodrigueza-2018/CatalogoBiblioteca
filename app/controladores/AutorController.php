@@ -1,11 +1,6 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
-?>
 
-<?php
-
-class Autores extends Controlador {
+class AutorController extends Controlador {
 
     // Atributos de la Clase
     private $repoAutores;
@@ -35,7 +30,7 @@ class Autores extends Controlador {
 
         $autor = new Autor(0, trim($_POST['nombre']), trim($_POST['apellidos']), trim($_POST['fechaNacimiento']), trim($_POST['pais']));
         if ($this->repoAutores->crearAutor($autor)) {
-            redirect('autores');
+            redirect('autorController');
         } else {
             die('No se pudo dar de alta al autor');
         }
@@ -76,12 +71,11 @@ class Autores extends Controlador {
         $autor = new Autor($id, trim($_POST['nombre']), trim($_POST['apellidos']), trim($_POST['fechaNacimiento']), trim($_POST['pais']));
 
         if ($this->repoAutores->editarAutor($autor)) {
-            redirect('autores');
+            redirect('autorController');
         } else {
             die('No se pudo cambiar los datos del autor');
         }
     }
-
 
     // Método para buscar los autores por apellido
     public function buscarAutores() {

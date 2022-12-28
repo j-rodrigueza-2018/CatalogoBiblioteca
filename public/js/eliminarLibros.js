@@ -8,10 +8,11 @@ $(document).ready(function() {
         if (idsArray.length > 0) {
             $.ajax({
                 method: "POST",
-                url: "http://localhost/CatalogoBiblioteca/libros/eliminarLibros",
+                url: "http://localhost/CatalogoBiblioteca/libroController/eliminarLibros",
                 data: {idsArray: idsArray},
                 success: function() {
                     $.each(idsArray, function(indice, id) {
+                        alert('Libro/s eliminado/s correctamente');
                         $("#idLibro" + id).remove();
                     });
                 }
@@ -23,10 +24,11 @@ $(document).ready(function() {
         let datos = $(this).attr("id");
         $.ajax({
             method: "POST",
-            url: "http://localhost/CatalogoBiblioteca/libros/eliminarLibro",
+            url: "http://localhost/CatalogoBiblioteca/libroController/eliminarLibro",
             data: {datos: datos},
             success: function() {
-                $("#idLibro" + datos[0]).remove();
+                alert('Libro eliminado correctamente');
+                $("#idLibro" + datos).remove();
             }
         });
     });

@@ -1,25 +1,20 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
-?>
 
-<?php
-
-class Biblioteca extends Controlador {
+class BibliotecaController extends Controlador {
 
     // Atributos de la Clase
     private $repoLibros;
-    private $repoCatalogo;
+    private $repoBiblioteca;
 
     // Método Constructor de la Clase
     public function __construct() {
         $this->repoLibros = $this->repositorio('RepositorioLibro');
-        $this->repoCatalogo = $this->repositorio('RepositorioCatalogo');
+        $this->repoBiblioteca = $this->repositorio('RepositorioBiblioteca');
     }
 
     // Método para establecer la vista principal de la Clase
     public function index() {
-        $libros = $this->repoCatalogo->getLibrosDestacados();
+        $libros = $this->repoBiblioteca->getLibrosDestacados();
         $data = [
             'libro' => $libros
         ];
@@ -28,7 +23,7 @@ class Biblioteca extends Controlador {
 
     // Método para establecer la vista de Catálogo
     public function catalogo() {
-        $libros = $this->repoCatalogo->getLibrosPublicados();
+        $libros = $this->repoBiblioteca->getLibrosPublicados();
         $data = [
             'libro' => $libros
         ];
@@ -48,7 +43,7 @@ class Biblioteca extends Controlador {
     // Método para establecer la vista de detalle de un libro
     public function detalleLibro($id) {
         $libro = $this->repoLibros->buscarPorId($id);
-        $post = $this->repoCatalogo->getDetallesLibro($libro);
+        $post = $this->repoBiblioteca->getDetallesLibro($libro);
         $data = [
             'id' => $id,
             'titulo' => $post->titulo,
@@ -64,7 +59,7 @@ class Biblioteca extends Controlador {
     // Método para buscar los libros en el catálogo
     public function buscarLibros() {
         $consulta = $_POST['busqueda'];
-        $libros = $this->repoCatalogo->buscarLibros($consulta);
+        $libros = $this->repoBiblioteca->buscarLibros($consulta);
         $data = [
             'libro' => $libros
         ];
@@ -74,7 +69,7 @@ class Biblioteca extends Controlador {
     // Método que devuelve un libro dada su categoría
     public function libroCategoria() {
         $consulta = $_POST['categoria'];
-        $libros = $this->repoCatalogo->buscarLibroPorCategoria($consulta);
+        $libros = $this->repoBiblioteca->buscarLibroPorCategoria($consulta);
         $data = [
             'libro' => $libros
         ];

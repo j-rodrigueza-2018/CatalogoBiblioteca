@@ -3,7 +3,7 @@ $(document).ready(function() {
         let datos = $(this).attr("id");
         $.ajax({
             method: "POST",
-            url: "http://localhost/CatalogoBiblioteca/libros/destacarLibro",
+            url: "http://localhost/CatalogoBiblioteca/libroController/destacarLibro",
             data: {datos: datos},
             success: function() {
                 alert('Libro añadido a la sección de destacados con éxito');

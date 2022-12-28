@@ -12,7 +12,7 @@
     <?php include("includes/header.php"); ?>
     <div class="container">
         <p class="h1 mt-3 mb-3">DETALLES DEL LIBRO</p>
-        <form action="<?php echo RUTA_PUBLIC ?>/biblioteca/detalleLibro/<?php echo $data['id']; ?>" method="get">
+        <form action="<?php echo RUTA_PUBLIC ?>/bibliotecaController/detalleLibro/<?php echo $data['id']; ?>" method="get">
             <div class="row">
                 <div class="col-lg-2 col-md-4 col-sm-12 mb-3">
                     <img src="<?php echo RUTA_PUBLIC; ?>/public/imagenesPortada/<?php echo $data['imagenPortada']; ?>" class="col-12 pe-2" width="200px">

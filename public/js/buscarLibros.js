@@ -6,7 +6,7 @@ $(document).ready(function() {
         let busqueda = [titulo, autor, categoria];
         $.ajax({
             method: 'POST',
-            url: 'http://localhost/CatalogoBiblioteca/biblioteca/buscarLibros',
+            url: 'http://localhost/CatalogoBiblioteca/bibliotecaController/buscarLibros',
             data: {'busqueda': busqueda},
         }).done(function(respuesta) {
             $('#librosCatalogo').html(respuesta);
@@ -22,7 +22,7 @@ $(document).ready(function() {
         let busqueda = [titulo, autor, categoria];
         $.ajax({
             method: 'POST',
-            url: 'http://localhost/CatalogoBiblioteca/libros/buscarLibros',
+            url: 'http://localhost/CatalogoBiblioteca/libroController/buscarLibros',
             data: {'busqueda': busqueda},
         }).done(function(respuesta) {
             $('#tablaDatosLibros').html(respuesta);

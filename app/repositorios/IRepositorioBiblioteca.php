@@ -1,6 +1,6 @@
 <?php
 
-interface IRepositorioCatalogo {
+interface IRepositorioBiblioteca {
 
     public function getLibrosDestacados();
     public function getLibrosPublicados();
