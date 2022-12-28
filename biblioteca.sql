@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 21-12-2022 a las 19:56:26
+-- Tiempo de generación: 28-12-2022 a las 12:09:21
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -40,12 +40,12 @@ CREATE TABLE `autor` (
 --
 
 INSERT INTO `autor` (`id`, `nombre`, `apellidos`, `fechaNacimiento`, `paisId`) VALUES
-(25, 'Gerardo', 'Diego', '1896-10-03', 28),
-(26, 'Antonio', 'Machado', '1875-07-26', 28),
-(27, 'Manuel', 'Machado', '1874-08-29', 28),
-(28, 'Juan Ramón', 'Jiménez', '1881-12-23', 28),
-(29, 'Federico', 'García Lorca', '1898-06-05', 28),
-(30, 'J.K.', 'Rowling', '1965-07-31', 13);
+(31, 'Gerardo', 'Diego', '1896-10-03', 28),
+(32, 'Antonio', 'Machado', '1875-07-26', 28),
+(34, 'Juan Ramón', 'Jiménez', '1881-12-23', 28),
+(35, 'Federico', 'García Lorca', '1898-06-05', 28),
+(36, 'J.K.', 'Rowling', '1965-07-31', 13),
+(43, 'Manuel', 'Machado', '1875-07-26', 28);
 
 -- --------------------------------------------------------
 
@@ -101,7 +101,9 @@ CREATE TABLE `libro` (
 --
 
 INSERT INTO `libro` (`id`, `titulo`, `autorId`, `categoriaId`, `sinopsis`, `imagenPortada`, `estaPublicado`, `esDestacado`) VALUES
-(73, 'Animales fantásticos y dónde encontrarlos', 30, 13, 'Animales fantásticos y dónde encontrarlos (título original en inglés: Fantastic Beasts and Where to Find Them) es un libro de 2001 escrito por la autora británica J. K. Rowling sobre las criaturas mágicas de Harry Potter.', 'Animales_fantsticos_y_dnde_encontrarlos_10144.jpg', b'1', b'0');
+(2, 'Animales fantásticos y dónde encontrarlos', 36, 13, 'Animales fantásticos y dónde encontrarlos (título original en inglés: Fantastic Beasts and Where to Find Them) es un libro de 2001 escrito por la autora británica J. K. Rowling sobre las criaturas mágicas de Harry Potter.', 'Animales_fantsticos_y_dnde_encontrarlos_10144.jpg', b'1', b'1'),
+(6, 'Platero y Yo', 34, 2, 'La obra Platero y yo trata sobre la vida de un burro muy querido llamado Platero. Este asno está bajo el cuidado de un jovencito que lo quiere y lo trata como si fuese su mejor amigo. Por diversas razones, entre ellas la muerte de sus familiares, este muchacho no confía en las demás personas.', 'Platero_y_Yo_79276.jpeg', b'1', b'0'),
+(9, 'Poema del Cante Jondo', 35, 11, 'En el Poema del cante jondo se propone Federico García Lorca lograr una obra misteriosa y clara que sea como una flor: arbitraria y perfecta como una flor. Se trataba de penetrar en el espíritu de Andalucía captando su cultura popular primitiva y misteriosa, curtida en el dolor. El resultado es un prodigio de voz poética a la que cabe aplicar lo que el propio Federico dijo del tradicional cantaor: cuando canta, celebra un solemne rito, saca las viejas esencias dormidas y las lanza al viento envueltas en su voz..., la raza se vale de él para dejar escapar su dolor y su historia verídica. Luis García Montero, profesor de la Universidad de Granada y poeta, ofrece aquí una edición depurada y explica la mezcla de romanticismo, estilización y forma vanguardista que se entrelazan para lograr uno de los más conmovedores libros lorquianos. Luis García Montero, profesor de la Universidad de Granada y poeta, ofrece aquí una edición depurada del texto lorquiano.', 'Poema_del_Cante_Jondo_54508.jpg', b'1', b'1');
 
 -- --------------------------------------------------------
 
@@ -342,7 +344,8 @@ INSERT INTO `pais` (`id`, `nombre`) VALUES
 -- Indices de la tabla `autor`
 --
 ALTER TABLE `autor`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fkPaisId` (`paisId`);
 
 --
 -- Indices de la tabla `categoria`
@@ -372,7 +375,7 @@ ALTER TABLE `pais`
 -- AUTO_INCREMENT de la tabla `autor`
 --
 ALTER TABLE `autor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT de la tabla `categoria`
@@ -384,7 +387,7 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `libro`
 --
 ALTER TABLE `libro`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `pais`
@@ -400,7 +403,7 @@ ALTER TABLE `pais`
 -- Filtros para la tabla `autor`
 --
 ALTER TABLE `autor`
-  ADD CONSTRAINT `fk_paisId` FOREIGN KEY (`paisId`) REFERENCES `pais` (`id`);
+  ADD CONSTRAINT `fkPaisId` FOREIGN KEY (`paisId`) REFERENCES `pais` (`id`);
 
 --
 -- Filtros para la tabla `libro`
