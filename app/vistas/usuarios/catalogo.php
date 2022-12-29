@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Biblioteca - Catálogo</title>
-    <link rel="stylesheet" href="<?php echo RUTA_PUBLIC; ?>/public/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<?php echo RUTA_PUBLIC; ?>/public/css/styles.css">
+    <link rel="stylesheet" href="<?php echo URL_PROYECTO; ?>/public/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo URL_PROYECTO; ?>/public/css/styles.css">
 </head>
 <body class="catalogo">
     <?php include("includes/header.php"); ?>
@@ -50,8 +50,8 @@
         let catalogo = document.getElementById('catalogo');
         catalogo.className += " active";
     </script>
-    <script src="<?php echo RUTA_PUBLIC; ?>/public/js/jquery-3.6.1.min.js"></script>
-    <script type="text/javascript" src="<?php echo RUTA_PUBLIC; ?>/public/js/buscarLibros.js"></script>
-    <script type="text/javascript" src="<?php echo RUTA_PUBLIC; ?>/public/js/libroPorCategoria.js"></script>
+    <script src="<?php echo URL_PROYECTO; ?>/public/js/jquery-3.6.1.min.js"></script>
+    <script type="text/javascript" src="<?php echo URL_PROYECTO; ?>/public/js/buscarLibros.js"></script>
+    <script type="text/javascript" src="<?php echo URL_PROYECTO; ?>/public/js/libroPorCategoria.js"></script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 <?php
 
-$rutaPublic = RUTA_PUBLIC;
+$rutaPublic = URL_PROYECTO;
 
 foreach ($data['libro'] as $libro):
     $idLibro = $libro->idLibro;

@@ -1,7 +1,7 @@
 <?php
 
 include_once 'IRepositorioAutor.php';
-include_once RUTA_APP . '/modelos/Autor.php';
+include_once RUTA_APP_FROM_REPOS . '/modelos/Autor.php';
 
 class RepositorioAutor implements IRepositorioAutor {
 

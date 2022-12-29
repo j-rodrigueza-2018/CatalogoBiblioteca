@@ -10,7 +10,7 @@
     <?php include("includes/header.php"); ?>
     <div class="container">
         <p class="h1 mt-3 mb-3">EDITAR LIBRO</p>
-        <form class="row" action="<?php echo RUTA_PUBLIC ?>/libroController/editarLibro/<?php echo $data['id']; ?>" method="post" autocomplete="off" enctype="multipart/form-data">
+        <form class="row" action="<?php echo URL_PROYECTO ?>/libroController/editarLibro/<?php echo $data['id']; ?>" method="post" autocomplete="off" enctype="multipart/form-data">
             <div class="col-12 mb-3">
                 <label for="titulo" class="form-label subrayado">Título:</label>
                 <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Título del Libro" value="<?php echo $data['titulo']; ?>" autofocus required>
@@ -57,14 +57,14 @@
                 <label for="imagenPortada" class="form-label subrayado">Imagen de Portada:</label>
             </div>
             <div class="col-12 mb-3">
-                <img src="<?php echo RUTA_PUBLIC; ?>/public/imagenesPortada/<?php echo $data['imagenPortada']?>" width="70">
+                <img src="<?php echo URL_PROYECTO; ?>/public/imagenesPortada/<?php echo $data['imagenPortada']?>" width="70">
                 <input type="hidden" name="ruta" value="<?php echo $data['imagenPortada']?>">
             </div>
             <div class="col-12 mb-3">
                 <input accept="image/png, image/jpeg, image/jpg" type="file" class="form-control" id="imagen" name="imagen" value="<?php echo $data['imagenPortada']; ?>">
             </div>
             <div class="mb-3 text-center">
-                <button type="button" class="btn btn-danger me-4" onclick="location.href='<?php echo RUTA_PUBLIC; ?>/libroController'">Cancelar</button>
+                <button type="button" class="btn btn-danger me-4" onclick="location.href='<?php echo URL_PROYECTO; ?>/libroController'">Cancelar</button>
                 <button type="submit" class="btn btn-success">Confirmar</button>
             </div>
         </form>

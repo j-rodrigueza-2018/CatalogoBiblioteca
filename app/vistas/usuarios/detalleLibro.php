@@ -5,17 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Biblioteca - Detalles del Libro</title>
-    <link rel="stylesheet" href="<?php echo RUTA_PUBLIC; ?>/public/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<?php echo RUTA_PUBLIC; ?>/public/css/styles.css">
+    <link rel="stylesheet" href="<?php echo URL_PROYECTO; ?>/public/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo URL_PROYECTO; ?>/public/css/styles.css">
 </head>
 <body class="detalleLibro">
     <?php include("includes/header.php"); ?>
     <div class="container">
         <p class="h1 mt-3 mb-3">DETALLES DEL LIBRO</p>
-        <form action="<?php echo RUTA_PUBLIC ?>/bibliotecaController/detalleLibro/<?php echo $data['id']; ?>" method="get">
+        <form action="<?php echo URL_PROYECTO ?>/bibliotecaController/detalleLibro/<?php echo $data['id']; ?>" method="get">
             <div class="row">
                 <div class="col-lg-2 col-md-4 col-sm-12 mb-3">
-                    <img src="<?php echo RUTA_PUBLIC; ?>/public/imagenesPortada/<?php echo $data['imagenPortada']; ?>" class="col-12 pe-2" width="200px">
+                    <img src="<?php echo URL_PROYECTO; ?>/public/imagenesPortada/<?php echo $data['imagenPortada']; ?>" class="col-12 pe-2" width="200px">
                 </div>
                 <div class="col-lg-10 col-md-8 col-sm-12">
                     <p class="h5 col-12" id="titulo" name="titulo"><span class="subrayado">Título:</span> <?php echo $data['titulo']; ?></p>

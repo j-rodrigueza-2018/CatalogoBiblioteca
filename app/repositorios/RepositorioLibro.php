@@ -1,7 +1,7 @@
 <?php
 
 include_once 'IRepositorioLibro.php';
-include_once RUTA_APP.'/modelos/Libro.php';
+include_once RUTA_APP_FROM_REPOS.'/modelos/Libro.php';
 
 class RepositorioLibro implements IRepositorioLibro {
 
@@ -42,7 +42,7 @@ class RepositorioLibro implements IRepositorioLibro {
     public function eliminarLibro(Libro $libro) {
         $id = $libro->getId();
         $imagen = $libro->getImagenPortada();
-        $borrarImg = RUTA_IMG.'/public/imagenesPortada/'.$imagen;
+        $borrarImg = RUTA_IMG_FROM_APP.'/public/imagenesPortada/'.$imagen;
         unlink($borrarImg);
 
         return $this->db->query("DELETE FROM libro WHERE id='".$id."'");
@@ -50,7 +50,7 @@ class RepositorioLibro implements IRepositorioLibro {
 
     public function eliminarLibros($libros) {
         foreach ($libros as $libro) {
-            $borrarImg = RUTA_IMG.'/public/imagenesPortada/'.$libro->getImagenPortada();
+            $borrarImg = RUTA_IMG_FROM_APP.'/public/imagenesPortada/'.$libro->getImagenPortada();
             unlink($borrarImg);
             $eliminacion = $this->db->query("DELETE FROM libro WHERE id='".$libro->getId()."'");
         }

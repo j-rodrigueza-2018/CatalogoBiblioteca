@@ -12,7 +12,7 @@
         <p class="h1 mt-3 mb-3">LISTADO DE LIBROS</p>
         <div class="row">
             <div class="col-lg-4 col-md-12 col-sm-12 mb-3">
-                <button type="button" class="btn btn-success bi-plus-square" onclick="location.href='<?php echo RUTA_PUBLIC; ?>/libroController/nuevoLibro'"></button>
+                <button type="button" class="btn btn-success bi-plus-square" onclick="location.href='<?php echo URL_PROYECTO; ?>/libroController/nuevoLibro'"></button>
                 <button type="button" class="btn btn-danger bi-trash" id="btnBorrarLibros"></button>
                 <button type="button" class="btn btn-warning bi-eye-fill text-white" id="btnPublicar"></button>
                 <button type="button" class="btn btn-secondary bi-eye-slash-fill" id="btnOcultar"></button>
@@ -55,12 +55,12 @@
         let libros = document.getElementById('libros');
         libros.className += " active";
     </script>
-    <script src="<?php echo RUTA_PUBLIC; ?>/public/js/jquery-3.6.1.min.js"></script>
-    <script type="text/javascript" src="<?php echo RUTA_PUBLIC; ?>/public/js/eliminarLibros.js"></script>
-    <script type="text/javascript" src="<?php echo RUTA_PUBLIC; ?>/public/js/publicarEnCatalogo.js"></script>
-    <script type="text/javascript" src="<?php echo RUTA_PUBLIC; ?>/public/js/ocultarDelCatalogo.js"></script>
-    <script type="text/javascript" src="<?php echo RUTA_PUBLIC; ?>/public/js/destacarLibro.js"></script>
-    <script type="text/javascript" src="<?php echo RUTA_PUBLIC; ?>/public/js/quitarLibroDeDestacados.js"></script>
-    <script type="text/javascript" src="<?php echo RUTA_PUBLIC; ?>/public/js/buscarLibros.js"></script>
+    <script src="<?php echo URL_PROYECTO; ?>/public/js/jquery-3.6.1.min.js"></script>
+    <script type="text/javascript" src="<?php echo URL_PROYECTO; ?>/public/js/eliminarLibros.js"></script>
+    <script type="text/javascript" src="<?php echo URL_PROYECTO; ?>/public/js/publicarEnCatalogo.js"></script>
+    <script type="text/javascript" src="<?php echo URL_PROYECTO; ?>/public/js/ocultarDelCatalogo.js"></script>
+    <script type="text/javascript" src="<?php echo URL_PROYECTO; ?>/public/js/destacarLibro.js"></script>
+    <script type="text/javascript" src="<?php echo URL_PROYECTO; ?>/public/js/quitarLibroDeDestacados.js"></script>
+    <script type="text/javascript" src="<?php echo URL_PROYECTO; ?>/public/js/buscarLibros.js"></script>
 </body>
 </html>

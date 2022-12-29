@@ -20,7 +20,7 @@
             <td class='text-center'>
                 <button type='button' class='btn btn-danger bi-trash elimLibro' id='<?php echo $libro->id;?>'></button>
                 <?php
-                $location = RUTA_PUBLIC.'/libroController/vistaEditarLibro/'.$libro->id;
+                $location = URL_PROYECTO.'/libroController/vistaEditarLibro/'.$libro->id;
                 echo "<button type='button' class='btn btn-primary bi-pencil-square ms-2' onclick='location.href=\"$location\"'></button>";
                 if ($libro->estaPublicado == 0) {
                     echo "<button type='button' class='btn btn-warning bi-eye-fill text-white ms-2 publicarLibro' name='publicarLibro".$libro->id."' id='".$libro->id."'></button>";

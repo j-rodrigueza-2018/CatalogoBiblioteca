@@ -30,16 +30,16 @@ class LibroController extends Controlador {
 
         $archivo = $_FILES['imagen']['tmp_name'];
         if ($archivo == '') {
-            $tmpName = RUTA_IMG.'/public/img/libro1.jpg';
+            $tmpName = RUTA_IMG_FROM_APP.'/public/img/libro1.jpg';
             $nombreImagen = preg_replace("/[^a-zA-Z0-9\_\-]+/", "", strtr($_POST['titulo'], " ", "_")).'_'.rand(00000, 99999);
-            copy($tmpName, RUTA_IMG.'/public/imagenesPortada/'.$nombreImagen.'.jpg');
+            copy($tmpName, RUTA_IMG_FROM_APP.'/public/imagenesPortada/'.$nombreImagen.'.jpg');
             $ruta = $nombreImagen.'.jpg';
         } else {
             $nombreArchivo = $_FILES['imagen']['name'];
             $info = pathinfo($nombreArchivo);
             $extension = $info['extension'];
             $nombreImagen = preg_replace("/[^a-zA-Z0-9\_\-]+/", "", strtr($_POST['titulo'], " ", "_")).'_'.rand(00000, 99999);
-            move_uploaded_file($archivo, RUTA_IMG.'/public/imagenesPortada/'.$nombreImagen.'.'.$extension);
+            move_uploaded_file($archivo, RUTA_IMG_FROM_APP.'/public/imagenesPortada/'.$nombreImagen.'.'.$extension);
             $ruta = $nombreImagen.'.'.$extension;
         }
 
@@ -91,13 +91,13 @@ class LibroController extends Controlador {
             $ruta = $_POST['ruta'];
         } else {
             $imgEliminar = $_POST['ruta'];
-            $borrarImg = RUTA_IMG.'/public/imagenesPortada/'.$imgEliminar;
+            $borrarImg = RUTA_IMG_FROM_APP.'/public/imagenesPortada/'.$imgEliminar;
             unlink($borrarImg);
             $nombreArchivo = $_FILES['imagen']['name'];
             $info = pathinfo($nombreArchivo);
             $extension = $info['extension'];
             $nombreImagen = preg_replace("/[^a-zA-Z0-9\_\-]+/", "", strtr($_POST['titulo'], " ", "_")).'_'.rand(00000, 99999);
-            move_uploaded_file($archivo, RUTA_IMG.'/public/imagenesPortada/'.$nombreImagen.'.'.$extension);
+            move_uploaded_file($archivo, RUTA_IMG_FROM_APP.'/public/imagenesPortada/'.$nombreImagen.'.'.$extension);
             $ruta = $nombreImagen.'.'.$extension;
         }
 

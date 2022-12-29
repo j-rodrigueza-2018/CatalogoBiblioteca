@@ -1,7 +1,7 @@
 <?php
 
 include_once 'IRepositorioBiblioteca.php';
-include_once RUTA_APP.'/modelos/Libro.php';
+include_once RUTA_APP_FROM_REPOS.'/modelos/Libro.php';
 
 class RepositorioBiblioteca implements IRepositorioBiblioteca {
 
