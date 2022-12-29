@@ -31,10 +31,10 @@
                 }
                 if ($libro->esDestacado == 0) {
                     echo "<button type='button' class='btn btn-success bi-star-fill ms-2 destacarLibro' name='destacarLibro".$libro->id."' id='".$libro->id."'></button>";
-                    echo "<button type='button' class='btn btn-danger bi-star ms-2 quitarLibro' name='quitarLibro".$libro->id."' id='".$libro->id."' hidden></button>";
+                    echo "<button type='button' class='btn btn-secondary bi-star ms-2 quitarLibro' name='quitarLibro".$libro->id."' id='".$libro->id."' hidden></button>";
                 } else {
                     echo "<button type='button' class='btn btn-success bi-star-fill ms-2 destacarLibro' name='destacarLibro".$libro->id."' id='".$libro->id."' hidden></button>";
-                    echo "<button type='button' class='btn btn-danger bi-star ms-2 quitarLibro' name='quitarLibro".$libro->id."' id='".$libro->id."'></button>";
+                    echo "<button type='button' class='btn btn-secondary bi-star ms-2 quitarLibro' name='quitarLibro".$libro->id."' id='".$libro->id."'></button>";
                 }
                 ?>
             </td>
