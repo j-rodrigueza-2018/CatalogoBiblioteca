@@ -20,7 +20,7 @@
                 <select class="form-select" id="autor" name="autor" data-show-subtext="true" data-live-search="true" required>
                     <option selected disabled>Autor</option>
                     <?php
-                    $conexion = new Conexion();
+                    $conexion = new Conexion(new mysqli(HOST, USER, PASS, NAME));
                     $resultado = $conexion->query("SELECT * FROM autor ORDER BY nombre ASC");
                     while ($fila = mysqli_fetch_assoc($resultado)) {
                         if ($fila['id'] == $data['autor']) {
@@ -37,7 +37,7 @@
                 <select class="form-select" id="categoria" name="categoria" data-show-subtext="true" data-live-search="true" required>
                     <option selected disabled>Categoría</option>
                     <?php
-                    $conexion = new Conexion();
+                    $conexion = new Conexion(new mysqli(HOST, USER, PASS, NAME));
                     $resultado = $conexion->query("SELECT * FROM categoria ORDER BY nombre ASC");
                     while ($fila = mysqli_fetch_assoc($resultado)) {
                         if ($fila['id'] == $data['categoria']) {

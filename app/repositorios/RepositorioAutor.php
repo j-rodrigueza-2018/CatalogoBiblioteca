@@ -3,15 +3,14 @@
 include_once 'IRepositorioAutor.php';
 include_once RUTA_APP . '/modelos/Autor.php';
 
-class RepositorioAutor implements IRepositorioAutor
-{
+class RepositorioAutor implements IRepositorioAutor {
 
     // Atributos de la Clase
     private Conexion $db;
 
     // Método Constructor de la Clase
     public function __construct() {
-        $this->db = new Conexion();
+        $this->db = new Conexion(new mysqli(HOST, USER, PASS, NAME));
     }
 
     // Implementamos los métodos de la interfaz 'IRepositorioAutor'
@@ -21,7 +20,9 @@ class RepositorioAutor implements IRepositorioAutor
         $fechaNacimiento = $autor->getFechaNacimiento();
         $pais = $autor->getPaisId();
 
-        return $this->db->query("INSERT INTO autor VALUES (DEFAULT, '$nombre', '$apellidos', '$fechaNacimiento', '$pais')");
+        $consulta = $this->db->query("INSERT INTO autor VALUES (DEFAULT, '$nombre', '$apellidos', '$fechaNacimiento', '$pais')");
+        $autor->setId($this->db->lastInsertedId());
+        return $consulta;
     }
 
     public function editarAutor(Autor $autor) {
@@ -46,10 +47,14 @@ class RepositorioAutor implements IRepositorioAutor
         return $eliminacion;
     }
 
-    public function buscarPorId($id): Autor {
+    public function buscarPorId($id): ?Autor {
         $consulta = $this->db->query("SELECT * FROM autor WHERE id='$id'");
         $data = $consulta->fetch_object();
-        return new Autor($data->id, $data->nombre, $data->apellidos, $data->fechaNacimiento, $data->paisId);
+        if (isset($data->nombre)) {
+            return new Autor($id, $data->nombre, $data->apellidos, $data->fechaNacimiento, $data->paisId);
+        } else {
+            return null;
+        }
     }
 
     public function mostrarAutores(): array {

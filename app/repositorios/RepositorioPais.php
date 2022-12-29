@@ -7,7 +7,7 @@ class RepositorioPais implements IRepositorioPais {
 
     // Método Constructor de la Clase
     public function __construct() {
-        $this->db = new Conexion();
+        $this->db = new Conexion(new mysqli(HOST, USER, PASS, NAME));
     }
 
     // Implementamos los métodos de la interfaz 'IRepositorioCategoria'

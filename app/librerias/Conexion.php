@@ -3,17 +3,12 @@
 class Conexion {
 
     // Atributos
-    private string $host = HOST;
-    private string $user = USER;
-    private string $pass = PASS;
-    private string $dbname = NAME;
-    protected array $rows = array();
     private mysqli $dbh;
 
     // Método Constructor
-    public function __construct() {
+    public function __construct(mysqli $dbh) {
         try {
-            $this->dbh = new mysqli($this->host, $this->user, $this->pass, $this->dbname);
+            $this->dbh = $dbh;
         } catch (mysqli_sql_exception $e) {
             $this->error = $e->getMessage();
         }
@@ -38,6 +33,10 @@ class Conexion {
 
     public function realEscapeString($query) {
         return $this->dbh->real_escape_string($query);
+    }
+
+    public function lastInsertedId() {
+        return mysqli_insert_id($this->dbh);
     }
 
 }

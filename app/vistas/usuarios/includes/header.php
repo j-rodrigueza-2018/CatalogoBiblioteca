@@ -26,7 +26,7 @@
                     <a id="categorias" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">CATEGORÍAS</a>
                     <ul class="dropdown-menu">
                         <?php
-                            $conexion = new Conexion();
+                            $conexion = new Conexion(new mysqli(HOST, USER, PASS, NAME));
                             $resultado = $conexion->query("SELECT id, nombre FROM categoria ORDER BY nombre ASC");
                             while ($fila = mysqli_fetch_assoc($resultado)) {
                                 echo "<li><a class='dropdown-item filtroCategoria'>".$fila['nombre']."</a></li>";

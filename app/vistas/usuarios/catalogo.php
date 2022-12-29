@@ -19,7 +19,7 @@
                     <option selected disabled>Autor</option>
                     <option></option>
                     <?php
-                        $conexion = new Conexion();
+                        $conexion = new Conexion(new mysqli(HOST, USER, PASS, NAME));
                         $resultado = $conexion->query("SELECT id, CONCAT(nombre, ' ', apellidos) AS nombreAutor FROM autor ORDER BY nombre ASC");
                         while ($fila = mysqli_fetch_assoc($resultado)) {
                             echo "<option value='".$fila['nombreAutor']."'>".$fila['nombreAutor']."</option>";
@@ -30,7 +30,7 @@
                     <option selected disabled>Categorías</option>
                     <option></option>
                     <?php
-                        $conexion = new Conexion();
+                        $conexion = new Conexion(new mysqli(HOST, USER, PASS, NAME));
                         $resultado = $conexion->query("SELECT id, nombre FROM categoria ORDER BY nombre ASC");
                         while ($fila = mysqli_fetch_assoc($resultado)) {
                             echo "<option value='".$fila['nombre']."'>".$fila['nombre']."</option>";

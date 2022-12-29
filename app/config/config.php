@@ -1,7 +1,7 @@
 <?php
 
 // Constantes para la conexión con la Base de Datos
-const HOST = "localhost";
+const HOST = "127.0.0.1";
 const USER = "root";
 const PASS = "";
 const NAME = "biblioteca";

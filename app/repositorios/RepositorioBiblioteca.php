@@ -10,7 +10,7 @@ class RepositorioBiblioteca implements IRepositorioBiblioteca {
 
     // Método Constructor de la Clase
     public function __construct() {
-        $this->db = new Conexion();
+        $this->db = new Conexion(new mysqli(HOST, USER, PASS, NAME));
     }
 
     public function getLibrosDestacados(): array {

@@ -28,7 +28,7 @@
                 <select class="form-select" id="pais" name="pais" data-show-subtext="true" data-live-search="true" required>
                     <option selected disabled>País de Origen</option>
                     <?php
-                    $conexion = new Conexion();
+                    $conexion = new Conexion(new mysqli(HOST, USER, PASS, NAME));
                     $resultado = $conexion->query("SELECT * FROM pais ORDER BY nombre ASC");
                     while ($fila = mysqli_fetch_assoc($resultado)) {
                         if ($fila['id'] == $data['pais']) {

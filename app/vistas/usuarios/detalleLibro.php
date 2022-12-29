@@ -34,7 +34,7 @@
                         </div>
                         <div class="modal-body">
                             <?php
-                                $conexion = new Conexion();
+                                $conexion = new Conexion(new mysqli(HOST, USER, PASS, NAME));
                                 $resultado = $conexion->query("SELECT a.nombre AS nombreAutor, a.apellidos, DATE_FORMAT(a.fechaNacimiento, '%d-%m-%Y') AS fechaNac, p.nombre AS pais FROM autor a JOIN pais p ON (a.paisId = p.id) WHERE a.id='".$data['autorId']."'");
                                 while ($fila = mysqli_fetch_assoc($resultado)) {
                                     echo "<p class='h6'><span class='subrayado'>Nombre:</span> ".$fila['nombreAutor']."</p>";
