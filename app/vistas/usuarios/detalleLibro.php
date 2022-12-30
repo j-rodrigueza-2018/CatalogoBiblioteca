@@ -5,8 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Biblioteca - Detalles del Libro</title>
-    <link rel="stylesheet" href="<?php echo URL_PROYECTO; ?>/public/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<?php echo URL_PROYECTO; ?>/public/css/styles.css">
 </head>
 <body class="detalleLibro">
     <?php include("includes/header.php"); ?>

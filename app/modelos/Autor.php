@@ -43,14 +43,6 @@ class Autor {
         $this->apellidos = $apellidos;
     }
 
-    public function getNombreCompleto(): string {
-        if (isset($this->nombre) && isset($this->apellidos)) {
-            return $this->getNombre().' '.$this->getApellidos();
-        } else {
-            return '';
-        }
-    }
-
     public function getFechaNacimiento(): string {
         return $this->fechaNacimiento;
     }

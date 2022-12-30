@@ -1,5 +1,8 @@
 <?php
 
+include_once 'IRepositorioPais.php';
+include_once RUTA_APP_FROM_REPOS.'/modelos/Pais.php';
+
 class RepositorioPais implements IRepositorioPais {
 
     // Atributos de la Clase

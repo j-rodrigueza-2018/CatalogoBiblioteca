@@ -13,6 +13,7 @@ class RepositorioBiblioteca implements IRepositorioBiblioteca {
         $this->db = new Conexion(new mysqli(HOST, USER, PASS, NAME));
     }
 
+    // Implementamos los métodos de la interfaz 'IRepositorioBiblioteca'
     public function getLibrosDestacados(): array {
         $consulta = "SELECT id AS idLibro, titulo, imagenPortada FROM libro WHERE estaPublicado=1 AND esDestacado=1 ORDER BY titulo";
         return $this->db->result_query($consulta);

@@ -1,6 +1,6 @@
 $(document).ready(function() {
     $('.filtroCategoria').on('click', function() {
-        let categoria = $('.filtroCategoria').innerText;
+        let categoria = $(this).attr("id");
         $.ajax({
             type: 'POST',
             url: 'http://localhost/CatalogoBiblioteca/bibliotecaController/libroCategoria',

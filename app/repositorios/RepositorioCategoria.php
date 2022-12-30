@@ -1,5 +1,8 @@
 <?php
 
+include_once 'IRepositorioCategoria.php';
+include_once RUTA_APP_FROM_REPOS.'/modelos/Categoria.php';
+
 class RepositorioCategoria implements IRepositorioCategoria {
 
     // Atributos de la Clase

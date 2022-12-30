@@ -12,7 +12,7 @@ class BibliotecaController extends Controlador {
         $this->repoBiblioteca = $this->repositorio('RepositorioBiblioteca');
     }
 
-    // Método para establecer la vista principal de la Clase
+    // Método para establecer la vista principal con los libros destacados
     public function index() {
         $libros = $this->repoBiblioteca->getLibrosDestacados();
         $data = [

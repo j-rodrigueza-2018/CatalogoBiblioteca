@@ -37,7 +37,7 @@ class LibroTest extends TestCase {
 
     // Comprobamos que funciona el método de editar un libro cambiando el título y la sinopsis al libro
     public function testEditarLibro() {
-        // Cambiamos el nombre y los apellidos del autor
+        // Cambiamos el título y la sinopsis del libro
         self::$libro->setTitulo('Manual de Espumas 2');
         self::$libro->setSinopsis('Sinopsis nueva');
         // Editamos el libro en la base de datos con los nuevos datos
@@ -80,7 +80,7 @@ class LibroTest extends TestCase {
     }
 
     // Comprobamos que funciona el método de eliminar un libro
-    public function testEliminarAutor() {
+    public function testEliminarLibro() {
         // Eliminamos el libro de la base de datos
         self::$repositorioLibro->eliminarLibro(self::$libro);
         // Intentamos obtener el libro eliminado de la base de datos a través de su id
